@@ -38,10 +38,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ), token: token
         )
         // 채널 만들기
+        
         do {
             let controller = try ChatClient.shared.channelController(
                 createChannelWithId: ChannelId(type: .messaging, id: "test_channel"),
-                name: "테스트테스트테스트",
+                name: "Jonh, Maria",
                 members: ["john", "maria"]
             )
 
@@ -64,7 +65,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         channelList.controller = ChatClient.shared.channelListController(query: query)
 
         /// Step 4: similar to embedding with a navigation controller using Storyboard
-        window?.rootViewController = UINavigationController(rootViewController: channelList)
+//        if let storyboard = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DemoChannelList") as? ChannelListViewController {
+//        window?.rootViewController = UINavigationController(rootViewController: storyboard)
+//        window?.makeKeyAndVisible()
+//    }
+       // window?.rootViewController = UINavigationController(rootViewController: channelList)
+      //  window?.
     }
     
     
