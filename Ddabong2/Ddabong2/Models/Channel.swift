@@ -8,10 +8,10 @@
 import Foundation
 struct Channel {
     let id: String
-    let name: String
+    let chatroomName: String
     let lastMessage: String
     let timestamp: Date
-    let members: [String]   // 멤버 ID 배열
+    let chatMembers: [String]   // 멤버 ID 배열
 //    init(id: String? = nil, name: String) {
 //        self.id = id
 //        self.name = name

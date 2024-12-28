@@ -11,6 +11,7 @@ import InputBarAccessoryView
 import FirebaseFirestore
 
 class ChatViewController: MessagesViewController {
+    
     let chatRoomId: String
     var messages: [Message] = []
     let db = Firestore.firestore()
@@ -31,10 +32,46 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
+       
         
         fetchChatData()
-    }
         
+        // 네비게이션 바 설정
+        self.navigationItem.title = "채팅방 이름"
+        
+        // 뒤로가기 버튼 설정
+        let backButton = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(backButtonTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        
+       // 확인 버튼 설정
+       let confirmButton = UIBarButtonItem(title: "햄버거", style: .plain, target: self, action: #selector(confirmButtonTapped))
+           self.navigationItem.rightBarButtonItem = confirmButton
+        
+    }
+    
+    
+    // 뒤로 가기 버튼 액션
+    @objc func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    // 확인 버튼 액션
+    @objc func confirmButtonTapped() {
+        // 새 채팅방 저장
+        
+        // 해당 채팅방 id 가져와서 네비게이션뷰에 push
+//        let chatVC = ChatViewController(chatRoomId: "tFOnTDw8ZyAQhsqJRclw")
+//        self.navigationController?.pushViewController(chatVC, animated: true)
+    }
+    
+    
+   
+    
+    
+    @IBAction func btnBack(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func fetchChatData() {
             db.collection("chatrooms")
                 .document(chatRoomId)

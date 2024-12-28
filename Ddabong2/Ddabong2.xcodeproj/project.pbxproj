@@ -11,11 +11,16 @@
 		65020F812D1F0B2700CC85FB /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F802D1F0B2700CC85FB /* Channel.swift */; };
 		65020F832D1F0B5500CC85FB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F822D1F0B5500CC85FB /* Message.swift */; };
 		65020F852D1FCBDD00CC85FB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F842D1FCBDD00CC85FB /* ChatViewController.swift */; };
-		65020F8A2D1FCE3B00CC85FB /* ChattingViewController+list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F892D1FCE3B00CC85FB /* ChattingViewController+list.swift */; };
-		65020F8C2D1FCF1800CC85FB /* ChatViewController+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F8B2D1FCF1800CC85FB /* ChatViewController+content.swift */; };
+		65020F8A2D1FCE3B00CC85FB /* ChatList+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F892D1FCE3B00CC85FB /* ChatList+extension.swift */; };
+		65020F8C2D1FCF1800CC85FB /* Chat+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F8B2D1FCF1800CC85FB /* Chat+extension.swift */; };
 		65020F8E2D1FD3A400CC85FB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 65020F8D2D1FD3A400CC85FB /* FirebaseFirestore */; };
+		65020F922D20373400CC85FB /* ChannelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F912D20373400CC85FB /* ChannelViewModel.swift */; };
+		65020F942D20373F00CC85FB /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F932D20373F00CC85FB /* MessageViewModel.swift */; };
+		65020F962D203DA600CC85FB /* ParticiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F952D203DA600CC85FB /* ParticiViewController.swift */; };
+		65020F982D2042E400CC85FB /* roomNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F972D2042E400CC85FB /* roomNameViewController.swift */; };
+		65020F9A2D2055BF00CC85FB /* Partici+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F992D2055BF00CC85FB /* Partici+extension.swift */; };
 		6504AFEC2D1BF7E700051B44 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504AFEB2D1BF7E700051B44 /* ScheduleViewController.swift */; };
-		6504AFEF2D1BF80300051B44 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504AFEE2D1BF80300051B44 /* ChattingViewController.swift */; };
+		6504AFEF2D1BF80300051B44 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504AFEE2D1BF80300051B44 /* ChatListViewController.swift */; };
 		6504AFF12D1BF80D00051B44 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504AFF02D1BF80D00051B44 /* BoardViewController.swift */; };
 		6504AFF32D1BF81A00051B44 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504AFF22D1BF81A00051B44 /* MyPageViewController.swift */; };
 		6504AFF62D1BF94700051B44 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504AFF52D1BF94700051B44 /* UserModel.swift */; };
@@ -67,10 +72,15 @@
 		65020F802D1F0B2700CC85FB /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		65020F822D1F0B5500CC85FB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		65020F842D1FCBDD00CC85FB /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		65020F892D1FCE3B00CC85FB /* ChattingViewController+list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChattingViewController+list.swift"; sourceTree = "<group>"; };
-		65020F8B2D1FCF1800CC85FB /* ChatViewController+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+content.swift"; sourceTree = "<group>"; };
+		65020F892D1FCE3B00CC85FB /* ChatList+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatList+extension.swift"; sourceTree = "<group>"; };
+		65020F8B2D1FCF1800CC85FB /* Chat+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chat+extension.swift"; sourceTree = "<group>"; };
+		65020F912D20373400CC85FB /* ChannelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewModel.swift; sourceTree = "<group>"; };
+		65020F932D20373F00CC85FB /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		65020F952D203DA600CC85FB /* ParticiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticiViewController.swift; sourceTree = "<group>"; };
+		65020F972D2042E400CC85FB /* roomNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roomNameViewController.swift; sourceTree = "<group>"; };
+		65020F992D2055BF00CC85FB /* Partici+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Partici+extension.swift"; sourceTree = "<group>"; };
 		6504AFEB2D1BF7E700051B44 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
-		6504AFEE2D1BF80300051B44 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		6504AFEE2D1BF80300051B44 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		6504AFF02D1BF80D00051B44 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		6504AFF22D1BF81A00051B44 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		6504AFF52D1BF94700051B44 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -148,8 +158,9 @@
 		65020F862D1FCCB700CC85FB /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				65020F8B2D1FCF1800CC85FB /* ChatViewController+content.swift */,
-				65020F892D1FCE3B00CC85FB /* ChattingViewController+list.swift */,
+				65020F8B2D1FCF1800CC85FB /* Chat+extension.swift */,
+				65020F892D1FCE3B00CC85FB /* ChatList+extension.swift */,
+				65020F992D2055BF00CC85FB /* Partici+extension.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -158,11 +169,13 @@
 			isa = PBXGroup;
 			children = (
 				6504AFEB2D1BF7E700051B44 /* ScheduleViewController.swift */,
-				6504AFEE2D1BF80300051B44 /* ChattingViewController.swift */,
+				6504AFEE2D1BF80300051B44 /* ChatListViewController.swift */,
 				65020F842D1FCBDD00CC85FB /* ChatViewController.swift */,
 				6504AFF02D1BF80D00051B44 /* BoardViewController.swift */,
 				6504AFF22D1BF81A00051B44 /* MyPageViewController.swift */,
 				65B9DC8E2D1BFB4E00BB969D /* LoginViewController.swift */,
+				65020F952D203DA600CC85FB /* ParticiViewController.swift */,
+				65020F972D2042E400CC85FB /* roomNameViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,6 +253,8 @@
 		65B9DC902D1BFB9D00BB969D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				65020F912D20373400CC85FB /* ChannelViewModel.swift */,
+				65020F932D20373F00CC85FB /* MessageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -538,19 +553,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				65020F812D1F0B2700CC85FB /* Channel.swift in Sources */,
-				6504AFEF2D1BF80300051B44 /* ChattingViewController.swift in Sources */,
+				6504AFEF2D1BF80300051B44 /* ChatListViewController.swift in Sources */,
 				6504AFFA2D1BF96400051B44 /* DayoffModel.swift in Sources */,
+				65020F962D203DA600CC85FB /* ParticiViewController.swift in Sources */,
 				6504AFF32D1BF81A00051B44 /* MyPageViewController.swift in Sources */,
 				6504AFF82D1BF95000051B44 /* ScheduleModel.swift in Sources */,
 				655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */,
+				65020F922D20373400CC85FB /* ChannelViewModel.swift in Sources */,
 				6504AFF62D1BF94700051B44 /* UserModel.swift in Sources */,
-				65020F8C2D1FCF1800CC85FB /* ChatViewController+content.swift in Sources */,
+				65020F982D2042E400CC85FB /* roomNameViewController.swift in Sources */,
+				65020F8C2D1FCF1800CC85FB /* Chat+extension.swift in Sources */,
+				65020F942D20373F00CC85FB /* MessageViewModel.swift in Sources */,
 				655DCB2E2D144C3300E8A8F2 /* SceneDelegate.swift in Sources */,
 				65020F832D1F0B5500CC85FB /* Message.swift in Sources */,
 				65020F852D1FCBDD00CC85FB /* ChatViewController.swift in Sources */,
 				6504AFEC2D1BF7E700051B44 /* ScheduleViewController.swift in Sources */,
-				65020F8A2D1FCE3B00CC85FB /* ChattingViewController+list.swift in Sources */,
+				65020F8A2D1FCE3B00CC85FB /* ChatList+extension.swift in Sources */,
 				6504AFF12D1BF80D00051B44 /* BoardViewController.swift in Sources */,
+				65020F9A2D2055BF00CC85FB /* Partici+extension.swift in Sources */,
 				65B9DC8F2D1BFB4E00BB969D /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
