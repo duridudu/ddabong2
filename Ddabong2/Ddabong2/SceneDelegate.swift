@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import StreamChat
+
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,59 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        let config = ChatClientConfig(apiKey: .init("y57jr4rgfvea"))
-
-        /// user id and token for the user
-        let userId = "maria"
-        let token: Token =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibWFyaWEifQ.lkisfdCvygaCgmhE6NA_kYAMHfNhiQza1sNhABG_Zqo"
-
-        /// Step 1: create an instance of ChatClient and share it using the singleton
-        ChatClient.shared = ChatClient(config: config)
-        print("STEP 1")
-        
-        /// Step 2: connect to chat
-        ChatClient.shared.connectUser(
-            userInfo: UserInfo(
-                id: userId,
-                name: "maria"
-               // imageURL: URL(string: "https://bit.ly/2TIt8NR")
-            ), token: token
-        )
-        // 채널 만들기
-        
-        do {
-            let controller = try ChatClient.shared.channelController(
-                createChannelWithId: ChannelId(type: .messaging, id: "test_channel"),
-                name: "Jonh, Maria",
-                members: ["john", "maria"]
-            )
-
-            controller.synchronize { error in
-                if let error = error {
-                    print("Failed to create channel: \(error)")
-                } else {
-                    print("Channel created successfully!")
-                }
-            }
-        } catch {
-            print("Error creating channel: \(error)")
-        }
-        
-        print("STEP 2")
-        
-        /// Step 3: create the ChannelList view controller
-        let channelList = DemoChannelList()
-        let query = ChannelListQuery(filter: .containMembers(userIds: [userId]))
-        channelList.controller = ChatClient.shared.channelListController(query: query)
-
-        /// Step 4: similar to embedding with a navigation controller using Storyboard
-//        if let storyboard = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DemoChannelList") as? ChannelListViewController {
-//        window?.rootViewController = UINavigationController(rootViewController: storyboard)
-//        window?.makeKeyAndVisible()
-//    }
-       // window?.rootViewController = UINavigationController(rootViewController: channelList)
-      //  window?.
+       
     }
     
     

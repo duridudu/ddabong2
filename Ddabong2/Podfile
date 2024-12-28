@@ -7,9 +7,7 @@ target 'Ddabong2' do
 
   # Pods for Ddabong2
 
-  pod 'StreamChatUI', '~> 4.0.0'
-  pod 'StreamChat', '~> 4.0.0'
-  
+  pod 'MessageKit'  
  post_install do |installer|
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|

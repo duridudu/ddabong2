@@ -1,33 +1,22 @@
 PODS:
-  - Nuke (10.7.1)
-  - Starscream (4.0.8)
-  - StreamChat (4.0.4):
-    - Starscream (~> 4.0)
-  - StreamChatUI (4.0.4):
-    - Nuke (~> 10.0)
-    - StreamChat (= 4.0.4)
-    - SwiftyGif (~> 5.0)
-  - SwiftyGif (5.4.5)
+  - InputBarAccessoryView (5.5.0):
+    - InputBarAccessoryView/Core (= 5.5.0)
+  - InputBarAccessoryView/Core (5.5.0)
+  - MessageKit (3.8.0):
+    - InputBarAccessoryView (~> 5.5.0)
 
 DEPENDENCIES:
-  - StreamChat (~> 4.0.0)
-  - StreamChatUI (~> 4.0.0)
+  - MessageKit
 
 SPEC REPOS:
   trunk:
-    - Nuke
-    - Starscream
-    - StreamChat
-    - StreamChatUI
-    - SwiftyGif
+    - InputBarAccessoryView
+    - MessageKit
 
 SPEC CHECKSUMS:
-  Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
-  Starscream: 19b5533ddb925208db698f0ac508a100b884a1b9
-  StreamChat: 5f849859ba70a522d43412181ce77241e4ee0f4d
-  StreamChatUI: f8ed5b08502a55ab16ae8f10f7b9383448e6429d
-  SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
+  InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
+  MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
 
-PODFILE CHECKSUM: 2b909e867162d4b3758565e6e8e1d5688fda80e4
+PODFILE CHECKSUM: 84188575169cbb15d1fa1a826ea51b07672312db
 
 COCOAPODS: 1.15.2

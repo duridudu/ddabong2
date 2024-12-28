@@ -7,7 +7,7 @@
 
 import Foundation
 struct User {
-
+    
 }
 
 class UserModel {
