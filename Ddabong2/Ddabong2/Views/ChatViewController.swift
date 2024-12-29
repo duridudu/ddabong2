@@ -42,8 +42,17 @@ class ChatViewController: MessagesViewController {
             messageInputBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             messageInputBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             messageInputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            messageInputBar.heightAnchor.constraint(equalToConstant: 44)  // 높이를 설정
+            messageInputBar.heightAnchor.constraint(equalToConstant: 44) , // 높이를 설정
+//            messageInputBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 550),  // 인풋 바 위에 50 포인트 여백 추가
         ])
+        
+        // 인풋바랑 겹치는거 수정
+//        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:800, right: 0)
+//        messagesCollectionView.scrollIndicatorInsets = messagesCollectionView.contentInset
+        
+        // 키보드 이벤트에 따라 메시지 리스트를 위로 밀기
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         fetchChatData()
         
@@ -51,29 +60,27 @@ class ChatViewController: MessagesViewController {
         
     }
     
-    
-    // 뒤로 가기 버튼 액션
-    @objc func backButtonTapped() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil) // "Main"은 스토리보드 파일 이름
-        let chatListVC = storyboard.instantiateViewController(withIdentifier: "chatListVC")
-        // 네비게이션 스택을 초기화하고 새로운 뷰 컨트롤러를 루트로 설정
-        // 기존 뷰 컨트롤러들을 모두 제거하고 새로운 뷰 컨트롤러만 네비게이션 스택에 추가
-        if let navigationController = self.navigationController {
-            navigationController.popToRootViewController(animated: true)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // 메시지 컬렉션 뷰의 contentInset을 설정
+        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+    }
+    @objc func keyboardWillShow(notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+            // 메시지 컬렉션 뷰의 contentInset을 키보드 높이에 맞게 조정
+            messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight + 10, right: 0)
         }
-                
     }
 
-    // 확인 버튼 액션
-    @objc func confirmButtonTapped() {
-        // 새 채팅방 저장
-        
-        // 해당 채팅방 id 가져와서 네비게이션뷰에 push
-//        let chatVC = ChatViewController(chatRoomId: "tFOnTDw8ZyAQhsqJRclw")
-//        self.navigationController?.pushViewController(chatVC, animated: true)
+    @objc func keyboardWillHide(notification: Notification) {
+        // 키보드가 내려갈 때 contentInset을 초기화
+        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
     }
     
-    
+  
    
     func fetchChatData() {
             db.collection("chatrooms")
