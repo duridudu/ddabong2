@@ -12,47 +12,56 @@ import FirebaseFirestore
 
 class ChatViewController: MessagesViewController {
     
-    let chatRoomId: String
+    var chatRoomId: String = ""
     var messages: [Message] = []
     let db = Firestore.firestore()
     let currentUser = Sender(senderId: "user2", displayName: "따봉2") // 현재 유저 정보
     
-    init(chatRoomId: String) {
-        self.chatRoomId = chatRoomId
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ROOM ID --- ", chatRoomId)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-       
+        
+        // inputBar의 배경색 변경
+        // inputBar가 정상적으로 보이도록 설정
+           messageInputBar.alpha = 1
+           messageInputBar.isHidden = false
+        // inputBar 크기와 위치 설정
+//        messageInputBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)  // 적당한 높이로 설정
+//        self.view.addSubview(messageInputBar)
+//        print("messageInputBar", messageInputBar)
+        messageInputBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(messageInputBar)
+
+        // 오토 레이아웃으로 크기 및 위치 설정
+        NSLayoutConstraint.activate([
+            messageInputBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            messageInputBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            messageInputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            messageInputBar.heightAnchor.constraint(equalToConstant: 44)  // 높이를 설정
+        ])
         
         fetchChatData()
         
-        // 네비게이션 바 설정
-        self.navigationItem.title = "채팅방 이름"
-        
-        // 뒤로가기 버튼 설정
-        let backButton = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(backButtonTapped))
-            self.navigationItem.leftBarButtonItem = backButton
-        
-       // 확인 버튼 설정
-       let confirmButton = UIBarButtonItem(title: "햄버거", style: .plain, target: self, action: #selector(confirmButtonTapped))
-           self.navigationItem.rightBarButtonItem = confirmButton
+      
         
     }
     
     
     // 뒤로 가기 버튼 액션
     @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // "Main"은 스토리보드 파일 이름
+        let chatListVC = storyboard.instantiateViewController(withIdentifier: "chatListVC")
+        // 네비게이션 스택을 초기화하고 새로운 뷰 컨트롤러를 루트로 설정
+        // 기존 뷰 컨트롤러들을 모두 제거하고 새로운 뷰 컨트롤러만 네비게이션 스택에 추가
+        if let navigationController = self.navigationController {
+            navigationController.popToRootViewController(animated: true)
+        }
+                
     }
 
     // 확인 버튼 액션
@@ -66,12 +75,6 @@ class ChatViewController: MessagesViewController {
     
     
    
-    
-    
-    @IBAction func btnBack(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     func fetchChatData() {
             db.collection("chatrooms")
                 .document(chatRoomId)

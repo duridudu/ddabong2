@@ -8,50 +8,40 @@
 import Foundation
 import UIKit
 class roomNameViewController:UIViewController{
+    let viewModel = ChannelViewModel(currentUserId: "user1") // ViewModel 초기화
+    
+    // 앞 화면에서 선택한 members 저장할 배열 필요
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 네비게이션 바 설정
-        self.navigationItem.title = "채팅방 이름"
-        
-        // 뒤로가기 버튼 설정
-        let backButton = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(backButtonTapped))
-            self.navigationItem.leftBarButtonItem = backButton
-        
-       // 확인 버튼 설정
-       let confirmButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(confirmButtonTapped))
-           self.navigationItem.rightBarButtonItem = confirmButton
-        
     }
     
     
-    // 뒤로 가기 버튼 액션
-    @objc func backButtonTapped() {
+    @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    
+    @IBAction func btnOk(_ sender: Any) {
+        // 새 채팅방 저장
+        
+        // 해당 채팅방 id 가져와서 네비게이션뷰에 push
+        viewModel.createChatRoom(chatroomName: "테스트 채팅방", chatMembers: ["user1", "user2"]) { documentId in
+            if let chatId = documentId {
+                print("생성된 채팅방 ID: \(chatId)")
+                if let chatVC = self.storyboard?.instantiateViewController(withIdentifier: "parentVC") as? ChatParentViewController {
+                    print("ChatParentViewController instance: \(chatVC)")
+                    chatVC.chatroomId = chatId // 프로퍼티 설정
+                    self.navigationController?.pushViewController(chatVC, animated: true)
+                }
+                
+            } else {
+                print("채팅방 생성 실패")
+            }
+        }
+        
+        
 
-    // 확인 버튼 액션
-    @objc func confirmButtonTapped() {
-        // 새 채팅방 저장
-        
-        // 해당 채팅방 id 가져와서 네비게이션뷰에 push
-        let chatVC = ChatViewController(chatRoomId: "tFOnTDw8ZyAQhsqJRclw")
-        self.navigationController?.pushViewController(chatVC, animated: true)
-    }
-    
-    
-    
-    @IBAction func btnBack(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func btnOk(_ sender: UIButton) {
-        // 새 채팅방 저장
-        
-        // 해당 채팅방 id 가져와서 네비게이션뷰에 push
-        let chatVC = ChatViewController(chatRoomId: "tFOnTDw8ZyAQhsqJRclw")
-        self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
 }

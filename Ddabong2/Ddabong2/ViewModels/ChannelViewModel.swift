@@ -39,7 +39,7 @@ class ChannelViewModel {
                         print("Error fetching chat rooms: \(error?.localizedDescription ?? "Unknown error")")
                         return
                     }
-                    
+                    print("Fetched chat rooms: \(documents.count)")  // 얼마나 가져왔는지 확인
                     // Firebase 데이터 -> Channel 모델로 변환
                     self.chatRooms = documents.map { doc in
                         let data = doc.data()
@@ -51,13 +51,33 @@ class ChannelViewModel {
                             chatMembers: data["chatMembers"] as? [String] ?? []
                         )
                     }
+                    
                 }
         }
     
     // 채팅방 생성
-    func addNewChatRoom(){
+    func createChatRoom(chatroomName: String, chatMembers: [String], completion: @escaping (String?) -> Void) {
+        let chatRoomData: [String: Any] = [
+            "chatroomName": chatroomName,
+            "chatMembers": chatMembers,
+            "lastMessage": "",
+            "timestamp": FieldValue.serverTimestamp() // Firestore에서 서버 시간 추가
+        ]
         
+        // Firestore 문서 추가
+           let collectionReference = db.collection("chatrooms")
+           let documentReference = collectionReference.document() // 문서를 미리 생성하여 참조 가져오기
+           documentReference.setData(chatRoomData) { error in
+               if let error = error {
+                   print("Error creating chat room: \(error.localizedDescription)")
+                   completion(nil)
+               } else {
+                   print("Chat room created with ID: \(documentReference.documentID)")
+                   completion(documentReference.documentID)
+               }
+           }
     }
+
     
     // 특정 채팅방의 LastMessage 업데이트
     func updateLastMessage(chatRoomId: String, lastMessage: String, timestamp:Timestamp) {

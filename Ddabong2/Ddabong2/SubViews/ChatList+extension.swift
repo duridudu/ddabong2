@@ -9,7 +9,9 @@ import UIKit
 
 // 채팅방 리스트 테이블뷰셀
 extension ChatListViewController {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("+++챗룸개수+++",viewModel.chatRooms.count)
         return viewModel.chatRooms.count
     }
 
@@ -23,8 +25,12 @@ extension ChatListViewController {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatRoom = viewModel.chatRooms[indexPath.row]
-        let chatVC = ChatViewController(chatRoomId: chatRoom.id)
-      //  navigationController?.pushViewController(chatVC, animated: true)
-        self.navigationController?.pushViewController(chatVC, animated: true)
+        if let chatVC = storyboard?.instantiateViewController(withIdentifier: "parentVC") as? ChatParentViewController {
+            print("ChatParentViewController instance: \(chatVC)")
+            chatVC.chatroomId = chatRoom.id // 프로퍼티 설정
+            navigationController?.pushViewController(chatVC, animated: true)
+        }
+
+
     }
 }
