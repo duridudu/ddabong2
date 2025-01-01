@@ -59,25 +59,25 @@ class ChatViewController: MessagesViewController {
       
         
     }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         // 메시지 컬렉션 뷰의 contentInset을 설정
-        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     }
+    
     @objc func keyboardWillShow(notification: Notification) {
         if let userInfo = notification.userInfo,
            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height
             // 메시지 컬렉션 뷰의 contentInset을 키보드 높이에 맞게 조정
-            messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight + 10, right: 0)
+            messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight + 50, right: 0)
         }
     }
 
     @objc func keyboardWillHide(notification: Notification) {
         // 키보드가 내려갈 때 contentInset을 초기화
-        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     }
     
   
