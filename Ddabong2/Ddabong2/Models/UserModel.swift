@@ -6,10 +6,13 @@
 //
 
 import Foundation
-struct User {
-    
-}
-
-class UserModel {
+struct User :Decodable {
+    let accessToken:String
+    let name: String
+    let email: String?
+    let photo:String
+    let dayOffCnt: Float?
+    let employeeNum: Int
+    let role: String?
     
 }
