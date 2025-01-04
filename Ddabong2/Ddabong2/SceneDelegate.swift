@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
+        /*
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
                // UIWindow 생성 및 설정
@@ -30,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                
                self.window = window
                window.makeKeyAndVisible()
+         */
     }
     
     
