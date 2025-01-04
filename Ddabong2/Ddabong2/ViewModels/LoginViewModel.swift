@@ -1,3 +1,11 @@
+//
+//  LoginViewModel.swift
+//  Ddabong2
+//
+//  Created by 안지희 on 1/4/25.
+//
+
+
 import Foundation
 import Alamofire
 
@@ -33,10 +41,10 @@ class LoginViewModel {
                     )
                     self.onLoginSuccess?(user)
                 } else {
-                    self.onLoginFailure?(loginResponse.message)
+                    self.onLoginFailure?("이메일 또는 비밀번호를 확인해 주세요.")
                 }
-            case .failure(let error):
-                self.onLoginFailure?(error.localizedDescription)
+            case .failure(_):
+                self.onLoginFailure?("이메일 또는 비밀번호를 확인해 주세요.")
             }
         }
     }

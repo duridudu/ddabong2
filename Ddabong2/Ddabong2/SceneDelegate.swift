@@ -18,7 +18,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-       
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+               // UIWindow 생성 및 설정
+               let window = UIWindow(windowScene: windowScene)
+               
+               // LoginViewController를 초기 화면으로 설정
+               let loginVC = LoginViewController()
+               let navigationController = UINavigationController(rootViewController: loginVC) // 네비게이션 컨트롤러 래핑
+               window.rootViewController = navigationController
+               
+               self.window = window
+               window.makeKeyAndVisible()
     }
     
     
