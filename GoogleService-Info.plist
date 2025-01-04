@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAqohQ_MwSI7BLwd2RIAHS-9d5xiipRsew</string>
+	<key>GCM_SENDER_ID</key>
+	<string>317033169461</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>duridudu.Ddabong2</string>
+	<key>PROJECT_ID</key>
+	<string>myhands-8395a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>myhands-8395a.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:317033169461:ios:1572a1503f50a765e8e77c</string>
+</dict>
+</plist>

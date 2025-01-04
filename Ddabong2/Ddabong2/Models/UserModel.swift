@@ -14,5 +14,4 @@ struct User :Decodable {
     let dayOffCnt: Float?
     let employeeNum: Int
     let role: String?
-    
 }
