@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import UIKit
+
+class RaceViewController : UIViewController {
+    
+}

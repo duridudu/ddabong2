@@ -18,22 +18,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        /*
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
-               // UIWindow 생성 및 설정
-               let window = UIWindow(windowScene: windowScene)
-               
-               // LoginViewController를 초기 화면으로 설정
-               let loginVC = LoginViewController()
-               let navigationController = UINavigationController(rootViewController: loginVC) // 네비게이션 컨트롤러 래핑
-               window.rootViewController = navigationController
-               
-               self.window = window
-               window.makeKeyAndVisible()
-         */
+        
+        // 윈도우 생성
+        window = UIWindow(windowScene: windowScene)
+        
+        // 루트 뷰 컨트롤러로 네비게이션 컨트롤러 설정
+        let navigationViewController = NavigationViewController()
+        let navigationController = UINavigationController(rootViewController: navigationViewController)
+        
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
-    
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -62,7 +58,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-

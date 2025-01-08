@@ -18,6 +18,9 @@
 		569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA52D29404D00949DB4 /* LoginViewModel.swift */; };
 		569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */; };
 		56B2B0A92D2D3D1E007EF5B6 /* BoardAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B2B0A82D2D3D1E007EF5B6 /* BoardAllViewController.swift */; };
+		56C441572D2EC2BC00BAD635 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C441562D2EC2BC00BAD635 /* NavigationViewController.swift */; };
+		56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C441582D2EC52300BAD635 /* RaceViewController.swift */; };
+		56C4415B2D2EC54400BAD635 /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4415A2D2EC54400BAD635 /* QuestViewController.swift */; };
 		65020F8E2D1FD3A400CC85FB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 65020F8D2D1FD3A400CC85FB /* FirebaseFirestore */; };
 		65020F9E2D21226F00CC85FB /* ParticiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F9D2D21226F00CC85FB /* ParticiCell.swift */; };
 		65020FA52D251CD500CC85FB /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020FA42D251CD500CC85FB /* AlamofireManager.swift */; };
@@ -81,6 +84,9 @@
 		569D8AA52D29404D00949DB4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		56B2B0A82D2D3D1E007EF5B6 /* BoardAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAllViewController.swift; sourceTree = "<group>"; };
+		56C441562D2EC2BC00BAD635 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		56C441582D2EC52300BAD635 /* RaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
+		56C4415A2D2EC54400BAD635 /* QuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
 		65020F9D2D21226F00CC85FB /* ParticiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticiCell.swift; sourceTree = "<group>"; };
 		65020FA42D251CD500CC85FB /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		65020FA62D251D5F00CC85FB /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
@@ -187,6 +193,7 @@
 		6504AFED2D1BF7ED00051B44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				56C4415A2D2EC54400BAD635 /* QuestViewController.swift */,
 				569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */,
 				6504AFEB2D1BF7E700051B44 /* ScheduleViewController.swift */,
 				6504AFF02D1BF80D00051B44 /* BoardViewController.swift */,
@@ -195,6 +202,8 @@
 				562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */,
 				567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */,
 				56B2B0A82D2D3D1E007EF5B6 /* BoardAllViewController.swift */,
+				56C441582D2EC52300BAD635 /* RaceViewController.swift */,
+				56C441562D2EC2BC00BAD635 /* NavigationViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -548,14 +557,17 @@
 				6504AFF82D1BF95000051B44 /* ScheduleModel.swift in Sources */,
 				655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */,
 				562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */,
+				56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */,
 				6504AFF62D1BF94700051B44 /* UserModel.swift in Sources */,
 				567443812D2CE97000BBC8BD /* BoardDetailViewController.swift in Sources */,
 				569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */,
 				655DCB2E2D144C3300E8A8F2 /* SceneDelegate.swift in Sources */,
 				567443872D2CEC0200BBC8BD /* BoardTableViewCell.swift in Sources */,
+				56C4415B2D2EC54400BAD635 /* QuestViewController.swift in Sources */,
 				65020FA72D251D5F00CC85FB /* EndPoints.swift in Sources */,
 				562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */,
 				569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */,
+				56C441572D2EC2BC00BAD635 /* NavigationViewController.swift in Sources */,
 				6504AFEC2D1BF7E700051B44 /* ScheduleViewController.swift in Sources */,
 				6504AFF12D1BF80D00051B44 /* BoardViewController.swift in Sources */,
 				65B9DC8F2D1BFB4E00BB969D /* LoginViewController.swift in Sources */,

@@ -8,8 +8,7 @@
 import Foundation
 import UIKit
 
-class NavigationBar: UITabBarController {
-
+class NavigationViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +41,7 @@ import SwiftUI
 struct NavigationBarViewControllerPreview: PreviewProvider {
     static var previews: some View {
         UIViewControllerPreview {
-            let navigationBarVC = NavigationBar()
+            let navigationBarVC = NavigationViewController()
             return navigationBarVC
         }
     }
