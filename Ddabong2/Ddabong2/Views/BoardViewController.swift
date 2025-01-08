@@ -1,10 +1,8 @@
+// BoardViewController.swift
+// Ddabong2
 //
-//  BoardViewController.swift
-//  Ddabong2
+// Created by 이윤주 on 12/25/24.
 //
-//  Created by 이윤주 on 12/25/24.
-//
-// JH
 
 import UIKit
 
@@ -14,23 +12,27 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //인스턴스 생성
     private let viewModel = BoardViewModel() //뷰모델
     private let tableView = UITableView() //테이블뷰
-
+    
+    
     // 상단 배경 그라데이션
     private let gradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
-            UIColor(red: 1.0, green: 0.89, blue: 0.85, alpha: 1.0).cgColor, // 연한 핑크
-            UIColor.white.cgColor // 흰색
+            UIColor.white.cgColor, // 위쪽 흰색
+            UIColor(red: 1.0, green: 0.96, blue: 0.92, alpha: 1.0).cgColor, // 중간 연한 핑크
+            UIColor(red: 1.0, green: 0.84, blue: 0.80, alpha: 1.0).cgColor  // 아래쪽 진한 핑크
         ]
-        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.locations = [0.0, 0.5, 1.0] // 색상 위치
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0) // 그라데이션 시작점 (위쪽 중앙)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0) // 그라데이션 끝점 (아래쪽 중앙)
         return gradientLayer
     }()
 
     private func setupCurveWithShadow() {
         // 곡선 경로 생성
         let curvePath = UIBezierPath()
-        curvePath.move(to: CGPoint(x: 0, y: 220)) // 곡선 시작
-        curvePath.addQuadCurve(to: CGPoint(x: view.bounds.width, y: 220), // 끝 점
+        curvePath.move(to: CGPoint(x: 0, y: 200)) // 곡선 시작
+        curvePath.addQuadCurve(to: CGPoint(x: view.bounds.width, y: 200), // 끝 점
                                controlPoint: CGPoint(x: view.bounds.width / 2, y: 150)) // Control Point
         curvePath.addLine(to: CGPoint(x: view.bounds.width, y: view.bounds.height)) // 오른쪽 아래로
         curvePath.addLine(to: CGPoint(x: 0, y: view.bounds.height)) // 왼쪽 아래로
@@ -54,15 +56,7 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
 
     private func setupGradientBackground() {
-        // 그라데이션 레이어 생성
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor(red: 1.0, green: 0.96, blue: 0.92, alpha: 1.0).cgColor, // #FFF5F0 (연한 핑크)
-            UIColor(red: 1.0, green: 0.84, blue: 0.80, alpha: 1.0).cgColor  // #FFD5CB (진한 핑크)
-        ]
-        gradientLayer.locations = [0.0, 1.0] // 색상 위치
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0) // 그라데이션 시작점 (위쪽 중앙)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0) // 그라데이션 끝점 (아래쪽 중앙)
+        // 그라데이션 레이어 크기 설정
         gradientLayer.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 260)
         
         // 레이어 삽입
@@ -137,6 +131,7 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setupCurveWithShadow()    // 곡선과 그림자 추가
         setupUI()
         setupTableView()
+        edgesForExtendedLayout = []
         viewModel.fetchBoards() // ViewModel에서 데이터 가져오기
     }
     
