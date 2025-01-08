@@ -2,9 +2,8 @@
 //  LoginViewController.swift
 //  Ddabong2
 //
-//  Created by 이윤주 on 12/25/24.
-//
 
+//JH
 
 import Foundation
 import UIKit
@@ -23,23 +22,76 @@ class LoginViewController: UIViewController {
     
     let loginViewModel = LoginViewModel()  // ViewModel 인스턴스
 
+    // 상단 배경 그라데이션
+    private let gradientLayer: CAGradientLayer = {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor(red: 1.0, green: 0.89, blue: 0.85, alpha: 1.0).cgColor, // 연한 핑크
+            UIColor.white.cgColor // 흰색
+        ]
+        gradientLayer.locations = [0.0, 1.0]
+        return gradientLayer
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        
+        setupGradientBackground() // 그라데이션 추가
+        setupCurveWithShadow()    // 곡선과 그림자 추가
         setupUI()  // UI 설정
         setupBindings()  // ViewModel 바인딩 설정
     }
     
-    // UI 설정
-    func setupUI() {
-        // 배경 이미지 설정
-        let backgroundImage = UIImage(named: "loginback")
-        let backgroundImageView = UIImageView(frame: view.bounds)
-        backgroundImageView.image = backgroundImage
-        backgroundImageView.contentMode = .scaleAspectFill
-        view.addSubview(backgroundImageView)
-        view.sendSubviewToBack(backgroundImageView)
-        
-        // 로고 위치 조정
+    private func setupGradientBackground() {
+        // 그라데이션 레이어 생성
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor, // #FFFFFF (흰색)
+            UIColor(red: 1.0, green: 0.89, blue: 0.87, alpha: 1.0).cgColor, // #FFE4DE (연한 핑크)
+            UIColor(red: 1.0, green: 0.83, blue: 0.80, alpha: 1.0).cgColor  // #FFD5CB (진한 핑크)
+        ]
+        gradientLayer.locations = [0.0, 0.64, 1.0] // 색상 위치를 피그마와 동일하게 설정
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0) // 그라데이션 시작점 (위쪽 중앙)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0) // 그라데이션 끝점 (아래쪽 중앙)
+        gradientLayer.frame = view.bounds
+
+        // 레이어 삽입
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+
+
+    
+    private func setupCurveWithShadow() {
+        // 곡선 경로 생성
+        let curvePath = UIBezierPath()
+        curvePath.move(to: CGPoint(x: 0, y: 300)) // 곡선 시작 위치 아래로 조정
+        curvePath.addQuadCurve(to: CGPoint(x: view.bounds.width, y: 300),
+                               controlPoint: CGPoint(x: view.bounds.width / 2, y: 200)) // 제어점 조정
+        curvePath.addLine(to: CGPoint(x: view.bounds.width, y: view.bounds.height)) // 오른쪽 아래로
+        curvePath.addLine(to: CGPoint(x: 0, y: view.bounds.height)) // 왼쪽 아래로
+        curvePath.close()
+
+        // 곡선 레이어 생성
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = curvePath.cgPath
+        shapeLayer.fillColor = UIColor.white.cgColor
+
+        // 그림자 추가
+        shapeLayer.shadowColor = UIColor.black.cgColor
+        shapeLayer.shadowOpacity = 0.1
+        shapeLayer.shadowOffset = CGSize(width: 0, height: 4)
+        shapeLayer.shadowRadius = 10
+
+        // 레이어 삽입
+        view.layer.insertSublayer(shapeLayer, above: gradientLayer)
+    }
+
+    
+    //UI관련코드!!!!!!!!!!!!!!!!!!!!!!!!!1
+    private func setupUI() {
+        // 로고 이미지
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = UIImage(named: "loginlogo")
         logoImageView.contentMode = .scaleAspectFit
@@ -49,23 +101,26 @@ class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120),
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60), // 로고 위치 조정
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
             logoImageView.heightAnchor.constraint(equalToConstant: 100)
         ])
         
-        // 로그인 폼
+        // 로그인 폼 (그림자 추가)
         let loginFormView = UIView()
         loginFormView.translatesAutoresizingMaskIntoConstraints = false
         loginFormView.layer.cornerRadius = 20
-        loginFormView.layer.masksToBounds = true
         loginFormView.backgroundColor = .white
+        loginFormView.layer.shadowColor = UIColor.black.cgColor
+        loginFormView.layer.shadowOpacity = 0.1 // 그림자 투명도
+        loginFormView.layer.shadowOffset = CGSize(width: 0, height: 4) // 그림자 위치
+        loginFormView.layer.shadowRadius = 6 // 그림자 퍼짐 정도
         view.addSubview(loginFormView)
         
         NSLayoutConstraint.activate([
             loginFormView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginFormView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 40),
-            loginFormView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            loginFormView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30),
+            loginFormView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
             loginFormView.heightAnchor.constraint(equalToConstant: 120)
         ])
         
@@ -73,14 +128,12 @@ class LoginViewController: UIViewController {
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.placeholder = "이메일"
         emailTextField.borderStyle = .none
-        emailTextField.textColor = .black
         emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         loginFormView.addSubview(emailTextField)
         
-        
         let bottomLine1 = UIView()
         bottomLine1.translatesAutoresizingMaskIntoConstraints = false
-        bottomLine1.backgroundColor = UIColor.gray
+        bottomLine1.backgroundColor = UIColor.lightGray
         loginFormView.addSubview(bottomLine1)
         
         NSLayoutConstraint.activate([
@@ -99,26 +152,16 @@ class LoginViewController: UIViewController {
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "비밀번호"
         passwordTextField.borderStyle = .none
-        passwordTextField.textColor = .black
         passwordTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         passwordTextField.isSecureTextEntry = true
         loginFormView.addSubview(passwordTextField)
-        
-        let bottomLine2 = UIView()
-        bottomLine2.translatesAutoresizingMaskIntoConstraints = false
-        bottomLine2.backgroundColor = UIColor.gray
-        loginFormView.addSubview(bottomLine2)
+    
         
         NSLayoutConstraint.activate([
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: loginFormView.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: loginFormView.trailingAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 60),
-            
-            bottomLine2.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor),
-            bottomLine2.leadingAnchor.constraint(equalTo: loginFormView.leadingAnchor),
-            bottomLine2.trailingAnchor.constraint(equalTo: loginFormView.trailingAnchor),
-            bottomLine2.heightAnchor.constraint(equalToConstant: 1)
+            passwordTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
         
         // 비밀번호 눈 아이콘
@@ -128,26 +171,12 @@ class LoginViewController: UIViewController {
         passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         loginFormView.addSubview(passwordToggleButton)
         
-        
-        emailTextField.attributedPlaceholder = NSAttributedString(
-            string: "이메일",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        )
-        passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: "비밀번호",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        )
-
-        
-        
         NSLayoutConstraint.activate([
             passwordToggleButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor, constant: -10),
             passwordToggleButton.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor),
             passwordToggleButton.widthAnchor.constraint(equalToConstant: 30),
             passwordToggleButton.heightAnchor.constraint(equalToConstant: 30)
         ])
-        
-        
         
         // 로그인 버튼
         loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -160,68 +189,14 @@ class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.topAnchor.constraint(equalTo: loginFormView.bottomAnchor, constant: 40),
-            loginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            loginButton.topAnchor.constraint(equalTo: loginFormView.bottomAnchor, constant: 20),
+            loginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
             loginButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-    
-        
-        // 비밀번호 찾기 버튼
-        forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
-        forgotPasswordButton.setTitle("비밀번호 찾기", for: .normal)
-        forgotPasswordButton.setTitleColor(UIColor(hex: "#6E6E6E"), for: .normal) // 텍스트 색상 설정
-        forgotPasswordButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        forgotPasswordButton.addTarget(self, action: #selector(handleForgotPassword), for: .touchUpInside)
-        view.addSubview(forgotPasswordButton)
-
-        // 버튼 밑줄 추가
-        let forgotPasswordUnderline = UIView()
-        forgotPasswordUnderline.translatesAutoresizingMaskIntoConstraints = false
-        forgotPasswordUnderline.backgroundColor = UIColor(hex: "#6E6E6E") // 버튼 텍스트와 동일한 색상
-        view.addSubview(forgotPasswordUnderline)
-
-        // 비밀번호 찾기 버튼 제약 조건
-        NSLayoutConstraint.activate([
-            forgotPasswordButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            forgotPasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10)
-        ])
-
-        // 밑줄 제약 조건
-        NSLayoutConstraint.activate([
-            forgotPasswordUnderline.topAnchor.constraint(equalTo: forgotPasswordButton.titleLabel!.bottomAnchor, constant: 2),
-            forgotPasswordUnderline.centerXAnchor.constraint(equalTo: forgotPasswordButton.centerXAnchor),
-            forgotPasswordUnderline.widthAnchor.constraint(equalTo: forgotPasswordButton.titleLabel!.widthAnchor),
-            forgotPasswordUnderline.heightAnchor.constraint(equalToConstant: 1) // 밑줄 두께
-        ])
-
         
         
-        // 오류 메시지 레이블 위치 조정
-        errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
-        errorMessageLabel.textColor = .red
-        errorMessageLabel.font = UIFont.systemFont(ofSize: 12)
-        errorMessageLabel.textAlignment = .center
-        errorMessageLabel.isHidden = true
-        view.addSubview(errorMessageLabel)
-
-        // 오류 메시지 레이블 제약 조건 변경
-        NSLayoutConstraint.activate([
-            errorMessageLabel.topAnchor.constraint(equalTo: loginFormView.bottomAnchor, constant: 10), // 로그인 폼 아래
-            errorMessageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            errorMessageLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
-        ])
-
-        // 로그인 버튼 제약 조건 변경
-        NSLayoutConstraint.activate([
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.topAnchor.constraint(equalTo: errorMessageLabel.bottomAnchor, constant: 10), // 오류 메시지 아래
-            loginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-
     }
-    
-    
+
     
     func setupBindings() {
         loginViewModel.onLoginSuccess = { [weak self] user in
@@ -238,10 +213,10 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
-
     
-    //로그인버튼 액션
+    
+    
+    //액션!!!!!!!!!!!!!!!!!!!!!
     @objc func handleLogin() {
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
@@ -251,24 +226,16 @@ class LoginViewController: UIViewController {
         }
         loginViewModel.loginUser(email: email, password: password)
     }
+    
 
+    
     @objc func togglePasswordVisibility() {
         passwordTextField.isSecureTextEntry.toggle()
-    }
-    
-    
-    @objc func handleForgotPassword() {
-        // FindPasswordViewController로 화면 이동
-        let resetPasswordVC = FindPasswordViewController()
-        navigationController?.pushViewController(resetPasswordVC, animated: true)
+        let imageName = passwordTextField.isSecureTextEntry ? "eye.fill" : "eye.slash.fill"
+        passwordToggleButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
-    
 }
-
-
-
-
 
 
 ///프리뷰 보려고 잠깐... 쓰는 코드?
