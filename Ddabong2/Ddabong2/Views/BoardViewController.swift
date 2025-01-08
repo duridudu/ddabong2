@@ -215,6 +215,7 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
         ])
     }
     
+
     
 
     // MARK: - TableView DataSource
@@ -231,7 +232,19 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     
     
+    // MARK: - TableView Delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 선택된 게시글 데이터를 가져옴
+        let selectedBoard = viewModel.boards[indexPath.row]
+        
+        // BoardDetailViewController로 이동
+        let detailVC = BoardDetailViewController()
+        detailVC.board = selectedBoard // 선택한 게시글 데이터 전달
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+
     
+
     
     
     //액션!!!!!!!!!!

@@ -1,61 +1,64 @@
-//
-//  BoardDetailViewController.swift
-//  Ddabong2
-//
-//  Created by 안지희 on 1/7/25.
-//
-
-
 import UIKit
 
 class BoardDetailViewController: UIViewController {
-    var boardId: Int?
-
-    private let titleLabel = UILabel()
-    private let createdAtLabel = UILabel()
-
+    
+    
+    
+    
+    var board: Board? // BoardViewModel에서 전달받은 게시글 데이터
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        label.textAlignment = .center
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         setupUI()
-        fetchBoardDetails()
+        configureUI()
     }
-
+    
+    
+    
+    
+    ///UI!!!!!!!!!
+    
     private func setupUI() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 0
-
-        createdAtLabel.translatesAutoresizingMaskIntoConstraints = false
-        createdAtLabel.font = UIFont.systemFont(ofSize: 14)
-        createdAtLabel.textAlignment = .center
-        createdAtLabel.textColor = .gray
-
+        view.backgroundColor = .white
+        
         view.addSubview(titleLabel)
-        view.addSubview(createdAtLabel)
-
+        view.addSubview(dateLabel)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-
-            createdAtLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            createdAtLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
-
-    private func fetchBoardDetails() {
-        guard let boardId = boardId else { return }
-
-        // 임시 데이터: ViewModel에서 검색
-        if let board = BoardViewModel().boards.first(where: { $0.boardId == boardId }) {
-            titleLabel.text = board.title
-            createdAtLabel.text = "작성일: \(board.createdAt)"
-        } else {
-            titleLabel.text = "게시글을 찾을 수 없습니다."
-            createdAtLabel.text = nil
-        }
+    
+    
+    private func configureUI() {
+        guard let board = board else { return }
+        titleLabel.text = board.title
+        dateLabel.text = board.createdAt
     }
 }

@@ -18,6 +18,7 @@ class BoardViewModel {
 
     func fetchBoards() {
         // 테스트 데이터 추가
+        // 일단 DB 연결전 임시 데이터입니다람쥐
         boards = [
             Board(boardId: 1, title: "2025년 사내 교육 일정 공지", createdAt: "2024-12-31 15:00:00"),
             Board(boardId: 2, title: "박민수 차장 장남 결혼식 안내", createdAt: "2024-12-31 13:20:00"),
@@ -33,26 +34,4 @@ class BoardViewModel {
     }
 }
 
-
-
-    /*
-    func fetchBoards() {
-        //이 서버 주소는 수정 필요?
-        let url = "https://myhands.store/api/board"
-
-        AF.request(url, method: .get).responseDecodable(of: BoardResponse.self) { response in
-            switch response.result {
-            case .success(let boardResponse):
-                if boardResponse.status == "OK" {
-                    self.boards = boardResponse.responseDto.boardList
-                    self.onBoardsFetched?()
-                } else {
-                    self.onError?("Failed to fetch boards")
-                }
-            case .failure(let error):
-                self.onError?(error.localizedDescription)
-            }
-        }
-    }
-    */
 
