@@ -234,6 +234,13 @@ class LoginViewController: UIViewController {
         let imageName = passwordTextField.isSecureTextEntry ? "eye.fill" : "eye.slash.fill"
         passwordToggleButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
+    
+    //여백삭제
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           self.navigationController?.setNavigationBarHidden(true, animated: false)
+       }
+
 
 }
 

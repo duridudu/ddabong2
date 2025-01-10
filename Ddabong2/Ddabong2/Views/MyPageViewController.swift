@@ -282,4 +282,5 @@ class MyPageViewController: UIViewController {
             experienceLastYearLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
+
 }

@@ -126,6 +126,13 @@ class BoardAllViewController: UIViewController, UITableViewDelegate, UITableView
         detailVC.board = selectedBoard
         navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    //여백삭제
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           self.navigationController?.setNavigationBarHidden(true, animated: false)
+       }
+
 }
 
 
