@@ -12,7 +12,11 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //인스턴스 생성
     private let viewModel = BoardViewModel() //뷰모델
     private let tableView = UITableView() //테이블뷰
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
     
     // 상단 배경 그라데이션
     private let gradientLayer: CAGradientLayer = {

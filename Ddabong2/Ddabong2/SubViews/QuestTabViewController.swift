@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 class QuestTabViewController: UIView {
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
