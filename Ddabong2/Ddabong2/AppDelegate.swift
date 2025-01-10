@@ -82,7 +82,17 @@ extension AppDelegate: MessagingDelegate {
             object: nil,
             userInfo: dataDict
         )
+        
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
+        guard let fcmToken = fcmToken else { return }
+        
+        // Check if the token has already been stored
+        if let existingToken = TokenManager.shared.getToken(), existingToken == fcmToken {
+            print("Token already saved: \(existingToken)")
+        } else {
+            print("Saving new token: \(fcmToken)")
+            TokenManager.shared.saveToken(fcmToken)
+        }
     }
 }

@@ -38,7 +38,7 @@ class QuestViewController: UIViewController {
         
         // 레이아웃 제약 설정
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             mainStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
@@ -46,15 +46,20 @@ class QuestViewController: UIViewController {
         return view
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         topTabBar.collectionView.delegate = self
         view.addSubview(topTabBar)
         view.addSubview(basicView)
-        
+        self.extendedLayoutIncludesOpaqueBars = true
         NSLayoutConstraint.activate([
-            self.basicView.topAnchor.constraint(equalTo: topTabBar.bottomAnchor, constant: 5),
+            self.basicView.topAnchor.constraint(equalTo: topTabBar.bottomAnchor),
             self.basicView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             self.basicView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             self.basicView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
