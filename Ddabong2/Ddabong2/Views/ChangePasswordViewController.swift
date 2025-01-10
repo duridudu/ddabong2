@@ -248,6 +248,12 @@ class ChangePasswordViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
+    //여백삭제
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           self.navigationController?.setNavigationBarHidden(true, animated: false)
+       }
+
 }
 
 ///프리뷰 추가
