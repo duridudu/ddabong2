@@ -1,0 +1,5 @@
+AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+    .responseJSON { response in
+        print("요청 데이터: \(parameters)")
+        print("서버 응답: \(response)")
+    }

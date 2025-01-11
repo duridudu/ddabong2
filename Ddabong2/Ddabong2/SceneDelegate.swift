@@ -19,6 +19,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+                
+                // 윈도우 생성
+                window = UIWindow(windowScene: windowScene)
+                
+                // 루트 뷰 컨트롤러로 LoginViewController 설정
+                let loginViewController = LoginViewController()
+                let navigationController = UINavigationController(rootViewController: loginViewController)
+                
+                window?.rootViewController = navigationController
+                window?.makeKeyAndVisible()
+        /*
+        guard let windowScene = (scene as? UIWindowScene) else { return }
         
         // 윈도우 생성
         window = UIWindow(windowScene: windowScene)
@@ -29,6 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+         */
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
