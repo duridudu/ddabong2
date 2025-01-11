@@ -17,7 +17,7 @@ class UserService {
         let url = Endpoints.User.login.replacingOccurrences(of: "{id}", with: id)
         
         let parameters: [String: Any] = [
-            "email": "john@example.com",
+            "id": "john",
             "password": "securePassword123"
         ]
         
@@ -40,8 +40,27 @@ class UserService {
                     completion(.failure(error))
                 }
             }
+        
     
     }
     
-   
+    func fetchUserInfo(accessToken: String, completion: @escaping (Result<User, Error>) -> Void) {
+        // URL 설정
+        let url = "https://myhands.store/user/info" // 직접 URL 입력
+        let headers: HTTPHeaders = ["Authorization": "Bearer \(accessToken)"] // 인증 헤더
+        
+        // Alamofire 요청
+        AF.request(url, method: .get, headers: headers)
+            .responseDecodable(of: UserResponse.self) { response in
+                switch response.result {
+                case .success(let userResponse):
+                    let userInfo = userResponse.responseDto // 응답 데이터에서 유저 정보 추출
+                    print("유저 정보 가져오기 성공: \(userInfo)")
+                    completion(.success(userInfo)) // 성공 콜백 호출
+                case .failure(let error):
+                    print("유저 정보 가져오기 실패: \(error.localizedDescription)")
+                    completion(.failure(error)) // 실패 콜백 호출
+                }
+            }
+    }
 }

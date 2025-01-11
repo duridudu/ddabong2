@@ -6,13 +6,15 @@
 //
 
 enum Endpoints {
-    static let baseURL = "https://api.example.com"
+    static let baseURL = "https://myhands.store"
     
     enum User {
         static let login = "\(baseURL)/user/login"
+        static let userInfo = "\(baseURL)/user/info"
         static let update = "\(baseURL)/user/{id}"
         static let delete = "\(baseURL)/user/{id}"
     }
+    
     
     // 챗지피티가 만들어줌, 수정필요
     enum Schedule {

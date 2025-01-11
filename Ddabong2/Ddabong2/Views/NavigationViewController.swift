@@ -36,15 +36,4 @@ class NavigationViewController: UITabBarController {
 }
 
 
-import SwiftUI
-
-struct NavigationBarViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewControllerPreview {
-            let navigationBarVC = NavigationViewController()
-            return navigationBarVC
-        }
-    }
-}
-
 

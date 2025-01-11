@@ -204,14 +204,3 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
        }
 
 }
-
-import SwiftUI
-
-struct BoardViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewControllerPreview {
-            let boardVC = BoardViewController()
-            return UINavigationController(rootViewController: boardVC)
-        }
-    }
-}

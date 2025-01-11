@@ -9,10 +9,21 @@ import UIKit
 
 class MyPageViewController: UIViewController {
     
+    //유저정보라벨
+    private let nameLabel = UILabel()
+    
     // MARK: - UI Components
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
+    // MARK: - Lifecycle Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.systemGray6
+        setupUI()
+    }
+
+
     // Header
     private let headerLabel: UILabel = {
         let label = UILabel()
@@ -133,13 +144,7 @@ class MyPageViewController: UIViewController {
         return label
     }()
     
-    // MARK: - Lifecycle Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.systemGray6
-        edgesForExtendedLayout = []
-        setupUI()
-    }
+
     
     // MARK: - UI Setup
     private func setupUI() {
@@ -147,6 +152,18 @@ class MyPageViewController: UIViewController {
         setupHeader()
         setupGreetingCard()
         setupExperienceSection()
+        // 이름 레이블 설정
+               nameLabel.translatesAutoresizingMaskIntoConstraints = false
+               nameLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+               nameLabel.textColor = .black
+               nameLabel.textAlignment = .center
+               view.addSubview(nameLabel)
+
+               // 이름 레이블 제약 조건 설정
+               NSLayoutConstraint.activate([
+                   nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                   nameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+               ])
         
     }
     override func viewWillAppear(_ animated: Bool) {

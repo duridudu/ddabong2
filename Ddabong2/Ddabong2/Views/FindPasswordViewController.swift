@@ -224,16 +224,5 @@ class FindPasswordViewController: UIViewController {
 
 
 
-///프리뷰 보려고 잠깐... 쓰는 코드?
-import SwiftUI
-
-// UIViewController를 SwiftUI에서 사용할 수 있도록 확장
-struct FindPasswordViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewControllerPreview {
-            FindPasswordViewController()
-        }
-    }
-}
 
 

@@ -255,14 +255,3 @@ class ChangePasswordViewController: UIViewController {
        }
 
 }
-
-///프리뷰 추가
-import SwiftUI
-
-struct ChangePasswordViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewControllerPreview {
-            ChangePasswordViewController()
-        }
-    }
-}
