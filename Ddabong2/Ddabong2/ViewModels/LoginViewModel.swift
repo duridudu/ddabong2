@@ -25,10 +25,10 @@ class LoginViewModel {
                         // 성공 콜백 호출
                         self.onLoginSuccess?()
                     } else {
-                        self.onLoginFailure?("로그인 실패:")
+                        self.onLoginFailure?("아이디 또는 비밀번호를 확인해주세요.")
                     }
                 case .failure(let error):
-                    self.onLoginFailure?("네트워크 에러:")
+                    self.onLoginFailure?("네트워크를 확인해주세요.")
                 }
             }
     }
