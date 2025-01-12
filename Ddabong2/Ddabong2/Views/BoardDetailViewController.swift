@@ -1,9 +1,11 @@
+
 import UIKit
 
 class BoardDetailViewController: UIViewController {
     
     var board: Board? // BoardViewModel에서 전달받은 게시글 데이터
 
+    /*
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.backward"), for: .normal) // 뒤로가기 화살표 아이콘
@@ -85,5 +87,7 @@ class BoardDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
+     */
 }
+
 
