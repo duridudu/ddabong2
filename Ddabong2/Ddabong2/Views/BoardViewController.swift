@@ -55,8 +55,8 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     private let boardTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "게시판"
-        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.text = "최근글"
+        label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textColor = .black
         return label
     }()
