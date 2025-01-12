@@ -502,13 +502,13 @@ func setThirdView() -> UIView{
     return thirdView
 }
 
-import SwiftUI
-
-struct QuestViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewControllerPreview {
-            let questVC = QuestViewController()
-            return questVC
-        }
-    }
-}
+//import SwiftUI
+//
+//struct QuestViewControllerPreview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewControllerPreview {
+//            let questVC = QuestViewController()
+//            return questVC
+//        }
+//    }
+//}

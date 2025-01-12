@@ -18,6 +18,9 @@ class Container1ViewController:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         view.backgroundColor = UIColor(hex: "fff8f8")
         // 테두리 및 corner radius 설정
         bg1.layer.borderWidth = 2.0 // 테두리 두께

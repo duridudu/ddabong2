@@ -332,14 +332,14 @@ class Container2ViewController:UIViewController, UITableViewDataSource, UITableV
     
 }
 
-import SwiftUI
-
-struct Container2ViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewControllerPreview {
-            let navigationBarVC = Container2ViewController()
-            return navigationBarVC
-        }
-    }
-}
+//import SwiftUI
+//
+//struct Container2ViewControllerPreview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewControllerPreview {
+//            let navigationBarVC = Container2ViewController()
+//            return navigationBarVC
+//        }
+//    }
+//}
 
