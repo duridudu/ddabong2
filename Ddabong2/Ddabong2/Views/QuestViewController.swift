@@ -1,14 +1,18 @@
-//
-//  QuestViewController.swift
-//  Ddabong2
-//
-//  Created by 안지희 on 1/8/25.
-//
-
-import Foundation
 import UIKit
 
-class QuestViewController: UIViewController {
+class QuestViewController: UIViewController, UITableViewDelegate {
+    // 테이블 뷰 데이터 배열
+    // 각 콜렉션 뷰 셀에 해당하는 테이블 뷰의 데이터
+    let tableData: [[String]] = [
+        ["Item 1", "Item 2", "Item 3"], // 첫 번째 셀에 표시할 데이터
+        ["Item A", "Item B", "Item C"], // 두 번째 셀에 표시할 데이터
+        ["Item X", "Item Y", "Item Z"]  // 세 번째 셀에 표시할 데이터
+    ]
+    
+    let collectionData = ["1주차","2주차","3주차","4주차"]
+    var collectionView2:UICollectionView!
+    var tableView:UITableView!
+    
     typealias DataSource = UICollectionViewDiffableDataSource<TabBarSection, String>
     
     enum TabBarSection {
@@ -32,13 +36,14 @@ class QuestViewController: UIViewController {
     var basicView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         var mainStackView = setAllViews()
         // 부모 뷰에 큰 스택뷰 추가
         view.addSubview(mainStackView)
         
         // 레이아웃 제약 설정
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             mainStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
@@ -46,20 +51,20 @@ class QuestViewController: UIViewController {
         return view
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         topTabBar.collectionView.delegate = self
+        collectionView2?.dataSource=self
+        collectionView2?.delegate=self
+        tableView?.dataSource=self
+        tableView?.delegate=self
+        
         view.addSubview(topTabBar)
         view.addSubview(basicView)
-        self.extendedLayoutIncludesOpaqueBars = true
+        
         NSLayoutConstraint.activate([
-            self.basicView.topAnchor.constraint(equalTo: topTabBar.bottomAnchor),
+            self.basicView.topAnchor.constraint(equalTo: topTabBar.bottomAnchor, constant: 5),
             self.basicView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             self.basicView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             self.basicView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -107,13 +112,83 @@ class QuestViewController: UIViewController {
         }
     }
     
+    func updateBasicView(for indexPath: IndexPath) {
+        // 기본 뷰를 비우고 새로운 뷰를 추가
+        basicView.removeFromSuperview()
+        // 새로운 basicView를 생성
+        let newBasicView = UIScrollView()
+        newBasicView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(newBasicView)
+        
+        
+        if indexPath.row == 0 {
+            // 첫 번째 뷰 설정
+            let newView = setAllViews()
+            newBasicView.addSubview(newView)
+            
+            // 레이아웃 제약 설정
+            NSLayoutConstraint.activate([
+                newView.topAnchor.constraint(equalTo: topTabBar.bottomAnchor, constant: 20),
+                newView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                newView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                newView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
+            ])
+            
+            
+            
+        } else if indexPath.row == 1 {
+            // 두 번째 뷰 설정
+            let newView = setAllSecondView()
+            newBasicView.addSubview(newView)
+        }
+        
+        // 기존 basicView를 새로운 basicView로 교체
+        basicView = newBasicView
+        NSLayoutConstraint.activate([
+            basicView.topAnchor.constraint(equalTo: topTabBar.bottomAnchor, constant: 5),
+            basicView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            basicView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            basicView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+    }
+    
+    
+    // 월별내역
+    func setAllSecondView() -> UIView {
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 1. 콜렉션 뷰 생성
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        collectionView2 = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        collectionView2.translatesAutoresizingMaskIntoConstraints = false
+        print("월별내역")
+        collectionView2.dataSource = self
+        collectionView2.delegate = self
+        collectionView2.reloadData()
+        
+        //        collectionView2 = cView2
+        // 콜렉션 뷰의 데이터 소스 및 델리게이트 설정
+        containerView.addSubview(collectionView2)
+        
+        collectionView2.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        
+        NSLayoutConstraint.activate([
+            collectionView2.topAnchor.constraint(equalTo: containerView.topAnchor),
+            collectionView2.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            collectionView2.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            collectionView2.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+        
+        
+        return containerView
+    }
+    
+    
+    
 }
 
-extension QuestViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.currentIndexPath = indexPath
-    }
-}
 
 
 func setAllViews() -> UIStackView{
@@ -135,6 +210,78 @@ func setAllViews() -> UIStackView{
     
     return mainStackView
 }
+
+
+extension QuestViewController: UICollectionViewDelegate,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.currentIndexPath = indexPath
+        print("indexPath")
+        updateBasicView(for: indexPath)  // 인덱스에 따라 뷰를 업데이트
+    }
+    
+    // 콜렉션 뷰의 셀 개수
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("collectionData", collectionData.count)
+        return 4
+    }
+    
+    // 콜렉션 뷰 셀 설정
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("나 셀이야")
+//        let cell = collectionView2.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+//        
+//        // 각 셀에 테이블 뷰를 추가
+//        tableView = UITableView()
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        cell.contentView.addSubview(tableView)
+//        
+//        // 테이블 뷰의 데이터 소스 설정
+//        tableView.dataSource = self
+//        tableView.delegate = self
+//        
+//        // 테이블 뷰 제약 조건 설정
+////        if let cell = cell {
+//            NSLayoutConstraint.activate([
+//                tableView.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+//                tableView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
+//                tableView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
+//                tableView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
+//            ])
+//            
+//            // 테이블 뷰의 데이터를 설정 (2차원 배열 기반)
+//            tableView.tag = indexPath.row // 셀의 indexPath로 데이터를 분리
+//            tableView.reloadData()
+//            return cell
+//        }
+//        
+        return   UICollectionViewCell()
+    }
+    
+    
+}
+
+// 테이블 뷰의 데이터 소스
+extension QuestViewController: UITableViewDataSource {
+    // 각 셀의 행 수는 2차원 배열의 첫 번째 차원 크기
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // collection view에서 선택된 셀에 맞는 데이터 배열을 가져옵니다.
+        // guard let indexPath = tableView.indexPath(for: tableView) else { return 0 }
+        return tableData[section].count // 해당 행에 맞는 데이터 갯수
+    }
+    
+    // 각 셀에 데이터 설정
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath)
+        
+        // 2차원 배열에서 데이터 가져오기
+        let rowData = tableData[indexPath.section] // 섹션에 맞는 데이터를 가져옵니다.
+        cell.textLabel?.text = rowData[indexPath.row] // 각 행에 맞는 데이터
+        
+        return cell
+    }
+}
+
+
 
 func setFirstView() -> UIView{
     // 1. UIView 배경, 테두리, 레이디우스 설정
@@ -202,7 +349,7 @@ func setFirstView() -> UIView{
     
     // textStackView와 iconStackView를 첫 번째 뷰에 추가
     firstStackView.addSubview(textStackView)
-//    firstStackView.addSubview(iconStackView)
+    //    firstStackView.addSubview(iconStackView)
     
     // 하단에 수평 스택뷰 추가 (이미지 7개 배치)
     let imageStackView = UIStackView()
@@ -353,4 +500,15 @@ func setThirdView() -> UIView{
         titleLabel.trailingAnchor.constraint(equalTo: thirdView.trailingAnchor, constant: -10),
     ])
     return thirdView
+}
+
+import SwiftUI
+
+struct QuestViewControllerPreview: PreviewProvider {
+    static var previews: some View {
+        UIViewControllerPreview {
+            let questVC = QuestViewController()
+            return questVC
+        }
+    }
 }
