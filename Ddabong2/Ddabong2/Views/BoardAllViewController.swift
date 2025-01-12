@@ -2,9 +2,18 @@
 //JH
 
 
+
+
 import UIKit
 
-class BoardAllViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BoardAllViewController: UIViewController{
+    
+    override func viewDidLoad() {
+            super.viewDidLoad()
+            view.backgroundColor = .white
+            title = "전체 게시글 보기"
+        }
+    /*
     
     // ViewModel 인스턴스
     private let viewModel = BoardViewModel()
@@ -132,6 +141,8 @@ class BoardAllViewController: UIViewController, UITableViewDelegate, UITableView
            super.viewWillAppear(animated)
            self.navigationController?.setNavigationBarHidden(true, animated: false)
        }
+     
+     */
 
 }
 
