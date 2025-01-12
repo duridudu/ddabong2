@@ -1,174 +1,128 @@
-//
-//  MyPageViewController.swift
-//  Ddabong2
-//
-//  Created by 이윤주 on 12/25/24.
-//
+// 마이페이지
+// 일반 유저 개인정보 조회 가능
+// (유저, 오늘의 운세, 경험치)는 마이페이지 API에서 받아옴
+// JH
 
 import UIKit
+import SideMenu
 
 class MyPageViewController: UIViewController {
-    
-    //유저정보라벨
-    private let nameLabel = UILabel()
-    
+
+    // MARK: - ViewModel
+    private let userInfoViewModel = UserInfoViewModel()
+
+    // MARK: - SideMenu Navigation Controller
+    private var sideMenu: SideMenuNavigationController?
+
     // MARK: - UI Components
+    private let headerView = UIView()
+    private let titleLabel = UILabel()
+    private let drawerButton = UIButton(type: .system)
+    private let alertButton = UIButton(type: .system)
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
+
+    // Greeting Card Components
+    private let greetingLabel = UILabel()
+    private let dateLabel = UILabel()
+    private let progressLabel = UILabel()
+    private let progressSubtitleLabel = UILabel()
+
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.systemGray6
+        view.backgroundColor = UIColor.white // 배경색을 흰색으로 설정
         setupUI()
+        setupSideMenu()
+        setupBindings()
+        fetchUserInfo()
     }
 
+    // MARK: - Bindings
+    private func setupBindings() {
+        userInfoViewModel.onUserInfoFetchSuccess = { [weak self] in
+            DispatchQueue.main.async {
+                guard let user = self?.userInfoViewModel.userInfo else { return }
+                self?.updateUI(with: user)
+            }
+        }
 
-    // Header
-    private let headerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "마이페이지"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .black
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private let notificationButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "bell"), for: .normal)
-        button.tintColor = .black
-        return button
-    }()
-    
-    // Greeting Section
-    private let greetingCardView = UIView()
-    private let greetingImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "ddabong2") // Replace with your actual image name
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private let greetingLabel: UILabel = {
-        let label = UILabel()
-        label.text = "최이서님, 안녕하세요!"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = .black
-        label.textAlignment = .left
-        return label
-    }()
-    
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "01월 08일 오늘의 운세\n놓치지 말고 도전!"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
-        label.numberOfLines = 2
-        label.textAlignment = .left
-        return label
-    }()
-    
-    private let progressLabel: UILabel = {
-        let label = UILabel()
-        label.text = "F1-II 10500"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .black
-        return label
-    }()
-    
-    private let progressView: UIProgressView = {
-        let progress = UIProgressView(progressViewStyle: .default)
-        progress.progressTintColor = UIColor.systemRed
-        progress.trackTintColor = UIColor.systemGray5
-        progress.progress = 0.78
-        return progress
-    }()
-    
-    private let progressSubtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "F2-1 승급까지 -3000"
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .gray
-        label.textAlignment = .right
-        return label
-    }()
-    
-    // Experience Section
-    private let experienceTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "경험치 현황"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = .black
-        return label
-    }()
-    
-    private let recentQuestLabel: UILabel = {
-        let label = UILabel()
-        label.text = "최근 획득 경험치"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
-        return label
-    }()
-    
-    private let recentQuestValueLabel: UILabel = {
-        let label = UILabel()
-        label.text = "직무별 퀘스트\n생산성 MAX 달성"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.numberOfLines = 2
-        label.textColor = .black
-        return label
-    }()
-    
-    private let experienceProgressView: UIProgressView = {
-        let progress = UIProgressView(progressViewStyle: .default)
-        progress.progressTintColor = UIColor.systemOrange
-        progress.trackTintColor = UIColor.systemGray5
-        progress.progress = 0.83
-        return progress
-    }()
-    
-    private let experienceYearLabel: UILabel = {
-        let label = UILabel()
-        label.text = "올해 획득한 경험치 7,500"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .black
-        return label
-    }()
-    
-    private let experienceLastYearLabel: UILabel = {
-        let label = UILabel()
-        label.text = "작년에 획득한 경험치 3,000"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
-        return label
-    }()
-    
+        userInfoViewModel.onUserInfoFetchFailure = { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "에러", message: errorMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self?.present(alert, animated: true)
+            }
+        }
+    }
 
-    
+    // MARK: - Fetch User Info
+    private func fetchUserInfo() {
+        userInfoViewModel.fetchUserInfo()
+    }
+
+    // MARK: - Update UI
+    private func updateUI(with user: User) {
+        greetingLabel.text = "\(user.name)님, 안녕하세요!"
+        dateLabel.text = "01월 08일 오늘의 운세\n혼들리지 말고 소신껏!"
+        progressLabel.text = "\(user.level) \(user.employeeNum)"
+        progressSubtitleLabel.text = "F2-I 승급까지 -3000"
+    }
+
     // MARK: - UI Setup
     private func setupUI() {
+        setupHeaderView()
         setupScrollView()
-        setupHeader()
         setupGreetingCard()
-        setupExperienceSection()
-        // 이름 레이블 설정
-               nameLabel.translatesAutoresizingMaskIntoConstraints = false
-               nameLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-               nameLabel.textColor = .black
-               nameLabel.textAlignment = .center
-               view.addSubview(nameLabel)
-
-               // 이름 레이블 제약 조건 설정
-               NSLayoutConstraint.activate([
-                   nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                   nameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-               ])
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+
+    private func setupHeaderView() {
+        // Header View
+        headerView.backgroundColor = .white
+        view.addSubview(headerView)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Drawer Button
+        drawerButton.setImage(UIImage(named: "drawer"), for: .normal)
+        drawerButton.tintColor = .black
+        drawerButton.addTarget(self, action: #selector(drawerButtonTapped), for: .touchUpInside)
+        headerView.addSubview(drawerButton)
+        drawerButton.translatesAutoresizingMaskIntoConstraints = false
+
+        // Title Label
+        titleLabel.text = "마이페이지"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.textColor = .black
+        headerView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // Alert Button
+        alertButton.setImage(UIImage(named: "alert"), for: .normal)
+        alertButton.tintColor = .black
+        alertButton.addTarget(self, action: #selector(alertButtonTapped), for: .touchUpInside)
+        headerView.addSubview(alertButton)
+        alertButton.translatesAutoresizingMaskIntoConstraints = false
+
+        // Constraints
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 60),
+
+            drawerButton.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            drawerButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            drawerButton.widthAnchor.constraint(equalToConstant: 24),
+            drawerButton.heightAnchor.constraint(equalToConstant: 24),
+
+            titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+
+            alertButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
+            alertButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            alertButton.widthAnchor.constraint(equalToConstant: 24),
+            alertButton.heightAnchor.constraint(equalToConstant: 24)
+        ])
     }
 
     private func setupScrollView() {
@@ -176,13 +130,13 @@ class MyPageViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
+
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
@@ -190,114 +144,87 @@ class MyPageViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
-    
-    private func setupHeader() {
-        contentView.addSubview(headerLabel)
-        contentView.addSubview(notificationButton)
-        
-        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        notificationButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            headerLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            headerLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            notificationButton.centerYAnchor.constraint(equalTo: headerLabel.centerYAnchor),
-            notificationButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-        ])
-    }
-    
+
     private func setupGreetingCard() {
-        contentView.addSubview(greetingCardView)
-        greetingCardView.translatesAutoresizingMaskIntoConstraints = false
+        let cardBackgroundView = UIView()
+        cardBackgroundView.backgroundColor = UIColor(red: 1.0, green: 0.956, blue: 0.956, alpha: 1.0) // FFF4F4
+        contentView.addSubview(cardBackgroundView)
+        cardBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+
+        let greetingCardView = UIView()
         greetingCardView.layer.cornerRadius = 12
         greetingCardView.backgroundColor = .white
         greetingCardView.layer.shadowColor = UIColor.black.cgColor
         greetingCardView.layer.shadowOpacity = 0.1
         greetingCardView.layer.shadowOffset = CGSize(width: 0, height: 2)
         greetingCardView.layer.shadowRadius = 4
-        
-        greetingCardView.addSubview(greetingImageView)
+        cardBackgroundView.addSubview(greetingCardView)
+        greetingCardView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Greeting Label
         greetingCardView.addSubview(greetingLabel)
-        greetingCardView.addSubview(dateLabel)
-        greetingCardView.addSubview(progressLabel)
-        greetingCardView.addSubview(progressView)
-        greetingCardView.addSubview(progressSubtitleLabel)
-        
-        greetingImageView.translatesAutoresizingMaskIntoConstraints = false
         greetingLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // Date Label
+        greetingCardView.addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // Progress Label
+        greetingCardView.addSubview(progressLabel)
         progressLabel.translatesAutoresizingMaskIntoConstraints = false
-        progressView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Progress Subtitle Label
+        greetingCardView.addSubview(progressSubtitleLabel)
         progressSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
+        // Constraints
         NSLayoutConstraint.activate([
-            greetingCardView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 16),
-            greetingCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            greetingCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            greetingCardView.heightAnchor.constraint(equalToConstant: 140),
-            
-            greetingImageView.leadingAnchor.constraint(equalTo: greetingCardView.leadingAnchor, constant: 16),
-            greetingImageView.centerYAnchor.constraint(equalTo: greetingCardView.centerYAnchor),
-            greetingImageView.widthAnchor.constraint(equalToConstant: 60),
-            greetingImageView.heightAnchor.constraint(equalToConstant: 60),
-            
+            cardBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            cardBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cardBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cardBackgroundView.heightAnchor.constraint(equalToConstant: 200),
+
+            greetingCardView.topAnchor.constraint(equalTo: cardBackgroundView.topAnchor, constant: 16),
+            greetingCardView.leadingAnchor.constraint(equalTo: cardBackgroundView.leadingAnchor, constant: 16),
+            greetingCardView.trailingAnchor.constraint(equalTo: cardBackgroundView.trailingAnchor, constant: -16),
+            greetingCardView.bottomAnchor.constraint(equalTo: cardBackgroundView.bottomAnchor, constant: -16),
+
             greetingLabel.topAnchor.constraint(equalTo: greetingCardView.topAnchor, constant: 16),
-            greetingLabel.leadingAnchor.constraint(equalTo: greetingImageView.trailingAnchor, constant: 16),
-            
+            greetingLabel.leadingAnchor.constraint(equalTo: greetingCardView.leadingAnchor, constant: 16),
+
             dateLabel.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 8),
-            dateLabel.leadingAnchor.constraint(equalTo: greetingImageView.trailingAnchor, constant: 16),
-            
+            dateLabel.leadingAnchor.constraint(equalTo: greetingCardView.leadingAnchor, constant: 16),
+
             progressLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
             progressLabel.leadingAnchor.constraint(equalTo: greetingCardView.leadingAnchor, constant: 16),
-            
-            progressView.centerYAnchor.constraint(equalTo: progressLabel.centerYAnchor),
-            progressView.leadingAnchor.constraint(equalTo: progressLabel.trailingAnchor, constant: 8),
-            progressView.trailingAnchor.constraint(equalTo: greetingCardView.trailingAnchor, constant: -16),
-            progressView.heightAnchor.constraint(equalToConstant: 4),
-            
-            progressSubtitleLabel.topAnchor.constraint(equalTo: progressLabel.bottomAnchor, constant: 8),
+
+            progressSubtitleLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
             progressSubtitleLabel.trailingAnchor.constraint(equalTo: greetingCardView.trailingAnchor, constant: -16)
         ])
     }
-    
-    private func setupExperienceSection() {
-        contentView.addSubview(experienceTitleLabel)
-        contentView.addSubview(recentQuestLabel)
-        contentView.addSubview(recentQuestValueLabel)
-        contentView.addSubview(experienceProgressView)
-        contentView.addSubview(experienceYearLabel)
-        contentView.addSubview(experienceLastYearLabel)
-        
-        experienceTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        recentQuestLabel.translatesAutoresizingMaskIntoConstraints = false
-        recentQuestValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        experienceProgressView.translatesAutoresizingMaskIntoConstraints = false
-        experienceYearLabel.translatesAutoresizingMaskIntoConstraints = false
-        experienceLastYearLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            experienceTitleLabel.topAnchor.constraint(equalTo: greetingCardView.bottomAnchor, constant: 32),
-            experienceTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            recentQuestLabel.topAnchor.constraint(equalTo: experienceTitleLabel.bottomAnchor, constant: 16),
-            recentQuestLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            recentQuestValueLabel.topAnchor.constraint(equalTo: recentQuestLabel.bottomAnchor, constant: 8),
-            recentQuestValueLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            experienceProgressView.topAnchor.constraint(equalTo: recentQuestValueLabel.bottomAnchor, constant: 16),
-            experienceProgressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            experienceProgressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            experienceProgressView.heightAnchor.constraint(equalToConstant: 4),
-            
-            experienceYearLabel.topAnchor.constraint(equalTo: experienceProgressView.bottomAnchor, constant: 16),
-            experienceYearLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            experienceLastYearLabel.topAnchor.constraint(equalTo: experienceYearLabel.bottomAnchor, constant: 8),
-            experienceLastYearLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            experienceLastYearLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
-        ])
+
+    // MARK: - Actions
+    @objc private func drawerButtonTapped() {
+        guard let sideMenu = sideMenu else { return }
+        present(sideMenu, animated: true, completion: nil)
     }
 
+    @objc private func alertButtonTapped() {
+        print("Alert 버튼 눌림")
+    }
+
+    // MARK: - SideMenu 설정
+    private func setupSideMenu() {
+        let menuViewController = MenuViewController()
+        sideMenu = SideMenuNavigationController(rootViewController: menuViewController)
+        sideMenu?.leftSide = true
+        sideMenu?.menuWidth = 300
+        sideMenu?.presentationStyle = .menuSlideIn
+        sideMenu?.statusBarEndAlpha = 0
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 }
