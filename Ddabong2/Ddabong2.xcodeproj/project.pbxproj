@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2980894584ED34283FCF4398 /* Pods_Ddabong2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC04624703505BFC2C523B7 /* Pods_Ddabong2.framework */; };
+		561040122D340FCB0074D746 /* BoardAllViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561040112D340FCB0074D746 /* BoardAllViewModel.swift */; };
 		562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */; };
 		562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DDC2D2984D800B14088 /* UIColor+extension.swift */; };
 		567443812D2CE97000BBC8BD /* BoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */; };
@@ -85,6 +86,7 @@
 /* Begin PBXFileReference section */
 		0AE1A036EA429E30FE3AC91E /* Pods-Ddabong2-Ddabong2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ddabong2-Ddabong2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Ddabong2-Ddabong2UITests/Pods-Ddabong2-Ddabong2UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F1303123296D5BD822DABDA /* Pods-Ddabong2-Ddabong2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ddabong2-Ddabong2UITests.release.xcconfig"; path = "Target Support Files/Pods-Ddabong2-Ddabong2UITests/Pods-Ddabong2-Ddabong2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		561040112D340FCB0074D746 /* BoardAllViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAllViewModel.swift; sourceTree = "<group>"; };
 		562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		562E5DDC2D2984D800B14088 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 		65B9DC902D1BFB9D00BB969D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				561040112D340FCB0074D746 /* BoardAllViewModel.swift */,
 				567443842D2CEBD700BBC8BD /* BoardViewModel.swift */,
 				569D8AA52D29404D00949DB4 /* LoginViewModel.swift */,
 			);
@@ -597,6 +600,7 @@
 				655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */,
 				562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */,
 				56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */,
+				561040122D340FCB0074D746 /* BoardAllViewModel.swift in Sources */,
 				6504AFF62D1BF94700051B44 /* UserInfo.swift in Sources */,
 				567443812D2CE97000BBC8BD /* BoardDetailViewController.swift in Sources */,
 				654BD98E2D340A850048F5CA /* Container1ViewController.swift in Sources */,
