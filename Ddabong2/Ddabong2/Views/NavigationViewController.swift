@@ -14,7 +14,10 @@ class NavigationViewController: UITabBarController {
         
         // 각 뷰 컨트롤러 초기화
         let myPageVC = MyPageViewController()
-        let questVC = QuestViewController()
+        //let questVC = QuestViewController()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let questVC = storyboard.instantiateViewController(withIdentifier: "TestViewController") as! TestViewController
+
         let raceVC = RaceViewController()
         let boardVC = BoardViewController()
         

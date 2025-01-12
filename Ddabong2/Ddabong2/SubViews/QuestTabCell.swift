@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+
 class QuestTabCell: UICollectionViewCell {
     private let label: UILabel = {
         let label = UILabel()
@@ -66,3 +67,5 @@ class QuestTabCell: UICollectionViewCell {
         self.label.text = title
     }
 }
+
+
