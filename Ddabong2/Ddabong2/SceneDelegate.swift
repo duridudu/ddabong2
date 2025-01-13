@@ -19,31 +19,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-                
-                // 윈도우 생성
-                window = UIWindow(windowScene: windowScene)
-                
-                // 루트 뷰 컨트롤러로 LoginViewController 설정
-                let loginViewController = LoginViewController()
-                let navigationController = UINavigationController(rootViewController: loginViewController)
-                
-                window?.rootViewController = navigationController
-                window?.makeKeyAndVisible()
-        /*
-        guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        // 윈도우 생성
         window = UIWindow(windowScene: windowScene)
         
-        // 루트 뷰 컨트롤러로 네비게이션 컨트롤러 설정
-        let navigationViewController = NavigationViewController()
-        let navigationController = UINavigationController(rootViewController: navigationViewController)
+        // 로그인 상태 확인
+        let isLoggedIn = UserSessionManager.shared.getAccessToken() != nil
         
+        // 적절한 초기 루트 뷰 컨트롤러 설정
+        let initialViewController: UIViewController
+        if isLoggedIn {
+            initialViewController = AdminMainViewController() // 로그인 상태면 관리자 메인 화면
+        } else {
+            initialViewController = LoginViewController() // 로그인 필요 시 로그인 화면
+        }
+        
+        let navigationController = UINavigationController(rootViewController: initialViewController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-         */
     }
-    
+
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

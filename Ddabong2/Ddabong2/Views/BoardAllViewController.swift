@@ -5,7 +5,7 @@ class BoardAllViewController: UIViewController, UITableViewDelegate, UITableView
 
     // ViewModel 인스턴스
     private let viewModel = BoardViewModel()
-    
+   
     // 테이블 뷰
     private let tableView: UITableView = {
         let tableView = UITableView()
