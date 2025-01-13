@@ -15,6 +15,7 @@ class BoardViewModel {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(UserSessionManager.shared.getAccessToken() ?? "토큰 없음")"
         ]
+        print("ACCESS TOKEN",UserSessionManager.shared.getAccessToken())
         let parameters: [String: Any] = ["size": size]
         print("요청 URL: \(url)")
         print("요청 헤더: \(headers)")

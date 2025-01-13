@@ -17,7 +17,8 @@ enum Endpoints {
     
     
     // 챗지피티가 만들어줌, 수정필요
-        static let fetch = "\(baseURL)/schedule/{id}"
+    enum Quest{
+        static let fetchQuestStats = "\(baseURL)/quest/stats"
         static let update = "\(baseURL)/schedule/{id}"
         static let delete = "\(baseURL)/schedule/{id}"
     }
