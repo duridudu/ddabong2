@@ -192,13 +192,21 @@ class LoginViewController: UIViewController {
     
     //액션
     private func setupBindings() {
-        loginViewModel.onLoginSuccess = { [weak self] in
-
+        loginViewModel.onLoginSuccess = { [weak self] isAdmin in
             DispatchQueue.main.async {
-                let mainVC = NavigationViewController() // 메인 화면
-                let navigationController = UINavigationController(rootViewController: mainVC)
-                navigationController.modalPresentationStyle = .fullScreen
-                self?.present(navigationController, animated: true)
+                if isAdmin {
+                    // 어드민일 경우 AdminMainViewController로 이동
+                    let adminVC = AdminMainViewController()
+                    let navigationController = UINavigationController(rootViewController: adminVC)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self?.present(navigationController, animated: true)
+                } else {
+                    // 일반 유저일 경우 NavigationViewController로 이동
+                    let mainVC = NavigationViewController()
+                    let navigationController = UINavigationController(rootViewController: mainVC)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self?.present(navigationController, animated: true)
+                }
             }
         }
 

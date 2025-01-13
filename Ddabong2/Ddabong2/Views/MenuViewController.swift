@@ -137,13 +137,13 @@ class MenuViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             // Profile Background View
-            profileBackgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            profileBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), // Safe Area 기준으로 시작
             profileBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             profileBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileBackgroundView.heightAnchor.constraint(equalToConstant: 300), // Adjusted height for proper display
 
             // Profile Image
-            profileImageView.topAnchor.constraint(equalTo: profileBackgroundView.topAnchor, constant: 50),
+            profileImageView.topAnchor.constraint(equalTo: profileBackgroundView.topAnchor, constant: 20),
             profileImageView.leadingAnchor.constraint(equalTo: profileBackgroundView.leadingAnchor, constant: 20),
             profileImageView.widthAnchor.constraint(equalToConstant: 80),
             profileImageView.heightAnchor.constraint(equalToConstant: 80),
@@ -191,7 +191,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             print("프로필 수정 선택됨")
-        case 1:// Navigate to ChangePasswordViewController
+        case 1:
             let changePasswordVC = ChangePasswordViewController()
             navigationController?.pushViewController(changePasswordVC, animated: true)
             print("비밀번호 변경 선택됨")
@@ -200,9 +200,5 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }

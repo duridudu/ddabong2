@@ -18,6 +18,32 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
         return gradientLayer
     }()
+    
+    private func setupGradientBackground() {
+        gradientLayer.frame = CGRect(x: 0, y: 10, width: view.bounds.width, height: 300)
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+    private func setupCurveWithShadow() {
+        let curvePath = UIBezierPath()
+        curvePath.move(to: CGPoint(x: 0, y: 300))
+        curvePath.addQuadCurve(to: CGPoint(x: view.bounds.width, y: 300),
+                               controlPoint: CGPoint(x: view.bounds.width / 2, y: 250))
+        curvePath.addLine(to: CGPoint(x: view.bounds.width, y: view.bounds.height))
+        curvePath.addLine(to: CGPoint(x: 0, y: view.bounds.height))
+        curvePath.close()
+
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = curvePath.cgPath
+        shapeLayer.fillColor = UIColor.white.cgColor
+        shapeLayer.shadowColor = UIColor.black.cgColor
+        shapeLayer.shadowOpacity = 0.4
+        shapeLayer.shadowOffset = CGSize(width: 0, height: 10)
+        shapeLayer.shadowRadius = 10
+
+        view.layer.insertSublayer(shapeLayer, at: 1)
+    }
+
 
     private let containerView: UIView = {
         let view = UIView()
@@ -77,32 +103,7 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setupUI()
         setupTableView()
         bindViewModel()
-        viewModel.fetchBoards(size: 6) // 최신 게시글 4개 가져오기
-    }
-
-    private func setupGradientBackground() {
-        gradientLayer.frame = CGRect(x: 0, y: 10, width: view.bounds.width, height: 300)
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-
-    private func setupCurveWithShadow() {
-        let curvePath = UIBezierPath()
-        curvePath.move(to: CGPoint(x: 0, y: 300))
-        curvePath.addQuadCurve(to: CGPoint(x: view.bounds.width, y: 300),
-                               controlPoint: CGPoint(x: view.bounds.width / 2, y: 250))
-        curvePath.addLine(to: CGPoint(x: view.bounds.width, y: view.bounds.height))
-        curvePath.addLine(to: CGPoint(x: 0, y: view.bounds.height))
-        curvePath.close()
-
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = curvePath.cgPath
-        shapeLayer.fillColor = UIColor.white.cgColor
-        shapeLayer.shadowColor = UIColor.black.cgColor
-        shapeLayer.shadowOpacity = 0.4
-        shapeLayer.shadowOffset = CGSize(width: 0, height: 10)
-        shapeLayer.shadowRadius = 10
-
-        view.layer.insertSublayer(shapeLayer, at: 1)
+        viewModel.fetchBoards(size: 6) // 최신 게시글 6개 가져오기
     }
 
     private func setupUI() {
