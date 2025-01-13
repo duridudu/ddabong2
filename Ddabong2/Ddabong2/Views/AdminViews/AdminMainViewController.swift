@@ -1,5 +1,5 @@
 //
-//  AdminPageViewController.swift
+//  AdminMainViewController.swift
 //  Ddabong2
 //
 //  Created by 안지희 on 1/13/25.
@@ -24,6 +24,28 @@ class AdminMainViewController: UIViewController {
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
         return gradientLayer
+    }()
+
+    private let logoAndSloganStackView: UIStackView = {
+        let sloganLabel = UILabel()
+        sloganLabel.text = "멈추지 않는 도전,"
+        sloganLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        sloganLabel.textColor = UIColor(red: 1.0, green: 0.35, blue: 0.21, alpha: 1.0)
+        sloganLabel.textAlignment = .right
+
+        let logoImageView = UIImageView()
+        logoImageView.image = UIImage(named: "boardlogo")
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.widthAnchor.constraint(equalToConstant: 160).isActive = true
+        logoImageView.heightAnchor.constraint(equalToConstant: 45.5).isActive = true
+
+        let stackView = UIStackView(arrangedSubviews: [sloganLabel, logoImageView])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        return stackView
     }()
 
     override func viewDidLoad() {
@@ -67,6 +89,15 @@ class AdminMainViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
 
+        // 로고와 슬로건 StackView 추가
+        view.addSubview(logoAndSloganStackView)
+        logoAndSloganStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            logoAndSloganStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoAndSloganStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
+        ])
+
         // 드로어 버튼
         let drawerButton = UIButton()
         drawerButton.setImage(UIImage(named: "drawer"), for: .normal)
@@ -102,20 +133,26 @@ class AdminMainViewController: UIViewController {
         gridStackView.distribution = .fillEqually
 
         // 첫 번째 줄
-        let row1Stack = UIStackView(arrangedSubviews: [
-            AdminMenuButton(title: "회원 생성", iconName: "admin_join"),
-            AdminMenuButton(title: "회원 목록", iconName: "admin_personlist")
-        ])
+        let createMemberButton = AdminMenuButton(title: "회원 생성", iconName: "admin_join")
+        createMemberButton.addTarget(self, action: #selector(didTapCreateMemberButton), for: .touchUpInside)
+
+        let memberListButton = AdminMenuButton(title: "회원 목록", iconName: "admin_personlist")
+        memberListButton.addTarget(self, action: #selector(didTapMemberListButton), for: .touchUpInside)
+
+        let row1Stack = UIStackView(arrangedSubviews: [createMemberButton, memberListButton])
         row1Stack.axis = .horizontal
         row1Stack.spacing = 16
         row1Stack.alignment = .fill
         row1Stack.distribution = .fillEqually
 
         // 두 번째 줄
-        let row2Stack = UIStackView(arrangedSubviews: [
-            AdminMenuButton(title: "게시글 작성", iconName: "admin_boardwrite"),
-            AdminMenuButton(title: "게시글 조회", iconName: "admin_boardlist")
-        ])
+        let writeBoardButton = AdminMenuButton(title: "게시글 작성", iconName: "admin_boardwrite")
+        writeBoardButton.addTarget(self, action: #selector(didTapWriteBoardButton), for: .touchUpInside)
+
+        let boardListButton = AdminMenuButton(title: "게시글 조회", iconName: "admin_boardlist")
+        boardListButton.addTarget(self, action: #selector(didTapBoardListButton), for: .touchUpInside)
+
+        let row2Stack = UIStackView(arrangedSubviews: [writeBoardButton, boardListButton])
         row2Stack.axis = .horizontal
         row2Stack.spacing = 16
         row2Stack.alignment = .fill
@@ -157,6 +194,27 @@ class AdminMainViewController: UIViewController {
             present(sideMenu, animated: true, completion: nil)
         }
     }
+
+    // MARK: - Button Actions
+    @objc private func didTapCreateMemberButton() {
+        let createVC = AdminUserCreateViewController()
+        navigationController?.pushViewController(createVC, animated: true)
+    }
+
+    @objc private func didTapMemberListButton() {
+        let listVC = AdminUserListViewController()
+        navigationController?.pushViewController(listVC, animated: true)
+    }
+
+    @objc private func didTapWriteBoardButton() {
+        let writeVC = AdminBoardWriteViewController()
+        navigationController?.pushViewController(writeVC, animated: true)
+    }
+
+    @objc private func didTapBoardListButton() {
+        let boardListVC = BoardAllViewController()
+        navigationController?.pushViewController(boardListVC, animated: true)
+    }
 }
 
 class AdminMenuButton: UIButton {
@@ -196,13 +254,14 @@ class AdminMenuButton: UIButton {
         layer.shadowOpacity = 0.1
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 4
+
+        stackView.isUserInteractionEnabled = false // 터치 이벤트 방해 방지
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 import SwiftUI
 
@@ -219,9 +278,8 @@ struct AdminMainViewControllerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         return AdminMainViewController() // 미리 볼 뷰 컨트롤러를 반환
     }
-    
+
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
         // 필요 시 업데이트 작업 (대부분 미리보기에서는 비워둠)
     }
-    
 }

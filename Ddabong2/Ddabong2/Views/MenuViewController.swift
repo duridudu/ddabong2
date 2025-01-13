@@ -190,15 +190,44 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
+            let changeProfileVC = ChangeProfileViewController() // ChangeProfileViewController 초기화
+            navigationController?.pushViewController(changeProfileVC, animated: true) // 화면 전환
             print("프로필 수정 선택됨")
+
         case 1:
             let changePasswordVC = ChangePasswordViewController()
             navigationController?.pushViewController(changePasswordVC, animated: true)
             print("비밀번호 변경 선택됨")
         case 2:
             print("로그아웃 선택됨")
+            showLogoutModal()
         default:
             break
         }
     }
+    // MARK: - 로그아웃 모달 띄우기
+       private func showLogoutModal() {
+           let modalVC = LogoutModalViewController()
+           modalVC.modalPresentationStyle = .overFullScreen
+           modalVC.onConfirm = {
+               LogoutService.shared.logoutUser { success in
+                   if success {
+                       // 로그아웃 성공 처리: 로그인 화면으로 이동
+                       DispatchQueue.main.async {
+                           let loginVC = LoginViewController()
+                           loginVC.modalPresentationStyle = .fullScreen
+                           self.present(loginVC, animated: true, completion: nil)
+                       }
+                   } else {
+                       // 로그아웃 실패 처리
+                       DispatchQueue.main.async {
+                           let alert = UIAlertController(title: "오류", message: "로그아웃에 실패했습니다. 다시 시도해주세요.", preferredStyle: .alert)
+                           alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                           self.present(alert, animated: true, completion: nil)
+                       }
+                   }
+               }
+           }
+           present(modalVC, animated: true, completion: nil)
+       }
 }

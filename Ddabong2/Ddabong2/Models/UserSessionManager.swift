@@ -1,6 +1,3 @@
-//JH
-//토큰 관리!
-
 import Foundation
 
 class UserSessionManager {
@@ -11,6 +8,7 @@ class UserSessionManager {
     private var accessToken: String?
     private var refreshToken: String?
     private var userInfo: User?
+    private var isAdmin: Bool = false // admin 여부 저장
     
     func saveAccessToken(_ token: String) {
         self.accessToken = token
@@ -24,11 +22,19 @@ class UserSessionManager {
         self.userInfo = user
     }
     
+    func saveAdminStatus(_ admin: Bool) {
+        self.isAdmin = admin
+    }
+    
     func getAccessToken() -> String? {
         return accessToken
     }
     
     func getUserInfo() -> User? {
         return userInfo
+    }
+    
+    func isAdminUser() -> Bool {
+        return isAdmin
     }
 }

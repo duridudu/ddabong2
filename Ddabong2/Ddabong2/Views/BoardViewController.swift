@@ -1,7 +1,12 @@
 import UIKit
+import SideMenu
 
 class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    private var sideMenu: SideMenuNavigationController?
+
+    
     private let viewModel = BoardViewModel() // ViewModel
     private let tableView = UITableView() // TableView
 
@@ -20,9 +25,22 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }()
     
     private func setupGradientBackground() {
-        gradientLayer.frame = CGRect(x: 0, y: 10, width: view.bounds.width, height: 300)
+        // 그라데이션 영역의 높이를 줄임
+        gradientLayer.colors = [
+            UIColor.white.cgColor,
+            UIColor(red: 1.0, green: 0.96, blue: 0.92, alpha: 1.0).cgColor,
+            UIColor(red: 1.0, green: 0.84, blue: 0.80, alpha: 1.0).cgColor
+        ]
+        gradientLayer.locations = [0.0, 0.5, 1.0]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+
+        // 줄어든 높이를 반영
+        gradientLayer.frame = CGRect(x: 0, y: 50, width: view.bounds.width, height: 250)
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
+
+
 
     private func setupCurveWithShadow() {
         let curvePath = UIBezierPath()
@@ -43,7 +61,45 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         view.layer.insertSublayer(shapeLayer, at: 1)
     }
+    private let notchBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
+    // 상단 바
+    private let topBarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let menuButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "drawer"), for: .normal)
+        button.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "게시판"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let notificationButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "alert"), for: .normal)
+        button.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     private let containerView: UIView = {
         let view = UIView()
@@ -95,6 +151,13 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
         button.addTarget(self, action: #selector(didTapViewAllButton), for: .touchUpInside)
         return button
     }()
+    
+    private let topBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,24 +170,54 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     private func setupUI() {
+        view.addSubview(topBackgroundView) // 상태바와 탑바뷰 흰색 배경 추가
+        view.addSubview(topBarView)
+        topBarView.addSubview(menuButton)
+        topBarView.addSubview(titleLabel)
+        topBarView.addSubview(notificationButton)
+
         view.addSubview(logoAndSloganStackView)
         view.addSubview(containerView)
         containerView.addSubview(boardTitleLabel)
         containerView.addSubview(viewAllButton)
         containerView.addSubview(tableView)
 
+        topBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         logoAndSloganStackView.translatesAutoresizingMaskIntoConstraints = false
         boardTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         viewAllButton.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            logoAndSloganStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            // 상단 상태바와 탑바뷰 흰색 배경
+            topBackgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            topBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topBackgroundView.bottomAnchor.constraint(equalTo: topBarView.bottomAnchor),
+
+            // Top Bar Layout
+            topBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topBarView.heightAnchor.constraint(equalToConstant: 50),
+
+            menuButton.leadingAnchor.constraint(equalTo: topBarView.leadingAnchor, constant: 16),
+            menuButton.centerYAnchor.constraint(equalTo: topBarView.centerYAnchor),
+
+            titleLabel.centerXAnchor.constraint(equalTo: topBarView.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: topBarView.centerYAnchor),
+
+            notificationButton.trailingAnchor.constraint(equalTo: topBarView.trailingAnchor, constant: -16),
+            notificationButton.centerYAnchor.constraint(equalTo: topBarView.centerYAnchor),
+
+            // 로고와 슬로건 위치
+            logoAndSloganStackView.topAnchor.constraint(equalTo: topBarView.bottomAnchor, constant: 20),
             logoAndSloganStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
+            // 그라데이션 아래 컨테이너 뷰
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            containerView.topAnchor.constraint(equalTo: logoAndSloganStackView.bottomAnchor, constant: 90),
+            containerView.topAnchor.constraint(equalTo: logoAndSloganStackView.bottomAnchor, constant: 20),
             containerView.heightAnchor.constraint(equalToConstant: 420),
 
             boardTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
@@ -138,6 +231,8 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
             tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10)
         ])
+        // 버튼에 액션 연결
+        menuButton.addTarget(self, action: #selector(didTapDrawerButton), for: .touchUpInside)
     }
 
     private func setupTableView() {
@@ -160,6 +255,31 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
         navigationController?.pushViewController(boardAllVC, animated: true)
     }
 
+    
+
+    @objc private func didTapDrawerButton() {
+        // 로그인 사용자 ID 가져오기
+        guard let userId = UserSessionManager.shared.getUserInfo()?.id else {
+            print("사용자 정보가 없습니다.")
+            return
+        }
+
+        // Admin 여부에 따라 다른 메뉴 화면 설정
+        if userId == "admin" {
+            let adminMenuVC = AdminMenuViewController()
+            sideMenu = SideMenuNavigationController(rootViewController: adminMenuVC)
+        } else {
+            let menuVC = MenuViewController()
+            sideMenu = SideMenuNavigationController(rootViewController: menuVC)
+        }
+
+        // 사이드 메뉴 설정 및 표시
+        sideMenu?.leftSide = true // 왼쪽에서 나타나도록 설정
+        sideMenu?.setNavigationBarHidden(true, animated: false) // 네비게이션 바 숨김
+        present(sideMenu!, animated: true, completion: nil)
+    }
+
+    
     // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getBoards().count

@@ -1,9 +1,5 @@
-//
-//  AdminMenuViewController.swift
-//  Ddabong2
-//
-//  Created by 안지희 on 1/13/25.
-//
+//JH
+//어드민 사이드
 
 import UIKit
 
@@ -101,6 +97,32 @@ class AdminMenuViewController: UIViewController {
             menuTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+
+    // MARK: - 로그아웃 모달 띄우기
+    private func showLogoutModal() {
+        let modalVC = LogoutModalViewController()
+        modalVC.modalPresentationStyle = .overFullScreen
+        modalVC.onConfirm = {
+            LogoutService.shared.logoutUser { success in
+                if success {
+                    // 로그아웃 성공 처리: 로그인 화면으로 이동
+                    DispatchQueue.main.async {
+                        let loginVC = LoginViewController()
+                        loginVC.modalPresentationStyle = .fullScreen
+                        self.present(loginVC, animated: true, completion: nil)
+                    }
+                } else {
+                    // 로그아웃 실패 처리
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "오류", message: "로그아웃에 실패했습니다. 다시 시도해주세요.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+        present(modalVC, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -130,7 +152,7 @@ extension AdminMenuViewController: UITableViewDelegate, UITableViewDataSource {
             present(adminMainVC, animated: true, completion: nil)
         case 1:
             print("로그아웃 선택됨")
-            // 로그아웃 구현
+            showLogoutModal()
         default:
             break
         }
