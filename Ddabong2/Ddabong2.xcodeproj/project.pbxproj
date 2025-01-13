@@ -41,6 +41,15 @@
 		654BD98E2D340A850048F5CA /* Container1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BD98C2D340A850048F5CA /* Container1ViewController.swift */; };
 		654BD9902D340AA10048F5CA /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BD98F2D340AA10048F5CA /* TestViewController.swift */; };
 		654BD9922D340ABF0048F5CA /* Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BD9912D340ABF0048F5CA /* Quest.swift */; };
+		654BD9942D340E970048F5CA /* QuestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BD9932D340E970048F5CA /* QuestViewModel.swift */; };
+		654BD9962D3525060048F5CA /* QuestMonthlyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654BD9952D3525060048F5CA /* QuestMonthlyView.xib */; };
+		654BD99A2D3525ED0048F5CA /* QuestMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BD9992D3525ED0048F5CA /* QuestMonthlyView.swift */; };
+		654BD99C2D352D620048F5CA /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654BD99B2D352D620048F5CA /* CustomTableViewCell.xib */; };
+		654BD99E2D352D740048F5CA /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BD99D2D352D740048F5CA /* CustomTableViewCell.swift */; };
+		654BD9A32D35583A0048F5CA /* imgGrayEmptyCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 654BD99F2D35583A0048F5CA /* imgGrayEmptyCircle.png */; };
+		654BD9A42D35583A0048F5CA /* imgEmptyCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 654BD9A02D35583A0048F5CA /* imgEmptyCircle.png */; };
+		654BD9A52D35583A0048F5CA /* imgGrayCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 654BD9A12D35583A0048F5CA /* imgGrayCircle.png */; };
+		654BD9A62D35583A0048F5CA /* imgYellowCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 654BD9A22D35583A0048F5CA /* imgYellowCircle.png */; };
 		655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DCB2B2D144C3300E8A8F2 /* AppDelegate.swift */; };
 		655DCB2E2D144C3300E8A8F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DCB2D2D144C3300E8A8F2 /* SceneDelegate.swift */; };
 		655DCB332D144C3300E8A8F2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 655DCB322D144C3300E8A8F2 /* Base */; };
@@ -54,6 +63,9 @@
 		656175132D2FE86900562071 /* QuestTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656175122D2FE86900562071 /* QuestTabViewController.swift */; };
 		656175152D2FE8B600562071 /* QuestTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656175142D2FE8B600562071 /* QuestTabCell.swift */; };
 		656175172D2FEFDE00562071 /* QuestMonthlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656175162D2FEFDE00562071 /* QuestMonthlyViewController.swift */; };
+		6575F5562D3559070097C53C /* imgFullBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 6575F5532D3559070097C53C /* imgFullBlue.png */; };
+		6575F5572D3559070097C53C /* imgFullYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6575F5542D3559070097C53C /* imgFullYellow.png */; };
+		6575F5582D3559070097C53C /* imgFullRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6575F5552D3559070097C53C /* imgFullRed.png */; };
 		65B9DC8F2D1BFB4E00BB969D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9DC8E2D1BFB4E00BB969D /* LoginViewController.swift */; };
 		65B9DC982D1BFC6400BB969D /* logo_ci.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B9DC972D1BFC6400BB969D /* logo_ci.png */; };
 		65B9DC9A2D1BFDA000BB969D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B9DC992D1BFDA000BB969D /* GoogleService-Info.plist */; };
@@ -119,6 +131,15 @@
 		654BD98C2D340A850048F5CA /* Container1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container1ViewController.swift; sourceTree = "<group>"; };
 		654BD98F2D340AA10048F5CA /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		654BD9912D340ABF0048F5CA /* Quest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quest.swift; sourceTree = "<group>"; };
+		654BD9932D340E970048F5CA /* QuestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewModel.swift; sourceTree = "<group>"; };
+		654BD9952D3525060048F5CA /* QuestMonthlyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestMonthlyView.xib; sourceTree = "<group>"; };
+		654BD9992D3525ED0048F5CA /* QuestMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestMonthlyView.swift; sourceTree = "<group>"; };
+		654BD99B2D352D620048F5CA /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		654BD99D2D352D740048F5CA /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		654BD99F2D35583A0048F5CA /* imgGrayEmptyCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgGrayEmptyCircle.png; sourceTree = "<group>"; };
+		654BD9A02D35583A0048F5CA /* imgEmptyCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgEmptyCircle.png; sourceTree = "<group>"; };
+		654BD9A12D35583A0048F5CA /* imgGrayCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgGrayCircle.png; sourceTree = "<group>"; };
+		654BD9A22D35583A0048F5CA /* imgYellowCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgYellowCircle.png; sourceTree = "<group>"; };
 		655DCB282D144C3300E8A8F2 /* Ddabong2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ddabong2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		655DCB2B2D144C3300E8A8F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		655DCB2D2D144C3300E8A8F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +155,9 @@
 		656175122D2FE86900562071 /* QuestTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestTabViewController.swift; sourceTree = "<group>"; };
 		656175142D2FE8B600562071 /* QuestTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestTabCell.swift; sourceTree = "<group>"; };
 		656175162D2FEFDE00562071 /* QuestMonthlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestMonthlyViewController.swift; sourceTree = "<group>"; };
+		6575F5532D3559070097C53C /* imgFullBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgFullBlue.png; sourceTree = "<group>"; };
+		6575F5542D3559070097C53C /* imgFullYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgFullYellow.png; sourceTree = "<group>"; };
+		6575F5552D3559070097C53C /* imgFullRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgFullRed.png; sourceTree = "<group>"; };
 		65B9DC8E2D1BFB4E00BB969D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		65B9DC972D1BFC6400BB969D /* logo_ci.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_ci.png; sourceTree = "<group>"; };
 		65B9DC992D1BFDA000BB969D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -200,6 +224,10 @@
 				562E5DDC2D2984D800B14088 /* UIColor+extension.swift */,
 				656175142D2FE8B600562071 /* QuestTabCell.swift */,
 				656175122D2FE86900562071 /* QuestTabViewController.swift */,
+				654BD9952D3525060048F5CA /* QuestMonthlyView.xib */,
+				654BD9992D3525ED0048F5CA /* QuestMonthlyView.swift */,
+				654BD99B2D352D620048F5CA /* CustomTableViewCell.xib */,
+				654BD99D2D352D740048F5CA /* CustomTableViewCell.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -318,6 +346,7 @@
 			children = (
 				567443842D2CEBD700BBC8BD /* BoardViewModel.swift */,
 				569D8AA52D29404D00949DB4 /* LoginViewModel.swift */,
+				654BD9932D340E970048F5CA /* QuestViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -334,6 +363,13 @@
 		65B9DC952D1BFC3200BB969D /* photo */ = {
 			isa = PBXGroup;
 			children = (
+				6575F5532D3559070097C53C /* imgFullBlue.png */,
+				6575F5552D3559070097C53C /* imgFullRed.png */,
+				6575F5542D3559070097C53C /* imgFullYellow.png */,
+				654BD9A02D35583A0048F5CA /* imgEmptyCircle.png */,
+				654BD9A12D35583A0048F5CA /* imgGrayCircle.png */,
+				654BD99F2D35583A0048F5CA /* imgGrayEmptyCircle.png */,
+				654BD9A22D35583A0048F5CA /* imgYellowCircle.png */,
 				65118E2E2D30083B0048A222 /* imgChecked.png */,
 				65B9DC972D1BFC6400BB969D /* logo_ci.png */,
 			);
@@ -483,12 +519,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				654BD9962D3525060048F5CA /* QuestMonthlyView.xib in Resources */,
 				655DCB352D144C3500E8A8F2 /* Assets.xcassets in Resources */,
+				654BD9A32D35583A0048F5CA /* imgGrayEmptyCircle.png in Resources */,
+				6575F5582D3559070097C53C /* imgFullRed.png in Resources */,
+				654BD9A42D35583A0048F5CA /* imgEmptyCircle.png in Resources */,
 				65118E2F2D30083B0048A222 /* imgChecked.png in Resources */,
+				654BD9A62D35583A0048F5CA /* imgYellowCircle.png in Resources */,
+				654BD9A52D35583A0048F5CA /* imgGrayCircle.png in Resources */,
 				655DCB382D144C3500E8A8F2 /* Base in Resources */,
 				65B9DC9A2D1BFDA000BB969D /* GoogleService-Info.plist in Resources */,
 				65B9DC982D1BFC6400BB969D /* logo_ci.png in Resources */,
+				654BD99C2D352D620048F5CA /* CustomTableViewCell.xib in Resources */,
 				655DCB332D144C3300E8A8F2 /* Base in Resources */,
+				6575F5572D3559070097C53C /* imgFullYellow.png in Resources */,
+				6575F5562D3559070097C53C /* imgFullBlue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				654BD99A2D3525ED0048F5CA /* QuestMonthlyView.swift in Sources */,
 				65020F9E2D21226F00CC85FB /* ParticiCell.swift in Sources */,
 				56B2B0A92D2D3D1E007EF5B6 /* BoardAllViewController.swift in Sources */,
 				6504AFFA2D1BF96400051B44 /* DayoffModel.swift in Sources */,
@@ -597,6 +643,7 @@
 				655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */,
 				562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */,
 				56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */,
+				654BD9942D340E970048F5CA /* QuestViewModel.swift in Sources */,
 				6504AFF62D1BF94700051B44 /* UserInfo.swift in Sources */,
 				567443812D2CE97000BBC8BD /* BoardDetailViewController.swift in Sources */,
 				654BD98E2D340A850048F5CA /* Container1ViewController.swift in Sources */,
@@ -606,6 +653,7 @@
 				567443872D2CEC0200BBC8BD /* BoardTableViewCell.swift in Sources */,
 				56C4415B2D2EC54400BAD635 /* QuestViewController.swift in Sources */,
 				65020FA72D251D5F00CC85FB /* EndPoints.swift in Sources */,
+				654BD99E2D352D740048F5CA /* CustomTableViewCell.swift in Sources */,
 				656175132D2FE86900562071 /* QuestTabViewController.swift in Sources */,
 				562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */,
 				569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */,

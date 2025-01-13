@@ -22,3 +22,14 @@ struct Quest: Decodable {
     let completedAt: String
     let imageUrl: String? // 이미지 URL 추가 (Optional)
 }
+
+
+struct QuestStatsResponseDto: Decodable {
+    let challengeCount: Int
+    let resultList: [String]
+    let questRate: Int
+    let maxCount: Int
+    let historySize: Int
+    let expHistory: [String: Int]
+}
+
