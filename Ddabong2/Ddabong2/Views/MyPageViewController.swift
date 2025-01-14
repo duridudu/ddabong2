@@ -6,7 +6,7 @@ class MyPageViewController: UIViewController {
     // MARK: - ViewModels
     private let userInfoViewModel = UserInfoViewModel()
     private let myPageViewModel = MyPageViewModel()
-    
+
     private var sideMenu: SideMenuNavigationController?
 
     // MARK: - UI Components
@@ -33,27 +33,46 @@ class MyPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCustomTitle()
         setupUI()
         setupSideMenu()
         bindViewModels()
         fetchData()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Navigation Bar를 투명하게 설정
+        // Navigation Bar 설정
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.backgroundColor = .clear
+
+        // 사용자 정보 및 UI 업데이트
+        userInfoViewModel.fetchUserInfo()
+        userInfoViewModel.onUserInfoFetchSuccess = { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateProfileImage()
+            }
+        }
+    }
+
+    // 프로필 업데이트
+    private func updateProfileImage() {
+        if let avartaId = userInfoViewModel.userInfo?.avartaId,
+           let profileImage = UIImage.profileImage(for: avartaId) {
+            profileImageView.image = profileImage
+        } else {
+            profileImageView.image = UIImage(named: "defaultAvatar") // 기본 이미지
+        }
     }
 
     // MARK: - UI Setup
     private func setupUI() {
         navigationItem.title = "마이페이지"
+        setupCustomProgressBar()
 
-        // 사이드 메뉴 및 알림 버튼
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "drawer")?.withRenderingMode(.alwaysTemplate),
             style: .plain,
@@ -61,7 +80,7 @@ class MyPageViewController: UIViewController {
             action: #selector(openSideMenu)
         )
         navigationItem.leftBarButtonItem?.tintColor = .black
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "alert")?.withRenderingMode(.alwaysTemplate),
             style: .plain,
@@ -70,12 +89,10 @@ class MyPageViewController: UIViewController {
         )
         navigationItem.rightBarButtonItem?.tintColor = .black
 
-        // 핑크 배경 설정
         pinkBackgroundView.backgroundColor = UIColor(red: 1.0, green: 0.956, blue: 0.956, alpha: 1.0) // #FFF4F4
         pinkBackgroundView.layer.cornerRadius = 12
         view.addSubview(pinkBackgroundView)
 
-        // 흰색 컨테이너 설정
         whiteContainerView.backgroundColor = .white
         whiteContainerView.layer.cornerRadius = 12
         whiteContainerView.layer.shadowColor = UIColor.black.cgColor
@@ -84,24 +101,22 @@ class MyPageViewController: UIViewController {
         whiteContainerView.layer.shadowRadius = 4
         pinkBackgroundView.addSubview(whiteContainerView)
 
-        // 프로필 이미지 설정
         profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.cornerRadius = 36
         profileImageView.clipsToBounds = true
+        profileImageView.layer.cornerRadius = 40
+        profileImageView.layer.borderWidth = 2
+        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
         whiteContainerView.addSubview(profileImageView)
 
-        // Greeting Label (안녕하세요)
         greetingLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         greetingLabel.textAlignment = .right
         whiteContainerView.addSubview(greetingLabel)
 
-        // Fortune Label (운세)
         fortuneLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         fortuneLabel.textAlignment = .right
         fortuneLabel.numberOfLines = 0
         whiteContainerView.addSubview(fortuneLabel)
 
-        // Level Label
         levelLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         levelLabel.textAlignment = .left
         whiteContainerView.addSubview(levelLabel)
@@ -110,17 +125,14 @@ class MyPageViewController: UIViewController {
         nextLevelLabel.textAlignment = .right
         whiteContainerView.addSubview(nextLevelLabel)
 
-        // Progress Bar
-        progressBar.progressTintColor = UIColor.systemOrange
         progressBar.trackTintColor = UIColor.systemGray5
+        progressBar.progressTintColor = UIColor.systemOrange
         whiteContainerView.addSubview(progressBar)
-
         progressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 14)
         progressPercentageLabel.textAlignment = .center
         progressPercentageLabel.textColor = .white
         whiteContainerView.addSubview(progressPercentageLabel)
 
-        // 경험치 섹션
         experienceSectionView.backgroundColor = .white
         experienceSectionView.layer.cornerRadius = 12
         experienceSectionView.layer.shadowColor = UIColor.black.cgColor
@@ -129,44 +141,32 @@ class MyPageViewController: UIViewController {
         experienceSectionView.layer.shadowRadius = 4
         view.addSubview(experienceSectionView)
 
-        
-        //경험치 현황
-        // 최근 경험치
         recentExpLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        recentExpLabel.text = "최근 획득 경험치" // 임의 데이터
         experienceSectionView.addSubview(recentExpLabel)
 
         recentExpSubLabel.font = UIFont.systemFont(ofSize: 14)
-        recentExpSubLabel.text = "생산성 MAX 달성" // 임의 데이터
         experienceSectionView.addSubview(recentExpSubLabel)
 
         recentExpTimeLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         recentExpTimeLabel.textColor = .systemGray
-        recentExpTimeLabel.text = "5분 전" // 임의 데이터
         experienceSectionView.addSubview(recentExpTimeLabel)
 
         recentExpPointsLabel.font = UIFont.boldSystemFont(ofSize: 14)
         recentExpPointsLabel.textColor = .systemRed
-        recentExpPointsLabel.text = "80 D" // 임의 데이터
         experienceSectionView.addSubview(recentExpPointsLabel)
 
-        // 올해 경험치
         thisYearExpLabel.font = UIFont.systemFont(ofSize: 14)
-        thisYearExpLabel.text = "올해 획득한 경험치 7,500" // 임의 데이터
         experienceSectionView.addSubview(thisYearExpLabel)
 
         thisYearProgressBar.progressTintColor = UIColor.systemOrange
         experienceSectionView.addSubview(thisYearProgressBar)
 
-        // 작년 경험치
         lastYearExpLabel.font = UIFont.systemFont(ofSize: 14)
-        lastYearExpLabel.text = "작년까지 획득한 경험치 3,000" // 임의 데이터
         experienceSectionView.addSubview(lastYearExpLabel)
 
         lastYearProgressBar.progressTintColor = UIColor.systemBlue
         experienceSectionView.addSubview(lastYearProgressBar)
 
-        // Constraints
         setConstraints()
     }
 
@@ -203,8 +203,8 @@ class MyPageViewController: UIViewController {
 
             profileImageView.topAnchor.constraint(equalTo: whiteContainerView.topAnchor, constant: 16),
             profileImageView.leadingAnchor.constraint(equalTo: whiteContainerView.leadingAnchor, constant: 16),
-            profileImageView.widthAnchor.constraint(equalToConstant: 72),
-            profileImageView.heightAnchor.constraint(equalToConstant: 72),
+            profileImageView.widthAnchor.constraint(equalToConstant: 80),
+            profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor),
 
             greetingLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor),
             greetingLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
@@ -263,6 +263,28 @@ class MyPageViewController: UIViewController {
         ])
     }
 
+    private func setupCustomProgressBar() {
+        progressBar.layer.cornerRadius = 10
+        progressBar.clipsToBounds = true
+        if let sublayers = progressBar.layer.sublayers, sublayers.count > 1 {
+            sublayers[1].cornerRadius = 10
+            sublayers[1].masksToBounds = true
+        }
+        progressBar.progressTintColor = UIColor(hex: "#FF6C4A")
+        progressBar.trackTintColor = UIColor(hex: "#FFB4A3")
+        progressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        progressPercentageLabel.textAlignment = .center
+        progressPercentageLabel.textColor = .white
+    }
+
+    private func setupCustomTitle() {
+        let titleLabel = UILabel()
+        titleLabel.text = "마이페이지"
+        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        titleLabel.textColor = UIColor.black
+        navigationItem.titleView = titleLabel
+    }
+
     private func setupSideMenu() {
         let menuViewController = MenuViewController()
         sideMenu = SideMenuNavigationController(rootViewController: menuViewController)
@@ -279,6 +301,9 @@ class MyPageViewController: UIViewController {
                 self.updateUI(with: data)
             }
         }
+        myPageViewModel.onMyPageFetchFailure = { errorMessage in
+            print("Error fetching MyPage data: \(errorMessage)")
+        }
     }
 
     private func fetchData() {
@@ -288,15 +313,33 @@ class MyPageViewController: UIViewController {
 
     private func updateUI(with data: MyPageResponseDto) {
         greetingLabel.text = "\(userInfoViewModel.userInfo?.name ?? "")님, 안녕하세요!"
-        fortuneLabel.text = "\(data.fortune.date) 운세\n\(data.fortune.contents)"
+        fortuneLabel.text = "\(data.fortune.date) 오늘의 운세\n\(data.fortune.contents)"
+
         levelLabel.text = "\(data.levelRate.currentLevel) \(data.levelRate.currentExp)"
         nextLevelLabel.text = "다음 레벨까지: \(data.levelRate.leftExp)"
-        progressBar.progress = Float(data.levelRate.percent) / 100.0
-        progressPercentageLabel.text = "\(data.levelRate.percent)%"
-        profileImageView.image = UIImage(named: "profile") // 프로필 이미지 설정
 
+        let progressValue = Float(data.levelRate.percent) / 100.0
+        progressBar.progress = progressValue
+        progressPercentageLabel.text = "\(data.levelRate.percent)%"
+
+        thisYearExpLabel.text = "올해 획득한 경험치 \(data.thisYearExp.expAmount)"
         thisYearProgressBar.progress = Float(data.thisYearExp.percent) / 100.0
+
+        lastYearExpLabel.text = "작년까지 획득한 경험치 \(data.lastYearExp.expAmount)"
         lastYearProgressBar.progress = Float(data.lastYearExp.percent) / 100.0
+
+        recentExpLabel.text = "최근 획득 경험치"
+        recentExpSubLabel.text = data.recentExp.name
+        recentExpTimeLabel.text = formatDate(data.recentExp.completedAt)
+        recentExpPointsLabel.text = "\(data.recentExp.expAmount) D"
+    }
+
+    private func formatDate(_ dateString: String) -> String {
+        let formatter = ISO8601DateFormatter()
+        guard let date = formatter.date(from: dateString) else { return "" }
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        return outputFormatter.string(from: date)
     }
 
     @objc private func openSideMenu() {
