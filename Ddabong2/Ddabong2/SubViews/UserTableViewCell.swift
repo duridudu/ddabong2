@@ -1,17 +1,9 @@
-//
-//  UserTableViewCell.swift
-//  Ddabong2
-//
-//  Created by 안지희 on 1/14/25.
-//
-
-
 import UIKit
 
 class UserTableViewCell: UITableViewCell {
     private let avatarImageView = UIImageView()
     private let nameLabel = UILabel()
-    private let detailsLabel = UILabel()
+    private let detailLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,40 +16,42 @@ class UserTableViewCell: UITableViewCell {
 
     private func setupUI() {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        detailsLabel.translatesAutoresizingMaskIntoConstraints = false
-
         avatarImageView.contentMode = .scaleAspectFit
-        avatarImageView.layer.cornerRadius = 25
+        avatarImageView.layer.cornerRadius = 25 // 둥근 모양
         avatarImageView.clipsToBounds = true
 
-        nameLabel.font = .boldSystemFont(ofSize: 16)
-        detailsLabel.font = .systemFont(ofSize: 14)
-        detailsLabel.textColor = .gray
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        detailLabel.font = UIFont.systemFont(ofSize: 14)
+        detailLabel.textColor = .gray
+        detailLabel.translatesAutoresizingMaskIntoConstraints = false
 
         contentView.addSubview(avatarImageView)
         contentView.addSubview(nameLabel)
-        contentView.addSubview(detailsLabel)
+        contentView.addSubview(detailLabel)
 
         NSLayoutConstraint.activate([
-            avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             avatarImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             avatarImageView.widthAnchor.constraint(equalToConstant: 50),
             avatarImageView.heightAnchor.constraint(equalToConstant: 50),
 
-            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 15),
-            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            detailsLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            detailsLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
-            detailsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            detailsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            detailLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            detailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
+            detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         ])
     }
 
-    func configure(with user: User) {
-        avatarImageView.image = UIImage(named: "avatar\(user.avartaId)")
+    func configure(with user: UserListItem) {
+        let avatarName = "avatar\(user.avartaId)"
+        avatarImageView.image = UIImage(named: avatarName)
         nameLabel.text = "\(user.name) [\(user.employeeNum)]"
-        detailsLabel.text = "\(user.department) / \(user.level)"
+        detailLabel.text = "\(user.department)/ \(user.level)"
     }
 }

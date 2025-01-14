@@ -32,7 +32,7 @@ class NavigationViewController: UITabBarController {
         self.viewControllers = viewControllers.map { UINavigationController(rootViewController: $0) }
         
         // 탭 바 스타일 설정
-        tabBar.tintColor = UIColor.orange // 선택된 아이템 색상
+        tabBar.tintColor = UIColor(red: 255/255, green: 91/255, blue: 53/255, alpha: 1.0) // 선택된 아이템 색상 (#FF5B35)
         tabBar.unselectedItemTintColor = UIColor.black // 선택되지 않은 아이템 색상
         tabBar.backgroundColor = UIColor.white // 배경색
     }

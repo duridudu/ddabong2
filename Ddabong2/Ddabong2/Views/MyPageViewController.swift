@@ -6,6 +6,8 @@ class MyPageViewController: UIViewController {
     // MARK: - ViewModels
     private let userInfoViewModel = UserInfoViewModel()
     private let myPageViewModel = MyPageViewModel()
+    
+    
 
     private var sideMenu: SideMenuNavigationController?
 
@@ -21,15 +23,16 @@ class MyPageViewController: UIViewController {
     private let progressPercentageLabel = UILabel()
 
     // 경험치 현황 UI
-    private let experienceSectionView = UIView() // 경험치 섹션 배경
+    private let experienceContainerView = UIView() // 경험치 섹션 컨테이너
+    private let experienceTitleLabel = UILabel()
     private let recentExpLabel = UILabel()
-    private let recentExpSubLabel = UILabel()
-    private let recentExpTimeLabel = UILabel()
-    private let recentExpPointsLabel = UILabel()
+    private let viewAllButton = UIButton(type: .system)
     private let thisYearExpLabel = UILabel()
     private let thisYearProgressBar = UIProgressView(progressViewStyle: .default)
     private let lastYearExpLabel = UILabel()
     private let lastYearProgressBar = UIProgressView(progressViewStyle: .default)
+    private let thisYearProgressPercentageLabel = UILabel()
+    private let lastYearProgressPercentageLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +41,6 @@ class MyPageViewController: UIViewController {
         setupSideMenu()
         bindViewModels()
         fetchData()
-        setupCustomProgressBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +74,6 @@ class MyPageViewController: UIViewController {
     // MARK: - UI Setup
     private func setupUI() {
         navigationItem.title = "마이페이지"
-        setupCustomProgressBar()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "drawer")?.withRenderingMode(.alwaysTemplate),
@@ -125,48 +126,80 @@ class MyPageViewController: UIViewController {
         nextLevelLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         nextLevelLabel.textAlignment = .right
         whiteContainerView.addSubview(nextLevelLabel)
+        
+        progressBar.progressTintColor = UIColor(hex: "#FF6C4A")
+        progressBar.trackTintColor = UIColor(hex: "#FFB4A3")
+        progressBar.layer.cornerRadius = 5
+        progressBar.clipsToBounds = true
 
-        progressBar.trackTintColor = UIColor.systemGray5
-        progressBar.progressTintColor = UIColor.systemOrange
+        
+        
+        
         whiteContainerView.addSubview(progressBar)
         progressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 14)
         progressPercentageLabel.textAlignment = .center
         progressPercentageLabel.textColor = .white
         whiteContainerView.addSubview(progressPercentageLabel)
 
-        experienceSectionView.backgroundColor = .white
-        experienceSectionView.layer.cornerRadius = 12
-        experienceSectionView.layer.shadowColor = UIColor.black.cgColor
-        experienceSectionView.layer.shadowOpacity = 0.1
-        experienceSectionView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        experienceSectionView.layer.shadowRadius = 4
-        view.addSubview(experienceSectionView)
+        // 경험치 컨테이너 추가
+        experienceContainerView.backgroundColor = .clear
+        view.addSubview(experienceContainerView)
 
-        recentExpLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        experienceSectionView.addSubview(recentExpLabel)
+        experienceTitleLabel.text = "경험치 현황"
+        experienceTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        experienceTitleLabel.textAlignment = .left
+        experienceContainerView.addSubview(experienceTitleLabel)
 
-        recentExpSubLabel.font = UIFont.systemFont(ofSize: 14)
-        experienceSectionView.addSubview(recentExpSubLabel)
+        recentExpLabel.text = "최근 획득 경험치"
+        recentExpLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        recentExpLabel.textColor = UIColor(hex: "#494949") // 텍스트 색상 변경
+        recentExpLabel.textAlignment = .left
+        experienceContainerView.addSubview(recentExpLabel)
+        
+        
 
-        recentExpTimeLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        recentExpTimeLabel.textColor = .systemGray
-        experienceSectionView.addSubview(recentExpTimeLabel)
+        viewAllButton.setTitle("전체보기 >", for: .normal)
+        viewAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        experienceContainerView.addSubview(viewAllButton)
+        viewAllButton.setTitleColor(UIColor(hex: "#757575"), for: .normal)
 
-        recentExpPointsLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        recentExpPointsLabel.textColor = .systemRed
-        experienceSectionView.addSubview(recentExpPointsLabel)
 
+        thisYearExpLabel.text = "올해 획득한 경험치"
         thisYearExpLabel.font = UIFont.systemFont(ofSize: 14)
-        experienceSectionView.addSubview(thisYearExpLabel)
+        thisYearExpLabel.textColor = UIColor(hex: "#777777")
+        
 
-        thisYearProgressBar.progressTintColor = UIColor.systemOrange
-        experienceSectionView.addSubview(thisYearProgressBar)
+        experienceContainerView.addSubview(thisYearExpLabel)
 
+        thisYearProgressBar.progressTintColor = UIColor(hex: "#FF6C4A")
+        thisYearProgressBar.trackTintColor = UIColor(hex: "#FFB4A3")
+        experienceContainerView.addSubview(thisYearProgressBar)
+
+
+
+        lastYearExpLabel.text = "작년까지 획득한 경험치"
         lastYearExpLabel.font = UIFont.systemFont(ofSize: 14)
-        experienceSectionView.addSubview(lastYearExpLabel)
+        experienceContainerView.addSubview(lastYearExpLabel)
+        lastYearExpLabel.textColor = UIColor(hex: "#777777")
 
-        lastYearProgressBar.progressTintColor = UIColor.systemBlue
-        experienceSectionView.addSubview(lastYearProgressBar)
+        lastYearProgressBar.progressTintColor = UIColor(hex: "#FF6C4A")
+        lastYearProgressBar.trackTintColor = UIColor(hex: "#FFB4A3")
+        experienceContainerView.addSubview(lastYearProgressBar)
+        
+        // 올해 퍼센트 라벨
+        thisYearProgressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        thisYearProgressPercentageLabel.textColor = .white
+        thisYearProgressPercentageLabel.textAlignment = .center
+        experienceContainerView.addSubview(thisYearProgressPercentageLabel)
+
+        // 작년 퍼센트 라벨
+        lastYearProgressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        lastYearProgressPercentageLabel.textColor = .white
+        lastYearProgressPercentageLabel.textAlignment = .center
+        experienceContainerView.addSubview(lastYearProgressPercentageLabel)
+        thisYearProgressPercentageLabel.translatesAutoresizingMaskIntoConstraints = false
+        lastYearProgressPercentageLabel.translatesAutoresizingMaskIntoConstraints = false
+
 
         setConstraints()
     }
@@ -181,26 +214,27 @@ class MyPageViewController: UIViewController {
         nextLevelLabel.translatesAutoresizingMaskIntoConstraints = false
         progressBar.translatesAutoresizingMaskIntoConstraints = false
         progressPercentageLabel.translatesAutoresizingMaskIntoConstraints = false
-        experienceSectionView.translatesAutoresizingMaskIntoConstraints = false
+        experienceContainerView.translatesAutoresizingMaskIntoConstraints = false
+        experienceTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         recentExpLabel.translatesAutoresizingMaskIntoConstraints = false
-        recentExpSubLabel.translatesAutoresizingMaskIntoConstraints = false
-        recentExpTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        recentExpPointsLabel.translatesAutoresizingMaskIntoConstraints = false
+        viewAllButton.translatesAutoresizingMaskIntoConstraints = false
         thisYearExpLabel.translatesAutoresizingMaskIntoConstraints = false
         thisYearProgressBar.translatesAutoresizingMaskIntoConstraints = false
         lastYearExpLabel.translatesAutoresizingMaskIntoConstraints = false
         lastYearProgressBar.translatesAutoresizingMaskIntoConstraints = false
+        
 
         NSLayoutConstraint.activate([
             pinkBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             pinkBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pinkBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            pinkBackgroundView.heightAnchor.constraint(equalToConstant: 230),
+            pinkBackgroundView.heightAnchor.constraint(equalToConstant: 250),
 
-            whiteContainerView.topAnchor.constraint(equalTo: pinkBackgroundView.topAnchor, constant: 16),
-            whiteContainerView.leadingAnchor.constraint(equalTo: pinkBackgroundView.leadingAnchor, constant: 16),
-            whiteContainerView.trailingAnchor.constraint(equalTo: pinkBackgroundView.trailingAnchor, constant: -16),
-            whiteContainerView.bottomAnchor.constraint(equalTo: pinkBackgroundView.bottomAnchor, constant: -16),
+            whiteContainerView.topAnchor.constraint(equalTo: pinkBackgroundView.topAnchor, constant: 24),
+            whiteContainerView.leadingAnchor.constraint(equalTo: pinkBackgroundView.leadingAnchor, constant: 24),
+            whiteContainerView.trailingAnchor.constraint(equalTo: pinkBackgroundView.trailingAnchor, constant: -24),
+            whiteContainerView.bottomAnchor.constraint(equalTo: pinkBackgroundView.bottomAnchor, constant: -24),
+
 
             profileImageView.topAnchor.constraint(equalTo: whiteContainerView.topAnchor, constant: 16),
             profileImageView.leadingAnchor.constraint(equalTo: whiteContainerView.leadingAnchor, constant: 16),
@@ -221,7 +255,7 @@ class MyPageViewController: UIViewController {
             nextLevelLabel.centerYAnchor.constraint(equalTo: levelLabel.centerYAnchor),
             nextLevelLabel.trailingAnchor.constraint(equalTo: whiteContainerView.trailingAnchor, constant: -16),
 
-            progressBar.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: 16),
+            progressBar.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: 8),
             progressBar.leadingAnchor.constraint(equalTo: whiteContainerView.leadingAnchor, constant: 16),
             progressBar.trailingAnchor.constraint(equalTo: whiteContainerView.trailingAnchor, constant: -16),
             progressBar.heightAnchor.constraint(equalToConstant: 30),
@@ -229,61 +263,44 @@ class MyPageViewController: UIViewController {
             progressPercentageLabel.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor),
             progressPercentageLabel.centerYAnchor.constraint(equalTo: progressBar.centerYAnchor),
 
-            experienceSectionView.topAnchor.constraint(equalTo: pinkBackgroundView.bottomAnchor, constant: 16),
-            experienceSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            experienceSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            experienceSectionView.heightAnchor.constraint(equalToConstant: 200),
+            experienceContainerView.topAnchor.constraint(equalTo: pinkBackgroundView.bottomAnchor, constant: 16),
+            experienceContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            experienceContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            
+            experienceTitleLabel.topAnchor.constraint(equalTo: experienceContainerView.topAnchor),
+            experienceTitleLabel.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
 
-            recentExpLabel.topAnchor.constraint(equalTo: experienceSectionView.topAnchor, constant: 16),
-            recentExpLabel.leadingAnchor.constraint(equalTo: experienceSectionView.leadingAnchor, constant: 16),
+            recentExpLabel.topAnchor.constraint(equalTo: experienceTitleLabel.bottomAnchor, constant: 16),
+            recentExpLabel.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
 
-            recentExpSubLabel.topAnchor.constraint(equalTo: recentExpLabel.bottomAnchor, constant: 8),
-            recentExpSubLabel.leadingAnchor.constraint(equalTo: recentExpLabel.leadingAnchor),
+            viewAllButton.centerYAnchor.constraint(equalTo: recentExpLabel.centerYAnchor),
+            viewAllButton.trailingAnchor.constraint(equalTo: experienceContainerView.trailingAnchor),
 
-            recentExpTimeLabel.trailingAnchor.constraint(equalTo: experienceSectionView.trailingAnchor, constant: -16),
-            recentExpTimeLabel.topAnchor.constraint(equalTo: experienceSectionView.topAnchor, constant: 16),
-
-            recentExpPointsLabel.trailingAnchor.constraint(equalTo: recentExpTimeLabel.trailingAnchor),
-            recentExpPointsLabel.topAnchor.constraint(equalTo: recentExpTimeLabel.bottomAnchor, constant: 8),
-
-            thisYearExpLabel.topAnchor.constraint(equalTo: recentExpSubLabel.bottomAnchor, constant: 16),
-            thisYearExpLabel.leadingAnchor.constraint(equalTo: recentExpLabel.leadingAnchor),
+            thisYearExpLabel.topAnchor.constraint(equalTo: recentExpLabel.bottomAnchor, constant: 24),
+            thisYearExpLabel.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
 
             thisYearProgressBar.topAnchor.constraint(equalTo: thisYearExpLabel.bottomAnchor, constant: 8),
-            thisYearProgressBar.leadingAnchor.constraint(equalTo: thisYearExpLabel.leadingAnchor),
-            thisYearProgressBar.trailingAnchor.constraint(equalTo: experienceSectionView.trailingAnchor, constant: -16),
-            thisYearProgressBar.heightAnchor.constraint(equalToConstant: 8),
+            thisYearProgressBar.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
+            thisYearProgressBar.trailingAnchor.constraint(equalTo: experienceContainerView.trailingAnchor),
+            thisYearProgressBar.heightAnchor.constraint(equalToConstant: 20),
 
             lastYearExpLabel.topAnchor.constraint(equalTo: thisYearProgressBar.bottomAnchor, constant: 16),
-            lastYearExpLabel.leadingAnchor.constraint(equalTo: thisYearExpLabel.leadingAnchor),
+            lastYearExpLabel.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
 
             lastYearProgressBar.topAnchor.constraint(equalTo: lastYearExpLabel.bottomAnchor, constant: 8),
-            lastYearProgressBar.leadingAnchor.constraint(equalTo: lastYearExpLabel.leadingAnchor),
-            lastYearProgressBar.trailingAnchor.constraint(equalTo: experienceSectionView.trailingAnchor, constant: -16),
-            lastYearProgressBar.heightAnchor.constraint(equalToConstant: 8)
+            lastYearProgressBar.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
+            lastYearProgressBar.trailingAnchor.constraint(equalTo: experienceContainerView.trailingAnchor),
+            lastYearProgressBar.heightAnchor.constraint(equalToConstant: 20),
+            // 올해 퍼센트 라벨
+            thisYearProgressPercentageLabel.centerXAnchor.constraint(equalTo: thisYearProgressBar.centerXAnchor),
+            thisYearProgressPercentageLabel.centerYAnchor.constraint(equalTo: thisYearProgressBar.centerYAnchor),
+
+            // 작년 퍼센트 라벨
+            lastYearProgressPercentageLabel.centerXAnchor.constraint(equalTo: lastYearProgressBar.centerXAnchor),
+            lastYearProgressPercentageLabel.centerYAnchor.constraint(equalTo: lastYearProgressBar.centerYAnchor)
+            
         ])
     }
-
-    private func setupCustomProgressBar() {
-        progressBar.layer.cornerRadius = 10
-        progressBar.clipsToBounds = true
-        if let sublayers = progressBar.layer.sublayers, sublayers.count > 1 {
-            sublayers[1].cornerRadius = 10
-            sublayers[1].masksToBounds = true
-        }
-        
-        // 채워진 색상 #FF6C4A, 채워지지 않은 색상 #FFB4A3
-        progressBar.progressTintColor = UIColor(hex: "#FF6C4A") // 채워진 색상
-        progressBar.trackTintColor = UIColor(hex: "#FFB4A3") // 채워지지 않은 색상
-        
-        // 퍼센트 글씨 스타일 설정
-        progressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 18) // Bold 폰트
-        progressPercentageLabel.textAlignment = .center
-        progressPercentageLabel.textColor = .white // 흰색 글씨 색상
-        // 진행률 바의 두께를 설정
-        progressBar.frame.size.height = 30 // 두께를 16으로 설정
-    }
-
 
     private func setupCustomTitle() {
         let titleLabel = UILabel()
@@ -324,10 +341,114 @@ class MyPageViewController: UIViewController {
         
         // 날짜 변환 (n월 n일 형식)
         let formattedDate = formatToMonthDay(data.fortune.date)
-        fortuneLabel.text = "\(formattedDate) 오늘의 운세\n\(data.fortune.contents)"
+        let firstPart = "\(formattedDate) 오늘의 운세"
+        let secondPart = "\(data.fortune.contents)"
+        
+        // 전체 텍스트 생성
+        let fullText = "\(firstPart)\n\(secondPart)"
 
-        levelLabel.text = "\(data.levelRate.currentLevel) \(data.levelRate.currentExp)"
-        nextLevelLabel.text = "다음 레벨까지: \(data.levelRate.leftExp)"
+        // NSMutableAttributedString으로 스타일 지정
+        let attributedText = NSMutableAttributedString(string: fullText)
+
+        // 첫 번째 부분 스타일 설정 (세미볼드, 글씨 크기 15)
+        if let range = fullText.range(of: firstPart) {
+            let nsRange = NSRange(range, in: fullText)
+            attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 15, weight: .semibold), range: nsRange)
+        }
+
+        // 두 번째 부분 스타일 설정 (글씨 크기 13, 색상 777777)
+        if let range = fullText.range(of: secondPart) {
+            let nsRange = NSRange(range, in: fullText)
+            attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 13, weight: .regular), range: nsRange)
+            attributedText.addAttribute(.foregroundColor, value: UIColor(hex: "#777777"), range: nsRange)
+        }
+
+        // 설정한 스타일을 레이블에 적용
+        fortuneLabel.attributedText = attributedText
+
+        
+        
+        // 텍스트 분리
+        let levelText = "\(data.levelRate.currentLevel)"
+        let expText = "\(data.levelRate.currentExp)"
+
+        // 공백 텍스트 생성 (크기 13)
+        let spaceText = "\n"
+
+        // 전체 텍스트 생성
+        let fullText2 = "\(spaceText)\(levelText) \(expText)"
+
+        // NSMutableAttributedString으로 스타일 지정
+        let attributedText2 = NSMutableAttributedString(string: fullText2)
+
+        // 첫 번째 부분 스타일 설정 (볼드)
+        if let range = fullText2.range(of: levelText) {
+            let nsRange = NSRange(range, in: fullText2)
+            attributedText2.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 16), range: nsRange)
+            attributedText2.addAttribute(.foregroundColor, value: UIColor(hex: "#FF704F"), range: nsRange)
+        }
+
+        // 공백 텍스트 스타일 설정 (크기 13)
+        if let range = fullText2.range(of: spaceText) {
+            let nsRange = NSRange(range, in: fullText2)
+            attributedText2.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: nsRange)
+            attributedText2.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange) // 투명색으로 설정
+        }
+
+        // 두 번째 부분 스타일 설정 (세미볼드)
+        if let range = fullText2.range(of: expText) {
+            let nsRange = NSRange(range, in: fullText2)
+            attributedText2.addAttribute(.font, value: UIFont.systemFont(ofSize: 16, weight: .semibold), range: nsRange)
+            attributedText2.addAttribute(.foregroundColor, value: UIColor(hex: "#FF704F"), range: nsRange)
+        }
+
+        // 설정한 스타일을 레이블에 적용
+        levelLabel.numberOfLines = 0 // 멀티라인 활성화
+        levelLabel.attributedText = attributedText2
+
+
+        
+        
+        // 텍스트 분리
+        let titleText = "내년도 예상 레벨\n"
+        let nextLevelText = "\(data.levelRate.nextLevel) 승급까지 "
+        let leftExpText = "\(data.levelRate.leftExp)D"
+
+        // 전체 텍스트 생성
+        let fullText3 = "\(titleText)\(nextLevelText)\(leftExpText)"
+
+        // NSMutableAttributedString으로 스타일 지정
+        let attributedText3 = NSMutableAttributedString(string: fullText3)
+
+        // 첫 번째 줄 스타일 설정 ("내년도 예상 레벨")
+        if let range = fullText3.range(of: titleText) {
+            let nsRange = NSRange(range, in: fullText3)
+            attributedText3.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 13), range: nsRange)
+            attributedText3.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: "#777777"), range: nsRange)
+        }
+
+        // 두 번째 줄 스타일 설정 ("nextLevel 승급까지")
+        if let range = fullText3.range(of: nextLevelText) {
+            let nsRange = NSRange(range, in: fullText3)
+            attributedText3.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 15), range: nsRange) // 볼드 처리
+            attributedText3.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: "#FF704F"), range: nsRange)
+        }
+
+        // 세 번째 줄 스타일 설정 ("leftExp D")
+        if let range = fullText3.range(of: leftExpText) {
+            let nsRange = NSRange(range, in: fullText3)
+            attributedText3.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 15), range: nsRange) // 볼드 처리
+            attributedText3.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: "#FF704F"), range: nsRange)
+        }
+
+        // 설정한 스타일을 레이블에 적용
+        nextLevelLabel.numberOfLines = 2
+        nextLevelLabel.attributedText = attributedText3
+
+        // 설정한 스타일을 레이블에 적용
+        nextLevelLabel.numberOfLines = 2
+        nextLevelLabel.attributedText = attributedText3
+
 
         let progressValue = Float(data.levelRate.percent) / 100.0
         progressBar.progress = progressValue
@@ -335,33 +456,39 @@ class MyPageViewController: UIViewController {
 
         thisYearExpLabel.text = "올해 획득한 경험치 \(data.thisYearExp.expAmount)"
         thisYearProgressBar.progress = Float(data.thisYearExp.percent) / 100.0
+        thisYearProgressBar.layer.cornerRadius = 5
+        thisYearProgressBar.clipsToBounds = true
 
         lastYearExpLabel.text = "작년까지 획득한 경험치 \(data.lastYearExp.expAmount)"
         lastYearProgressBar.progress = Float(data.lastYearExp.percent) / 100.0
+        lastYearProgressBar.layer.cornerRadius = 5
+        lastYearProgressBar.clipsToBounds = true
 
         recentExpLabel.text = "최근 획득 경험치"
-        recentExpSubLabel.text = data.recentExp.name
-        recentExpTimeLabel.text = formatDate(data.recentExp.completedAt)
-        recentExpPointsLabel.text = "\(data.recentExp.expAmount) D"
+        thisYearProgressPercentageLabel.text = "\(data.thisYearExp.percent)%"
+        lastYearProgressPercentageLabel.text = "\(data.lastYearExp.percent)%"
+
     }
 
     private func formatToMonthDay(_ isoDateString: String) -> String {
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: isoDateString) else { return "" }
-        
+        // 입력 형식: "yyyy-MM-dd"
+        let inputFormatter = DateFormatter()
+        inputFormatter.locale = Locale(identifier: "ko_KR") // 한국 로케일
+        inputFormatter.dateFormat = "yyyy-MM-dd" // 서버 제공 형식에 맞춤
+
+        // 입력 문자열을 Date로 변환
+        guard let date = inputFormatter.date(from: isoDateString) else {
+            return "날짜 형식 오류"
+        }
+
+        // 출력 형식: "MM월 dd일"
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "M월 d일" // n월 n일 형식
+        outputFormatter.locale = Locale(identifier: "ko_KR") // 한국 로케일
+        outputFormatter.dateFormat = "MM월 dd일" // 예: "01월 13일"
+
         return outputFormatter.string(from: date)
     }
 
-
-    private func formatDate(_ dateString: String) -> String {
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: dateString) else { return "" }
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        return outputFormatter.string(from: date)
-    }
 
     @objc private func openSideMenu() {
         guard let sideMenu = sideMenu else { return }

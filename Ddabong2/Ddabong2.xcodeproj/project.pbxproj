@@ -21,19 +21,14 @@
 		567443872D2CEC0200BBC8BD /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567443862D2CEC0200BBC8BD /* BoardTableViewCell.swift */; };
 		568DF6E22D318541000E7CBE /* ExpAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DF6E12D318541000E7CBE /* ExpAllViewController.swift */; };
 		5696B9C72D3502500028F98F /* ChangeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9C62D3502500028F98F /* ChangeProfileViewController.swift */; };
-		5696B9C92D350C250028F98F /* AdminUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9C82D350C240028F98F /* AdminUserService.swift */; };
 		5696B9E92D35420E0028F98F /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9E82D35420E0028F98F /* ProfileService.swift */; };
-		5696B9EF2D35615B0028F98F /* AdminBoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9EE2D35615B0028F98F /* AdminBoardService.swift */; };
 		5696B9F12D35628F0028F98F /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F02D35628F0028F98F /* LogoutService.swift */; };
 		5696B9F32D3563860028F98F /* LogoutModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F22D3563860028F98F /* LogoutModalViewController.swift */; };
 		5696B9F52D356EE10028F98F /* AdminUserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */; };
 		5696B9F72D356F0D0028F98F /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F62D356F0D0028F98F /* UserTableViewCell.swift */; };
-		5696B9F92D357D6D0028F98F /* CreateUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F82D357D6D0028F98F /* CreateUserService.swift */; };
 		5696BA0F2D36334C0028F98F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */; };
 		5696BA112D3646AF0028F98F /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA102D3646AF0028F98F /* AvatarCell.swift */; };
 		5696BA132D364C250028F98F /* ProfileChangeModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */; };
-		5696BA152D3653250028F98F /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA142D3653250028F98F /* PasswordService.swift */; };
-		5696BA532D36BB440028F98F /* CreateUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA522D36BB440028F98F /* CreateUserResponse.swift */; };
 		569D8AA42D293F5D00949DB4 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA32D293F5800949DB4 /* LoginResponse.swift */; };
 		569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA52D29404D00949DB4 /* LoginViewModel.swift */; };
 		569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */; };
@@ -116,19 +111,14 @@
 		567443862D2CEC0200BBC8BD /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		568DF6E12D318541000E7CBE /* ExpAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpAllViewController.swift; sourceTree = "<group>"; };
 		5696B9C62D3502500028F98F /* ChangeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileViewController.swift; sourceTree = "<group>"; };
-		5696B9C82D350C240028F98F /* AdminUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserService.swift; sourceTree = "<group>"; };
 		5696B9E82D35420E0028F98F /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
-		5696B9EE2D35615B0028F98F /* AdminBoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminBoardService.swift; sourceTree = "<group>"; };
 		5696B9F02D35628F0028F98F /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
 		5696B9F22D3563860028F98F /* LogoutModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModalViewController.swift; sourceTree = "<group>"; };
 		5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserListViewModel.swift; sourceTree = "<group>"; };
 		5696B9F62D356F0D0028F98F /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
-		5696B9F82D357D6D0028F98F /* CreateUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserService.swift; sourceTree = "<group>"; };
 		5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		5696BA102D3646AF0028F98F /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
 		5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeModalViewController.swift; sourceTree = "<group>"; };
-		5696BA142D3653250028F98F /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
-		5696BA522D36BB440028F98F /* CreateUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserResponse.swift; sourceTree = "<group>"; };
 		569D8AA32D293F5800949DB4 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		569D8AA52D29404D00949DB4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +176,8 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		56124D752D34F4A40016DF5B /* AdminViews */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AdminViews; sourceTree = "<group>"; };
+		56E670232D36F76C0052161A /* AdminModels */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AdminModels; sourceTree = "<group>"; };
+		56E670282D36F7D50052161A /* AdminAPI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AdminAPI; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,15 +244,12 @@
 		65020FA32D251CC200CC85FB /* API */ = {
 			isa = PBXGroup;
 			children = (
-				5696BA142D3653250028F98F /* PasswordService.swift */,
-				5696B9F82D357D6D0028F98F /* CreateUserService.swift */,
+				56E670282D36F7D50052161A /* AdminAPI */,
 				5696B9F02D35628F0028F98F /* LogoutService.swift */,
-				5696B9EE2D35615B0028F98F /* AdminBoardService.swift */,
 				5696B9E82D35420E0028F98F /* ProfileService.swift */,
 				65020FA42D251CD500CC85FB /* AlamofireManager.swift */,
 				65020FA62D251D5F00CC85FB /* EndPoints.swift */,
 				65020FAA2D2521CF00CC85FB /* APIResponse.swift */,
-				5696B9C82D350C240028F98F /* AdminUserService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -296,7 +285,7 @@
 		6504AFF42D1BF93C00051B44 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5696BA522D36BB440028F98F /* CreateUserResponse.swift */,
+				56E670232D36F76C0052161A /* AdminModels */,
 				654BD9912D340ABF0048F5CA /* Quest.swift */,
 				56CFC9982D317E0F00C77CCE /* UserSessionManager.swift */,
 				567443822D2CEBD000BBC8BD /* Board.swift */,
@@ -441,6 +430,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				56124D752D34F4A40016DF5B /* AdminViews */,
+				56E670232D36F76C0052161A /* AdminModels */,
+				56E670282D36F7D50052161A /* AdminAPI */,
 			);
 			name = Ddabong2;
 			packageProductDependencies = (
@@ -651,7 +642,6 @@
 				5696BA132D364C250028F98F /* ProfileChangeModalViewController.swift in Sources */,
 				65020F9E2D21226F00CC85FB /* ParticiCell.swift in Sources */,
 				56B2B0A92D2D3D1E007EF5B6 /* BoardAllViewController.swift in Sources */,
-				5696B9C92D350C250028F98F /* AdminUserService.swift in Sources */,
 				6504AFFA2D1BF96400051B44 /* DayoffModel.swift in Sources */,
 				5696B9C72D3502500028F98F /* ChangeProfileViewController.swift in Sources */,
 				567443832D2CEBD000BBC8BD /* Board.swift in Sources */,
@@ -660,12 +650,10 @@
 				65020FA52D251CD500CC85FB /* AlamofireManager.swift in Sources */,
 				561040172D3440200074D746 /* MenuViewController.swift in Sources */,
 				569D8AA42D293F5D00949DB4 /* LoginResponse.swift in Sources */,
-				5696B9F92D357D6D0028F98F /* CreateUserService.swift in Sources */,
 				65020FA92D251DE900CC85FB /* UserInfoViewModel.swift in Sources */,
 				654BD9922D340ABF0048F5CA /* Quest.swift in Sources */,
 				6504AFF32D1BF81A00051B44 /* MyPageViewController.swift in Sources */,
 				6504AFF82D1BF95000051B44 /* ScheduleModel.swift in Sources */,
-				5696BA152D3653250028F98F /* PasswordService.swift in Sources */,
 				655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */,
 				562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */,
 				56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */,
@@ -688,7 +676,6 @@
 				656175132D2FE86900562071 /* QuestTabViewController.swift in Sources */,
 				562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */,
 				569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */,
-				5696BA532D36BB440028F98F /* CreateUserResponse.swift in Sources */,
 				65118E322D3165780048A222 /* PushTokenManager.swift in Sources */,
 				5696B9E92D35420E0028F98F /* ProfileService.swift in Sources */,
 				568DF6E22D318541000E7CBE /* ExpAllViewController.swift in Sources */,
@@ -701,7 +688,6 @@
 				65020FAB2D2521CF00CC85FB /* APIResponse.swift in Sources */,
 				656175172D2FEFDE00562071 /* QuestMonthlyViewController.swift in Sources */,
 				654BD9902D340AA10048F5CA /* TestViewController.swift in Sources */,
-				5696B9EF2D35615B0028F98F /* AdminBoardService.swift in Sources */,
 				567443852D2CEBD700BBC8BD /* BoardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

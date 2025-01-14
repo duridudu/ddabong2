@@ -9,6 +9,8 @@ class UserSessionManager {
     private var refreshToken: String?
     private var userInfo: User?
     private var isAdmin: Bool = false // admin 여부 저장
+    private var lastFetchedId: Int? // 마지막 게시물 ID 저장
+
     
     func saveAccessToken(_ token: String) {
         self.accessToken = token
@@ -36,5 +38,12 @@ class UserSessionManager {
     
     func isAdminUser() -> Bool {
         return isAdmin
+    }
+    func setLastFetchedId(_ id: Int) {
+        lastFetchedId = id
+    }
+
+    func getLastFetchedId() -> Int? {
+        return lastFetchedId
     }
 }

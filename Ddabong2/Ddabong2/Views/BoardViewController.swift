@@ -239,8 +239,25 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16) // 구분선 마진 설정
+        tableView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16) // 셀 전체 마진 설정
         tableView.register(BoardTableViewCell.self, forCellReuseIdentifier: BoardTableViewCell.identifier)
     }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardTableViewCell.identifier, for: indexPath) as? BoardTableViewCell else {
+            return UITableViewCell()
+        }
+        let board = viewModel.getBoards()[indexPath.row]
+        cell.configure(with: board)
+        
+        // 셀의 구분선 마진을 테이블 뷰와 동일하게 설정
+        cell.separatorInset = tableView.separatorInset
+        cell.layoutMargins = tableView.layoutMargins
+
+        return cell
+    }
+
 
     private func bindViewModel() {
         viewModel.onBoardsUpdated = { [weak self] in
@@ -278,19 +295,6 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getBoards().count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardTableViewCell.identifier, for: indexPath) as? BoardTableViewCell else {
-            return UITableViewCell()
-        }
-        let board = viewModel.getBoards()[indexPath.row]
-        cell.configure(with: board)
-
-        if indexPath.row == viewModel.getBoards().count - 1 {
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
-        }
-        return cell
     }
 
     // MARK: - TableView Delegate
