@@ -29,6 +29,10 @@
 		5696B9F52D356EE10028F98F /* AdminUserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */; };
 		5696B9F72D356F0D0028F98F /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F62D356F0D0028F98F /* UserTableViewCell.swift */; };
 		5696B9F92D357D6D0028F98F /* CreateUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F82D357D6D0028F98F /* CreateUserService.swift */; };
+		5696BA0F2D36334C0028F98F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */; };
+		5696BA112D3646AF0028F98F /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA102D3646AF0028F98F /* AvatarCell.swift */; };
+		5696BA132D364C250028F98F /* ProfileChangeModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */; };
+		5696BA152D3653250028F98F /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA142D3653250028F98F /* PasswordService.swift */; };
 		569D8AA42D293F5D00949DB4 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA32D293F5800949DB4 /* LoginResponse.swift */; };
 		569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA52D29404D00949DB4 /* LoginViewModel.swift */; };
 		569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */; };
@@ -119,6 +123,10 @@
 		5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserListViewModel.swift; sourceTree = "<group>"; };
 		5696B9F62D356F0D0028F98F /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		5696B9F82D357D6D0028F98F /* CreateUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserService.swift; sourceTree = "<group>"; };
+		5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		5696BA102D3646AF0028F98F /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
+		5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeModalViewController.swift; sourceTree = "<group>"; };
+		5696BA142D3653250028F98F /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
 		569D8AA32D293F5800949DB4 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		569D8AA52D29404D00949DB4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
@@ -227,12 +235,14 @@
 		65020F862D1FCCB700CC85FB /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				5696BA102D3646AF0028F98F /* AvatarCell.swift */,
 				5696B9F62D356F0D0028F98F /* UserTableViewCell.swift */,
 				567443862D2CEC0200BBC8BD /* BoardTableViewCell.swift */,
 				65020F9D2D21226F00CC85FB /* ParticiCell.swift */,
 				562E5DDC2D2984D800B14088 /* UIColor+extension.swift */,
 				656175142D2FE8B600562071 /* QuestTabCell.swift */,
 				656175122D2FE86900562071 /* QuestTabViewController.swift */,
+				5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -240,6 +250,7 @@
 		65020FA32D251CC200CC85FB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				5696BA142D3653250028F98F /* PasswordService.swift */,
 				5696B9F82D357D6D0028F98F /* CreateUserService.swift */,
 				5696B9F02D35628F0028F98F /* LogoutService.swift */,
 				5696B9EE2D35615B0028F98F /* AdminBoardService.swift */,
@@ -267,6 +278,7 @@
 				6504AFF22D1BF81A00051B44 /* MyPageViewController.swift */,
 				562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */,
 				5696B9C62D3502500028F98F /* ChangeProfileViewController.swift */,
+				5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */,
 				65B9DC8E2D1BFB4E00BB969D /* LoginViewController.swift */,
 				5696B9F22D3563860028F98F /* LogoutModalViewController.swift */,
 				6504AFF02D1BF80D00051B44 /* BoardViewController.swift */,
@@ -633,6 +645,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5696BA132D364C250028F98F /* ProfileChangeModalViewController.swift in Sources */,
 				65020F9E2D21226F00CC85FB /* ParticiCell.swift in Sources */,
 				56B2B0A92D2D3D1E007EF5B6 /* BoardAllViewController.swift in Sources */,
 				5696B9C92D350C250028F98F /* AdminUserService.swift in Sources */,
@@ -649,6 +662,7 @@
 				654BD9922D340ABF0048F5CA /* Quest.swift in Sources */,
 				6504AFF32D1BF81A00051B44 /* MyPageViewController.swift in Sources */,
 				6504AFF82D1BF95000051B44 /* ScheduleModel.swift in Sources */,
+				5696BA152D3653250028F98F /* PasswordService.swift in Sources */,
 				655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */,
 				562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */,
 				56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */,
@@ -676,7 +690,9 @@
 				568DF6E22D318541000E7CBE /* ExpAllViewController.swift in Sources */,
 				56C441572D2EC2BC00BAD635 /* NavigationViewController.swift in Sources */,
 				6504AFEC2D1BF7E700051B44 /* ScheduleViewController.swift in Sources */,
+				5696BA0F2D36334C0028F98F /* UIImage+Extension.swift in Sources */,
 				6504AFF12D1BF80D00051B44 /* BoardViewController.swift in Sources */,
+				5696BA112D3646AF0028F98F /* AvatarCell.swift in Sources */,
 				65B9DC8F2D1BFB4E00BB969D /* LoginViewController.swift in Sources */,
 				65020FAB2D2521CF00CC85FB /* APIResponse.swift in Sources */,
 				656175172D2FEFDE00562071 /* QuestMonthlyViewController.swift in Sources */,

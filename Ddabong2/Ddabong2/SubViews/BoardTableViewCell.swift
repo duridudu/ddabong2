@@ -3,14 +3,13 @@ import UIKit
 class BoardTableViewCell: UITableViewCell {
     static let identifier = "BoardTableViewCell"
 
-    private let iconLabel: UILabel = {
-        let label = UILabel()
-        label.text = "N"
-        label.textColor = UIColor(hex: "#FF5B35")
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.isHidden = true // 기본적으로 숨김
-        return label
+    private let newIconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "newboard") // newboard 이미지
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isHidden = true // 기본적으로 숨김
+        return imageView
     }()
 
     private let titleLabel: UILabel = {
@@ -47,17 +46,18 @@ class BoardTableViewCell: UITableViewCell {
     }
 
     private func setupUI() {
-        contentView.addSubview(iconLabel)
+        contentView.addSubview(newIconImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(timeLabel)
         contentView.addSubview(arrowImageView)
 
         NSLayoutConstraint.activate([
-            iconLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            iconLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            iconLabel.widthAnchor.constraint(equalToConstant: 20),
+            newIconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            newIconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            newIconImageView.widthAnchor.constraint(equalToConstant: 16),
+            newIconImageView.heightAnchor.constraint(equalToConstant: 16),
 
-            titleLabel.leadingAnchor.constraint(equalTo: iconLabel.trailingAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: newIconImageView.trailingAnchor, constant: 10),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: -10),
 
@@ -75,13 +75,14 @@ class BoardTableViewCell: UITableViewCell {
     func configure(with board: Board) {
         titleLabel.text = board.title
         timeLabel.text = formatRelativeTime(board.timeAgo)
-
-        // 24시간 이내에 작성된 글인지 확인하여 N 표시 설정
+        
+        // 24시간 이내에 작성된 글인지 확인하여 newboard 이미지 표시 설정
         if isWithinLast24Hours(board.timeAgo) {
-            iconLabel.isHidden = false
+            newIconImageView.isHidden = false
         } else {
-            iconLabel.isHidden = true
+            newIconImageView.isHidden = true
         }
+    
     }
 
     private func formatRelativeTime(_ timeAgo: String) -> String {
@@ -90,14 +91,24 @@ class BoardTableViewCell: UITableViewCell {
     }
 
     private func isWithinLast24Hours(_ timeAgo: String) -> Bool {
-        // "2분 전", "5시간 전" 등 상대적인 시간 포맷을 해석하여 24시간 이내인지 확인
-        if timeAgo.contains("분 전") || timeAgo.contains("시간 전") {
-            let components = timeAgo.split(separator: " ")
-            if let value = Int(components.first ?? "0"),
-               (timeAgo.contains("분 전") && value < 1440) || (timeAgo.contains("시간 전") && value < 24) {
-                return true
+        print("timeAgo: \(timeAgo)") // 입력값 확인
+
+        if timeAgo.contains("분 전") {
+            if let value = Int(timeAgo.replacingOccurrences(of: "분 전", with: "").trimmingCharacters(in: .whitespaces)) {
+                print("\(value)분 전: \(value < 1440 ? "24시간 이내" : "24시간 초과")")
+                return value < 1440
+            }
+        } else if timeAgo.contains("시간 전") {
+            if let value = Int(timeAgo.replacingOccurrences(of: "시간 전", with: "").trimmingCharacters(in: .whitespaces)) {
+                print("\(value)시간 전: \(value < 24 ? "24시간 이내" : "24시간 초과")")
+                return value < 24
             }
         }
+
+        print("24시간 초과 또는 형식 불일치")
         return false
     }
+
+
 }
+

@@ -42,9 +42,16 @@ class MenuViewController: UIViewController {
         }
     }
 
-    // MARK: - Update UI
+    
     private func updateUI(with user: User) {
-        profileImageView.image = UIImage(named: "profile") // Replace with your actual image
+        // 아바타 ID로 프로필 이미지 설정
+        if let profileImage = UIImage.profileImage(for: user.avartaId) {
+            profileImageView.image = profileImage
+        } else {
+            profileImageView.image = UIImage(named: "defaultAvatar") // 기본 이미지
+        }
+
+        // 이름과 ID 설정
         nameLabel.text = user.name
         idLabel.text = user.id
 
@@ -73,6 +80,8 @@ class MenuViewController: UIViewController {
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.clipsToBounds = true
         profileImageView.layer.cornerRadius = 40 // Circular Image
+        profileImageView.layer.borderWidth = 2 // 테두리 두께
+        profileImageView.layer.borderColor = UIColor.lightGray.cgColor // 연한 회색 테두리
         profileBackgroundView.addSubview(profileImageView)
 
         // Name Label
@@ -230,4 +239,12 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
            }
            present(modalVC, animated: true, completion: nil)
        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // 사용자 정보 다시 가져오기
+        fetchUserInfo()
+    }
+
 }
