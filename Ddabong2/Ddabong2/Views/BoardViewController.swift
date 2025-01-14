@@ -258,26 +258,21 @@ class BoardViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
 
     @objc private func didTapDrawerButton() {
-        // 로그인 사용자 ID 가져오기
-        guard let userId = UserSessionManager.shared.getUserInfo()?.id else {
-            print("사용자 정보가 없습니다.")
-            return
-        }
-
-        // Admin 여부에 따라 다른 메뉴 화면 설정
-        if userId == "admin" {
+        // Admin 여부 확인
+        if UserSessionManager.shared.isAdminUser() == true { // Admin이면
             let adminMenuVC = AdminMenuViewController()
             sideMenu = SideMenuNavigationController(rootViewController: adminMenuVC)
-        } else {
+        } else { // Admin이 아니면
             let menuVC = MenuViewController()
             sideMenu = SideMenuNavigationController(rootViewController: menuVC)
         }
 
         // 사이드 메뉴 설정 및 표시
-        sideMenu?.leftSide = true // 왼쪽에서 나타나도록 설정
-        sideMenu?.setNavigationBarHidden(true, animated: false) // 네비게이션 바 숨김
+        sideMenu?.leftSide = true
+        sideMenu?.setNavigationBarHidden(true, animated: false)
         present(sideMenu!, animated: true, completion: nil)
     }
+
 
     
     // MARK: - TableView DataSource

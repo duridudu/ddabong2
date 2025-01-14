@@ -38,6 +38,7 @@ class MyPageViewController: UIViewController {
         setupSideMenu()
         bindViewModels()
         fetchData()
+        setupCustomProgressBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -223,7 +224,7 @@ class MyPageViewController: UIViewController {
             progressBar.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: 16),
             progressBar.leadingAnchor.constraint(equalTo: whiteContainerView.leadingAnchor, constant: 16),
             progressBar.trailingAnchor.constraint(equalTo: whiteContainerView.trailingAnchor, constant: -16),
-            progressBar.heightAnchor.constraint(equalToConstant: 8),
+            progressBar.heightAnchor.constraint(equalToConstant: 30),
 
             progressPercentageLabel.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor),
             progressPercentageLabel.centerYAnchor.constraint(equalTo: progressBar.centerYAnchor),
@@ -270,12 +271,19 @@ class MyPageViewController: UIViewController {
             sublayers[1].cornerRadius = 10
             sublayers[1].masksToBounds = true
         }
-        progressBar.progressTintColor = UIColor(hex: "#FF6C4A")
-        progressBar.trackTintColor = UIColor(hex: "#FFB4A3")
-        progressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        // 채워진 색상 #FF6C4A, 채워지지 않은 색상 #FFB4A3
+        progressBar.progressTintColor = UIColor(hex: "#FF6C4A") // 채워진 색상
+        progressBar.trackTintColor = UIColor(hex: "#FFB4A3") // 채워지지 않은 색상
+        
+        // 퍼센트 글씨 스타일 설정
+        progressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 18) // Bold 폰트
         progressPercentageLabel.textAlignment = .center
-        progressPercentageLabel.textColor = .white
+        progressPercentageLabel.textColor = .white // 흰색 글씨 색상
+        // 진행률 바의 두께를 설정
+        progressBar.frame.size.height = 30 // 두께를 16으로 설정
     }
+
 
     private func setupCustomTitle() {
         let titleLabel = UILabel()
@@ -313,7 +321,10 @@ class MyPageViewController: UIViewController {
 
     private func updateUI(with data: MyPageResponseDto) {
         greetingLabel.text = "\(userInfoViewModel.userInfo?.name ?? "")님, 안녕하세요!"
-        fortuneLabel.text = "\(data.fortune.date) 오늘의 운세\n\(data.fortune.contents)"
+        
+        // 날짜 변환 (n월 n일 형식)
+        let formattedDate = formatToMonthDay(data.fortune.date)
+        fortuneLabel.text = "\(formattedDate) 오늘의 운세\n\(data.fortune.contents)"
 
         levelLabel.text = "\(data.levelRate.currentLevel) \(data.levelRate.currentExp)"
         nextLevelLabel.text = "다음 레벨까지: \(data.levelRate.leftExp)"
@@ -333,6 +344,16 @@ class MyPageViewController: UIViewController {
         recentExpTimeLabel.text = formatDate(data.recentExp.completedAt)
         recentExpPointsLabel.text = "\(data.recentExp.expAmount) D"
     }
+
+    private func formatToMonthDay(_ isoDateString: String) -> String {
+        let formatter = ISO8601DateFormatter()
+        guard let date = formatter.date(from: isoDateString) else { return "" }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "M월 d일" // n월 n일 형식
+        return outputFormatter.string(from: date)
+    }
+
 
     private func formatDate(_ dateString: String) -> String {
         let formatter = ISO8601DateFormatter()

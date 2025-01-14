@@ -1,139 +1,144 @@
 import UIKit
 
 class AdminUserCreateViewController: UIViewController {
-    // MARK: - UI Components
-    private let idTextField = UITextField()
-    private let idCheckButton = UIButton()
-    private let passwordTextField = UITextField()
-    private let departmentTextField = UITextField()
-    private let jobGroupTextField = UITextField()
-    private let nameTextField = UITextField()
-    private let joinedAtTextField = UITextField()
-    private let groupTextField = UITextField()
-    private let submitButton = UIButton()
-    
+    // UI 요소 선언
+    let idLabel = UILabel()
+    let idTextField = UITextField()
+    let passwordLabel = UILabel()
+    let passwordTextField = UITextField()
+    let departmentLabel = UILabel()
+    let departmentTextField = UITextField()
+    let jobGroupLabel = UILabel()
+    let jobGroupTextField = UITextField()
+    let nameLabel = UILabel()
+    let nameTextField = UITextField()
+    let joinedAtLabel = UILabel()
+    let joinedAtTextField = UITextField()
+    let groupLabel = UILabel()
+    let groupTextField = UITextField()
+    let backButton = UIButton()
+    let doneButton = UIButton()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
         setupUI()
     }
-    
-    // MARK: - Setup Navigation Bar
-    private func setupNavigationBar() {
-        navigationItem.title = "회원 생성"
-        
-        let backButton = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(handleBack))
-        navigationItem.leftBarButtonItem = backButton
-        
-        let completeButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(handleSubmit))
-        navigationItem.rightBarButtonItem = completeButton
-    }
-    
-    // MARK: - Setup UI
+
+    // UI 초기화
     private func setupUI() {
         view.backgroundColor = .white
-        
-        // 아이디 필드와 중복확인 버튼을 담는 스택뷰
-        let idStackView = UIStackView(arrangedSubviews: [
-            createInputField(idTextField, placeholder: "아이디"),
-            idCheckButton
-        ])
-        idStackView.axis = .horizontal
-        idStackView.spacing = 10
-        
-        idCheckButton.setTitle("중복확인", for: .normal)
-        idCheckButton.backgroundColor = .systemOrange
-        idCheckButton.layer.cornerRadius = 5
-        idCheckButton.addTarget(self, action: #selector(handleIdCheck), for: .touchUpInside)
-        
-        // 스택뷰 설정
+
+        // 상단 뒤로가기 버튼 설정
+        backButton.setTitle("<", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(backButton)
+
+        // 상단 완료 버튼 설정
+        doneButton.setTitle("완료", for: .normal)
+        doneButton.setTitleColor(.systemBlue, for: .normal)
+        doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        doneButton.addTarget(self, action: #selector(handleCreateUser), for: .touchUpInside)
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(doneButton)
+
+        // 레이블과 TextField 구성
+        configureLabel(idLabel, text: "아이디")
+        configureTextField(idTextField, placeholder: "아이디를 입력하세요")
+        configureLabel(passwordLabel, text: "기본 패스워드")
+        configureTextField(passwordTextField, placeholder: "비밀번호를 입력하세요")
+        configureLabel(departmentLabel, text: "소속")
+        configureTextField(departmentTextField, placeholder: "소속을 입력하세요")
+        configureLabel(jobGroupLabel, text: "직무 그룹")
+        configureTextField(jobGroupTextField, placeholder: "직무 그룹을 입력하세요")
+        configureLabel(nameLabel, text: "이름")
+        configureTextField(nameTextField, placeholder: "이름을 입력하세요")
+        configureLabel(joinedAtLabel, text: "입사일")
+        configureTextField(joinedAtTextField, placeholder: "YYYY-MM-DD")
+        configureLabel(groupLabel, text: "직군")
+        configureTextField(groupTextField, placeholder: "직군을 입력하세요")
+
+        // StackView로 UI 구성
         let stackView = UIStackView(arrangedSubviews: [
-            idStackView,
-            createInputField(passwordTextField, placeholder: "기본 패스워드"),
-            createInputField(departmentTextField, placeholder: "소속"),
-            createInputField(jobGroupTextField, placeholder: "직무그룹"),
-            createInputField(nameTextField, placeholder: "이름"),
-            createInputField(joinedAtTextField, placeholder: "입사일 (YYYY.MM.DD)"),
-            createInputField(groupTextField, placeholder: "직군")
+            idLabel, idTextField,
+            passwordLabel, passwordTextField,
+            departmentLabel, departmentTextField,
+            jobGroupLabel, jobGroupTextField,
+            nameLabel, nameTextField,
+            joinedAtLabel, joinedAtTextField,
+            groupLabel, groupTextField
         ])
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = 15
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(stackView)
-        
+
+        // 제약 조건 설정
         NSLayoutConstraint.activate([
+            // 상단 버튼 제약 조건
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+
+            doneButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            // StackView 제약 조건
+            stackView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 20),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
-    
-    private func createInputField(_ textField: UITextField, placeholder: String) -> UIView {
+
+    private func configureLabel(_ label: UILabel, text: String) {
+        label.text = text
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    }
+
+    private func configureTextField(_ textField: UITextField, placeholder: String) {
         textField.borderStyle = .roundedRect
         textField.placeholder = placeholder
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        return textField
     }
-    
-    // MARK: - Actions
-    @objc private func handleIdCheck() {
-        // TODO: 아이디 중복확인 로직 구현
-        print("아이디 중복확인 버튼 클릭")
+
+    // 뒤로가기 동작
+    @objc private func handleBack() {
+        dismiss(animated: true, completion: nil)
     }
-    
-    @objc private func handleSubmit() {
-        guard let id = idTextField.text,
-              let password = passwordTextField.text,
-              let departmentId = departmentTextField.text,
-              let jobGroup = jobGroupTextField.text,
-              let name = nameTextField.text,
-              let joinedAt = joinedAtTextField.text,
-              let group = groupTextField.text else {
-            showErrorAlert(message: "모든 필드를 입력해주세요.")
+
+    // 회원 생성 처리
+    @objc private func handleCreateUser() {
+        guard let id = idTextField.text, !id.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let department = departmentTextField.text, let departmentId = Int(department),
+              let jobGroup = jobGroupTextField.text, let jobGroupId = Int(jobGroup),
+              let name = nameTextField.text, !name.isEmpty,
+              let joinedAt = joinedAtTextField.text, !joinedAt.isEmpty,
+              let group = groupTextField.text, !group.isEmpty else {
+            showAlert(message: "모든 필드를 채워주세요.")
             return
         }
-        
-        let parameters: [String: Any] = [
-            "id": id,
-            "password": password,
-            "departmentId": Int(departmentId) ?? 0,
-            "jobGroup": Int(jobGroup) ?? 0,
-            "name": name,
-            "joinedAt": joinedAt,
-            "group": group
-        ]
-        
-        CreateUserService.shared.createUser(parameters: parameters) { [weak self] result in
-            switch result {
-            case .success(let message):
+
+        CreateUserService.shared.createUser(name: name, id: id, password: password, joinedAt: joinedAt, departmentId: departmentId, jobGroup: jobGroupId, group: group) { [weak self] success, errorMessage in
+            if success {
                 DispatchQueue.main.async {
-                    self?.showSuccessAlert(message: message)
+                    self?.showAlert(message: "회원 생성 완료", isSuccess: true)
                 }
-            case .failure(let error):
+            } else {
                 DispatchQueue.main.async {
-                    self?.showErrorAlert(message: error.localizedDescription)
+                    self?.showAlert(message: errorMessage ?? "회원 생성 실패")
                 }
             }
         }
     }
-    
-    @objc private func handleBack() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "오류", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default))
-        present(alert, animated: true)
-    }
-    
-    private func showSuccessAlert(message: String) {
-        let alert = UIAlertController(title: "성공", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-            self.navigationController?.popViewController(animated: true)
-        }))
-        present(alert, animated: true)
+
+    private func showAlert(message: String, isSuccess: Bool = false) {
+        let alert = UIAlertController(title: isSuccess ? "성공" : "실패", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
+            if isSuccess {
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
+        present(alert, animated: true, completion: nil)
     }
 }

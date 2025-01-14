@@ -13,6 +13,7 @@ struct User: Codable {
     let department: String
     let avartaId: Int
     let level: String
+    
 }
 
 struct UserResponse: Codable {

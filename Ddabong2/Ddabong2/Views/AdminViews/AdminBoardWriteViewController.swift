@@ -153,12 +153,8 @@ class AdminBoardWriteViewController: UIViewController {
     }
 
     @objc private func handleBackButtonTapped() {
-        // AdminMainViewController로 이동
-        let adminMainVC = AdminMainViewController()
-        adminMainVC.modalPresentationStyle = .fullScreen // 전체 화면 표시
-        present(adminMainVC, animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
-
 
     @objc private func handleSaveButtonTapped() {
         print("완료 버튼 클릭")

@@ -33,6 +33,7 @@
 		5696BA112D3646AF0028F98F /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA102D3646AF0028F98F /* AvatarCell.swift */; };
 		5696BA132D364C250028F98F /* ProfileChangeModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */; };
 		5696BA152D3653250028F98F /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA142D3653250028F98F /* PasswordService.swift */; };
+		5696BA532D36BB440028F98F /* CreateUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA522D36BB440028F98F /* CreateUserResponse.swift */; };
 		569D8AA42D293F5D00949DB4 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA32D293F5800949DB4 /* LoginResponse.swift */; };
 		569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA52D29404D00949DB4 /* LoginViewModel.swift */; };
 		569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */; };
@@ -127,6 +128,7 @@
 		5696BA102D3646AF0028F98F /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
 		5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeModalViewController.swift; sourceTree = "<group>"; };
 		5696BA142D3653250028F98F /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
+		5696BA522D36BB440028F98F /* CreateUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserResponse.swift; sourceTree = "<group>"; };
 		569D8AA32D293F5800949DB4 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		569D8AA52D29404D00949DB4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		6504AFF42D1BF93C00051B44 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5696BA522D36BB440028F98F /* CreateUserResponse.swift */,
 				654BD9912D340ABF0048F5CA /* Quest.swift */,
 				56CFC9982D317E0F00C77CCE /* UserSessionManager.swift */,
 				567443822D2CEBD000BBC8BD /* Board.swift */,
@@ -685,6 +688,7 @@
 				656175132D2FE86900562071 /* QuestTabViewController.swift in Sources */,
 				562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */,
 				569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */,
+				5696BA532D36BB440028F98F /* CreateUserResponse.swift in Sources */,
 				65118E322D3165780048A222 /* PushTokenManager.swift in Sources */,
 				5696B9E92D35420E0028F98F /* ProfileService.swift in Sources */,
 				568DF6E22D318541000E7CBE /* ExpAllViewController.swift in Sources */,
