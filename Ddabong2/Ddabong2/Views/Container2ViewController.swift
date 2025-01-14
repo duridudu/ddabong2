@@ -8,36 +8,14 @@
 import Foundation
 import UIKit
 
-class Container2ViewController:UIViewController, UITableViewDataSource, UITableViewDelegate{
+class Container2ViewController:UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    // MARK: - UITableViewDataSource
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("TABLE",responseDTO?.questList[tableView.tag].count ?? 0)
-        return responseDTO?.questList[tableView.tag].count ?? 0
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("TABLE CELL")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
-        guard let quest = responseDTO?.questList[tableView.tag][indexPath.row] else { return cell }
-        cell.textLabel?.text = "\(quest.name)   \(quest.expAmount)D"
-        cell.backgroundColor = UIColor(hex: "fff8f8") // 원하는 배경색 (예: 밝은 베이지)
-        // 선택 시 배경색 제거
-           let bgView = UIView()
-           bgView.backgroundColor = .clear
-           cell.selectedBackgroundView = bgView
-
-        //        cell.detailTextLabel?.text = "Exp: \(quest.expAmount) | Grade: \(quest.grade)"
-        return cell
-    }
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topView: UIView!
@@ -49,7 +27,7 @@ class Container2ViewController:UIViewController, UITableViewDataSource, UITableV
     //    private let  stackView = UIStackView()
     //    private let containerView = UIStackView()
     var responseDTO: QuestResponseDTO?
-    
+    var viewModel = QuestViewModel()
     
     
     override func viewDidLoad() {
@@ -59,8 +37,15 @@ class Container2ViewController:UIViewController, UITableViewDataSource, UITableV
         // setupTopView()
         //        setupWeekData()
         // 데이터 로드 및 UI 갱신
-        loadData()
+        // 뷰 모델에서 데이터를 가져오고 완료 후 UI 업데이트
+        viewModel.fetchWeeklyQuests(year: 2025, month: 1) { [weak self] in
+            DispatchQueue.main.async {
+                self?.loadData()
+                
+            }
+        }
     }
+    
     
     func setupScrollView() {
         // top
@@ -118,23 +103,8 @@ class Container2ViewController:UIViewController, UITableViewDataSource, UITableV
         
     }
     
-    func setupWeekData(){
-        // 주차별로 UIView를 생성
-        //        let containerView = UIView()
-        //        containerView.translatesAutoresizingMaskIntoConstraints = false
-        //        containerView.backgroundColor = .blue
-        //
-        //        containerView.addSubview(experienceTitleLabel)
-        
-        print("WEEK", 1)
-        let lblTitle = UILabel()
-        lblTitle.text = "WEEK 1"
-        lblTitle.translatesAutoresizingMaskIntoConstraints = false
-        //        stackView.addArrangedSubview(lblTitle)  // 이 부분 추가!
-        
-    }
     
-    func loadData() {
+    func loadData(){
         // 예제 JSON 데이터 로드
         let jsonString = """
            {
@@ -192,154 +162,35 @@ class Container2ViewController:UIViewController, UITableViewDataSource, UITableV
         let jsonData = Data(jsonString.utf8)
         do {
             let decodedData = try JSONDecoder().decode(QuestResponseDTO.self, from: jsonData)
-            responseDTO = decodedData
+            responseDTO = viewModel.responseDto2
             setupViewsForWeeks()
         } catch {
             print("Failed to decode JSON: \(error)")
         }
     }
     
+    
+    
+    
+    
     func setupViewsForWeeks() {
         guard let responseDTO = responseDTO else { return }
         
         for (weekIndex, quests) in responseDTO.questList.enumerated() {
             // 주차별로 UIView를 생성
-            let containerView = UIStackView()
-            containerView.axis = .horizontal
-            containerView.spacing = 10
-            containerView.alignment = .fill
-            containerView.distribution = .fill
-            containerView.translatesAutoresizingMaskIntoConstraints = false
-            // **`containerView`에 높이 설정**
-            NSLayoutConstraint.activate([
-                containerView.heightAnchor.constraint(equalToConstant: 150), // 고정 높이
-            ])
+            let containerView = QuestMonthlyView()
+            containerView.lblWeek.text = "\(weekIndex + 1)주차"
             
-            print("WEEK", weekIndex)
+            // 가장 많이 얻은 분류에 따른 배경색, 원 이미지 설정
+            containerView.tableView.backgroundColor = UIColor(hex: "fff8f8") // 원하는 배경색 설정
+            containerView.tableView.tag = weekIndex
+            containerView.quests = quests
             
-            let weekLabelView = UIStackView()
-            weekLabelView.axis = .vertical
-            weekLabelView.spacing = 7
-            weekLabelView.alignment = .fill
-            weekLabelView.distribution = .fill
-            weekLabelView.translatesAutoresizingMaskIntoConstraints = false
-            
-            // 라벨 추가
-            let weekLabel = UILabel()
-            weekLabel.text = "\(weekIndex + 1)주차"
-            weekLabel.font = UIFont.boldSystemFont(ofSize: 20)
-            weekLabel.translatesAutoresizingMaskIntoConstraints = false
-            weekLabelView.addArrangedSubview(weekLabel)
-            // 라벨 추가(총합 점수)
-                        let weekLabel2 = UILabel()
-                        weekLabel2.text = "350D"
-                        weekLabel2.font = UIFont.boldSystemFont(ofSize: 10)
-                        weekLabel2.layer.borderWidth = 2.0 // 테두리 두께
-                        weekLabel2.backgroundColor = UIColor(hex:"fff8f8")
-                        weekLabel2.layer.borderColor = UIColor(hex:"ff5b35").cgColor // 테두리 색상
-                        weekLabel2.layer.cornerRadius = 20.0 // 테두리의 둥글기
-                        weekLabel2.layer.masksToBounds = true // corner radius가 적용되도록 설정
-            //
-                        weekLabel2.translatesAutoresizingMaskIntoConstraints = false
-                        weekLabelView.addArrangedSubview(weekLabel2)
-            
-            //            // 레이아웃 제약 조건 설정
-                        NSLayoutConstraint.activate([
-                            weekLabel.widthAnchor.constraint(equalToConstant: 40), // 라벨 고정 너비
-                            weekLabel.topAnchor.constraint(equalTo: weekLabelView.topAnchor, constant: 5),
-                            // weekLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                            weekLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30), // 최소 너비
-                            weekLabel.heightAnchor.constraint(equalToConstant: 30) ,// 고정 높이
-            
-                            weekLabel2.widthAnchor.constraint(equalToConstant: 40), // 라벨 고정 너비
-                            weekLabel2.topAnchor.constraint(equalTo: weekLabel.bottomAnchor, constant: 5),
-                            // weekLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                            weekLabel2.widthAnchor.constraint(greaterThanOrEqualToConstant: 30), // 최소 너비
-                            weekLabel2.heightAnchor.constraint(equalToConstant: 30) ,// 고정 높이
-            
-                        ])
-            
-            
-            
-           containerView.addArrangedSubview(weekLabelView)
-            print(containerView)
-            
-            // 이미지 추가
-            // 원형 UIView 생성
-            let circleView = UIImageView()
-            circleView.translatesAutoresizingMaskIntoConstraints = false
-            circleView.image=UIImage(named:"imgChecked")
-            containerView.addArrangedSubview(circleView)
-            
-            //      테이블 뷰 추가
-            let tableView = UITableView()
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-            tableView.dataSource = self
-            tableView.delegate = self
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-            tableView.tag = weekIndex
-            tableView.isScrollEnabled = false
-            
-            // 테이블 뷰 스타일
-                        tableView.backgroundColor = UIColor(hex: "fff8f8") // 원하는 배경색 설정
-                        tableView.layer.cornerRadius = 12 // 둥근 모서리 적용
-                        tableView.layer.masksToBounds = true // 둥근 모서리가 잘리도록 설정
-            //            // 테이블 뷰 줄 제거
-                        tableView.separatorStyle = .none
-            
-            tableView.reloadData()
-            containerView.addArrangedSubview(tableView)
-            
-            
-            // 레이아웃 제약 조건 설정
-            NSLayoutConstraint.activate([
-//                tableView.heightAnchor.constraint(equalToConstant: CGFloat(quests.count * 60)), // 테이블뷰 높이
-                
-                weekLabelView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-                weekLabelView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 15),
-                weekLabelView.widthAnchor.constraint(equalToConstant: 40), // 라벨 고정 너비
-                weekLabelView.heightAnchor.constraint(equalToConstant: 30) ,// 고정 높이
-                
-               circleView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-               circleView.leadingAnchor.constraint(equalTo: weekLabelView.trailingAnchor, constant: 8),
-               circleView.widthAnchor.constraint(equalToConstant: 4),
-               circleView.heightAnchor.constraint(equalToConstant: 4),
-                
-                tableView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-                tableView.leadingAnchor.constraint(equalTo: circleView.trailingAnchor, constant: 8),
-                tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-                
-//                containerView.heightAnchor.constraint(equalToConstant: CGFloat(max(quests.count, 1) * 60)) // 테이블뷰의 셀 높이 기준
-            ])
             stackView.addArrangedSubview(containerView)  // 이 부분 추가!
             
-            
-            //            print("StackView frame: \(stackView.frame)")
-            //            print("ContainerView frame: \(containerView.frame)")
-            
-        }
-        
-        // 데이터가 로드된 후 테이블 뷰 갱신´
-        for (weekIndex, quests) in responseDTO.questList.enumerated() {
-            if let tableView = view.subviews.compactMap({ $0 as? UIStackView }).first?.arrangedSubviews[weekIndex].subviews.compactMap({ $0 as? UITableView }).first {
-                tableView.reloadData()  // 테이블 뷰 데이터 갱신
-                print("Reloaded data for tableView of Week \(weekIndex + 1)")
-            }
         }
         
     }
     
 }
-
-//import SwiftUI
-//
-//struct Container2ViewControllerPreview: PreviewProvider {
-//    static var previews: some View {
-//        UIViewControllerPreview {
-//            let navigationBarVC = Container2ViewController()
-//            return navigationBarVC
-//        }
-//    }
-//}
 
