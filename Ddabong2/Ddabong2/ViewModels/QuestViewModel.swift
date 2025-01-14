@@ -45,7 +45,7 @@ class QuestViewModel{
 
     func fetchWeeklyQuests(year: Int, month: Int, completion: @escaping () -> Void) {
         print("API 호출 시작 - fetchWeeklyQuests")
-        let url = "https://853e-211-117-102-98.ngrok-free.app/quest/calendar-ios"
+        let url = "https://myhands.store/quest/calendar-ios"
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(UserSessionManager.shared.getAccessToken() ?? "토큰 없음")"
         ]
