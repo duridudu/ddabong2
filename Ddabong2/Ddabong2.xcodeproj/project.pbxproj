@@ -3,11 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2980894584ED34283FCF4398 /* Pods_Ddabong2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC04624703505BFC2C523B7 /* Pods_Ddabong2.framework */; };
+		561040122D340FCB0074D746 /* BoardAllViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561040112D340FCB0074D746 /* BoardAllViewModel.swift */; };
+		561040152D343FBA0074D746 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 561040142D343FBA0074D746 /* SideMenu */; };
+		561040172D3440200074D746 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561040162D3440200074D746 /* MenuViewController.swift */; };
+		56124D722D34E3A10016DF5B /* MyPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56124D712D34E3A10016DF5B /* MyPageResponse.swift */; };
+		56124D742D34E3EF0016DF5B /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56124D732D34E3EF0016DF5B /* MyPageViewModel.swift */; };
 		562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */; };
 		562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DDC2D2984D800B14088 /* UIColor+extension.swift */; };
 		567443812D2CE97000BBC8BD /* BoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */; };
@@ -15,6 +20,19 @@
 		567443852D2CEBD700BBC8BD /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567443842D2CEBD700BBC8BD /* BoardViewModel.swift */; };
 		567443872D2CEC0200BBC8BD /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567443862D2CEC0200BBC8BD /* BoardTableViewCell.swift */; };
 		568DF6E22D318541000E7CBE /* ExpAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DF6E12D318541000E7CBE /* ExpAllViewController.swift */; };
+		5696B9C72D3502500028F98F /* ChangeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9C62D3502500028F98F /* ChangeProfileViewController.swift */; };
+		5696B9C92D350C250028F98F /* AdminUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9C82D350C240028F98F /* AdminUserService.swift */; };
+		5696B9E92D35420E0028F98F /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9E82D35420E0028F98F /* ProfileService.swift */; };
+		5696B9EF2D35615B0028F98F /* AdminBoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9EE2D35615B0028F98F /* AdminBoardService.swift */; };
+		5696B9F12D35628F0028F98F /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F02D35628F0028F98F /* LogoutService.swift */; };
+		5696B9F32D3563860028F98F /* LogoutModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F22D3563860028F98F /* LogoutModalViewController.swift */; };
+		5696B9F52D356EE10028F98F /* AdminUserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */; };
+		5696B9F72D356F0D0028F98F /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F62D356F0D0028F98F /* UserTableViewCell.swift */; };
+		5696B9F92D357D6D0028F98F /* CreateUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F82D357D6D0028F98F /* CreateUserService.swift */; };
+		5696BA0F2D36334C0028F98F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */; };
+		5696BA112D3646AF0028F98F /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA102D3646AF0028F98F /* AvatarCell.swift */; };
+		5696BA132D364C250028F98F /* ProfileChangeModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */; };
+		5696BA152D3653250028F98F /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696BA142D3653250028F98F /* PasswordService.swift */; };
 		569D8AA42D293F5D00949DB4 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA32D293F5800949DB4 /* LoginResponse.swift */; };
 		569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA52D29404D00949DB4 /* LoginViewModel.swift */; };
 		569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */; };
@@ -27,7 +45,7 @@
 		65020F9E2D21226F00CC85FB /* ParticiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020F9D2D21226F00CC85FB /* ParticiCell.swift */; };
 		65020FA52D251CD500CC85FB /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020FA42D251CD500CC85FB /* AlamofireManager.swift */; };
 		65020FA72D251D5F00CC85FB /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020FA62D251D5F00CC85FB /* EndPoints.swift */; };
-		65020FA92D251DE900CC85FB /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020FA82D251DE900CC85FB /* UserService.swift */; };
+		65020FA92D251DE900CC85FB /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020FA82D251DE900CC85FB /* UserInfoViewModel.swift */; };
 		65020FAB2D2521CF00CC85FB /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65020FAA2D2521CF00CC85FB /* APIResponse.swift */; };
 		6504AFEC2D1BF7E700051B44 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504AFEB2D1BF7E700051B44 /* ScheduleViewController.swift */; };
 		6504AFF12D1BF80D00051B44 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504AFF02D1BF80D00051B44 /* BoardViewController.swift */; };
@@ -97,6 +115,10 @@
 /* Begin PBXFileReference section */
 		0AE1A036EA429E30FE3AC91E /* Pods-Ddabong2-Ddabong2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ddabong2-Ddabong2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Ddabong2-Ddabong2UITests/Pods-Ddabong2-Ddabong2UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F1303123296D5BD822DABDA /* Pods-Ddabong2-Ddabong2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ddabong2-Ddabong2UITests.release.xcconfig"; path = "Target Support Files/Pods-Ddabong2-Ddabong2UITests/Pods-Ddabong2-Ddabong2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		561040112D340FCB0074D746 /* BoardAllViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAllViewModel.swift; sourceTree = "<group>"; };
+		561040162D3440200074D746 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		56124D712D34E3A10016DF5B /* MyPageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageResponse.swift; sourceTree = "<group>"; };
+		56124D732D34E3EF0016DF5B /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		562E5DDC2D2984D800B14088 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +126,19 @@
 		567443842D2CEBD700BBC8BD /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 		567443862D2CEC0200BBC8BD /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		568DF6E12D318541000E7CBE /* ExpAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpAllViewController.swift; sourceTree = "<group>"; };
+		5696B9C62D3502500028F98F /* ChangeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileViewController.swift; sourceTree = "<group>"; };
+		5696B9C82D350C240028F98F /* AdminUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserService.swift; sourceTree = "<group>"; };
+		5696B9E82D35420E0028F98F /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		5696B9EE2D35615B0028F98F /* AdminBoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminBoardService.swift; sourceTree = "<group>"; };
+		5696B9F02D35628F0028F98F /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
+		5696B9F22D3563860028F98F /* LogoutModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModalViewController.swift; sourceTree = "<group>"; };
+		5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserListViewModel.swift; sourceTree = "<group>"; };
+		5696B9F62D356F0D0028F98F /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		5696B9F82D357D6D0028F98F /* CreateUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserService.swift; sourceTree = "<group>"; };
+		5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		5696BA102D3646AF0028F98F /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
+		5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeModalViewController.swift; sourceTree = "<group>"; };
+		5696BA142D3653250028F98F /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
 		569D8AA32D293F5800949DB4 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		569D8AA52D29404D00949DB4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
@@ -115,7 +150,7 @@
 		65020F9D2D21226F00CC85FB /* ParticiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticiCell.swift; sourceTree = "<group>"; };
 		65020FA42D251CD500CC85FB /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		65020FA62D251D5F00CC85FB /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
-		65020FA82D251DE900CC85FB /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		65020FA82D251DE900CC85FB /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
 		65020FAA2D2521CF00CC85FB /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		6504AFEB2D1BF7E700051B44 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		6504AFF02D1BF80D00051B44 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +206,10 @@
 		FBC7AA2EB915D899B3B5373E /* Pods-Ddabong2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ddabong2.debug.xcconfig"; path = "Target Support Files/Pods-Ddabong2/Pods-Ddabong2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		56124D752D34F4A40016DF5B /* AdminViews */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AdminViews; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		655DCB252D144C3300E8A8F2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -183,6 +222,7 @@
 				65020F8E2D1FD3A400CC85FB /* FirebaseFirestore in Frameworks */,
 				6561750E2D2E9C0700562071 /* FirebaseCore in Frameworks */,
 				65B9DCA12D1BFE1E00BB969D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				561040152D343FBA0074D746 /* SideMenu in Frameworks */,
 				65B9DCA52D1BFE1E00BB969D /* FirebaseAppDistribution-Beta in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +259,8 @@
 		65020F862D1FCCB700CC85FB /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				5696BA102D3646AF0028F98F /* AvatarCell.swift */,
+				5696B9F62D356F0D0028F98F /* UserTableViewCell.swift */,
 				567443862D2CEC0200BBC8BD /* BoardTableViewCell.swift */,
 				65020F9D2D21226F00CC85FB /* ParticiCell.swift */,
 				562E5DDC2D2984D800B14088 /* UIColor+extension.swift */,
@@ -228,6 +270,7 @@
 				654BD9992D3525ED0048F5CA /* QuestMonthlyView.swift */,
 				654BD99B2D352D620048F5CA /* CustomTableViewCell.xib */,
 				654BD99D2D352D740048F5CA /* CustomTableViewCell.swift */,
+				5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -235,10 +278,15 @@
 		65020FA32D251CC200CC85FB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				5696BA142D3653250028F98F /* PasswordService.swift */,
+				5696B9F82D357D6D0028F98F /* CreateUserService.swift */,
+				5696B9F02D35628F0028F98F /* LogoutService.swift */,
+				5696B9EE2D35615B0028F98F /* AdminBoardService.swift */,
+				5696B9E82D35420E0028F98F /* ProfileService.swift */,
 				65020FA42D251CD500CC85FB /* AlamofireManager.swift */,
 				65020FA62D251D5F00CC85FB /* EndPoints.swift */,
-				65020FA82D251DE900CC85FB /* UserService.swift */,
 				65020FAA2D2521CF00CC85FB /* APIResponse.swift */,
+				5696B9C82D350C240028F98F /* AdminUserService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -246,20 +294,25 @@
 		6504AFED2D1BF7ED00051B44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				56124D752D34F4A40016DF5B /* AdminViews */,
+				56C441562D2EC2BC00BAD635 /* NavigationViewController.swift */,
+				561040162D3440200074D746 /* MenuViewController.swift */,
 				654BD98F2D340AA10048F5CA /* TestViewController.swift */,
 				654BD98C2D340A850048F5CA /* Container1ViewController.swift */,
 				654BD98B2D340A850048F5CA /* Container2ViewController.swift */,
 				56C4415A2D2EC54400BAD635 /* QuestViewController.swift */,
 				569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */,
 				6504AFEB2D1BF7E700051B44 /* ScheduleViewController.swift */,
-				6504AFF02D1BF80D00051B44 /* BoardViewController.swift */,
 				6504AFF22D1BF81A00051B44 /* MyPageViewController.swift */,
-				65B9DC8E2D1BFB4E00BB969D /* LoginViewController.swift */,
 				562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */,
-				567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */,
+				5696B9C62D3502500028F98F /* ChangeProfileViewController.swift */,
+				5696BA122D364C250028F98F /* ProfileChangeModalViewController.swift */,
+				65B9DC8E2D1BFB4E00BB969D /* LoginViewController.swift */,
+				5696B9F22D3563860028F98F /* LogoutModalViewController.swift */,
+				6504AFF02D1BF80D00051B44 /* BoardViewController.swift */,
 				56B2B0A82D2D3D1E007EF5B6 /* BoardAllViewController.swift */,
+				567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */,
 				56C441582D2EC52300BAD635 /* RaceViewController.swift */,
-				56C441562D2EC2BC00BAD635 /* NavigationViewController.swift */,
 				656175162D2FEFDE00562071 /* QuestMonthlyViewController.swift */,
 				568DF6E12D318541000E7CBE /* ExpAllViewController.swift */,
 			);
@@ -277,6 +330,7 @@
 				6504AFF72D1BF95000051B44 /* ScheduleModel.swift */,
 				6504AFF92D1BF96400051B44 /* DayoffModel.swift */,
 				65118E312D3165780048A222 /* PushTokenManager.swift */,
+				56124D712D34E3A10016DF5B /* MyPageResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -344,9 +398,13 @@
 		65B9DC902D1BFB9D00BB969D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */,
+				56124D732D34E3EF0016DF5B /* MyPageViewModel.swift */,
+				561040112D340FCB0074D746 /* BoardAllViewModel.swift */,
 				567443842D2CEBD700BBC8BD /* BoardViewModel.swift */,
 				569D8AA52D29404D00949DB4 /* LoginViewModel.swift */,
 				654BD9932D340E970048F5CA /* QuestViewModel.swift */,
+				65020FA82D251DE900CC85FB /* UserInfoViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -414,6 +472,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				56124D752D34F4A40016DF5B /* AdminViews */,
+			);
 			name = Ddabong2;
 			packageProductDependencies = (
 				65B9DCA02D1BFE1E00BB969D /* FirebaseAnalyticsWithoutAdIdSupport */,
@@ -423,6 +484,7 @@
 				65020F8D2D1FD3A400CC85FB /* FirebaseFirestore */,
 				6561750D2D2E9C0700562071 /* FirebaseCore */,
 				6561750F2D2E9C0D00562071 /* FirebaseMessaging */,
+				561040142D343FBA0074D746 /* SideMenu */,
 			);
 			productName = Ddabong2;
 			productReference = 655DCB282D144C3300E8A8F2 /* Ddabong2.app */;
@@ -502,6 +564,7 @@
 				65B9DC9B2D1BFE1E00BB969D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				65B9DCA62D1C04E500BB969D /* XCRemoteSwiftPackageReference "Alamofire" */,
 				65B9DCAE2D1C498800BB969D /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				561040132D343FBA0074D746 /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = 655DCB292D144C3300E8A8F2 /* Products */;
 			projectDirPath = "";
@@ -628,44 +691,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				654BD99A2D3525ED0048F5CA /* QuestMonthlyView.swift in Sources */,
+				5696BA132D364C250028F98F /* ProfileChangeModalViewController.swift in Sources */,
 				65020F9E2D21226F00CC85FB /* ParticiCell.swift in Sources */,
 				56B2B0A92D2D3D1E007EF5B6 /* BoardAllViewController.swift in Sources */,
+				5696B9C92D350C250028F98F /* AdminUserService.swift in Sources */,
 				6504AFFA2D1BF96400051B44 /* DayoffModel.swift in Sources */,
+				5696B9C72D3502500028F98F /* ChangeProfileViewController.swift in Sources */,
 				567443832D2CEBD000BBC8BD /* Board.swift in Sources */,
 				656175152D2FE8B600562071 /* QuestTabCell.swift in Sources */,
 				654BD98D2D340A850048F5CA /* Container2ViewController.swift in Sources */,
 				65020FA52D251CD500CC85FB /* AlamofireManager.swift in Sources */,
+				561040172D3440200074D746 /* MenuViewController.swift in Sources */,
 				569D8AA42D293F5D00949DB4 /* LoginResponse.swift in Sources */,
-				65020FA92D251DE900CC85FB /* UserService.swift in Sources */,
+				5696B9F92D357D6D0028F98F /* CreateUserService.swift in Sources */,
+				65020FA92D251DE900CC85FB /* UserInfoViewModel.swift in Sources */,
 				654BD9922D340ABF0048F5CA /* Quest.swift in Sources */,
 				6504AFF32D1BF81A00051B44 /* MyPageViewController.swift in Sources */,
 				6504AFF82D1BF95000051B44 /* ScheduleModel.swift in Sources */,
+				5696BA152D3653250028F98F /* PasswordService.swift in Sources */,
 				655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */,
 				562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */,
 				56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */,
 				654BD9942D340E970048F5CA /* QuestViewModel.swift in Sources */,
+				561040122D340FCB0074D746 /* BoardAllViewModel.swift in Sources */,
+				5696B9F12D35628F0028F98F /* LogoutService.swift in Sources */,
 				6504AFF62D1BF94700051B44 /* UserInfo.swift in Sources */,
 				567443812D2CE97000BBC8BD /* BoardDetailViewController.swift in Sources */,
 				654BD98E2D340A850048F5CA /* Container1ViewController.swift in Sources */,
 				569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */,
+				5696B9F52D356EE10028F98F /* AdminUserListViewModel.swift in Sources */,
+				5696B9F72D356F0D0028F98F /* UserTableViewCell.swift in Sources */,
+				56124D742D34E3EF0016DF5B /* MyPageViewModel.swift in Sources */,
 				655DCB2E2D144C3300E8A8F2 /* SceneDelegate.swift in Sources */,
 				56CFC9992D317E0F00C77CCE /* UserSessionManager.swift in Sources */,
 				567443872D2CEC0200BBC8BD /* BoardTableViewCell.swift in Sources */,
 				56C4415B2D2EC54400BAD635 /* QuestViewController.swift in Sources */,
+				56124D722D34E3A10016DF5B /* MyPageResponse.swift in Sources */,
 				65020FA72D251D5F00CC85FB /* EndPoints.swift in Sources */,
 				654BD99E2D352D740048F5CA /* CustomTableViewCell.swift in Sources */,
+				5696B9F32D3563860028F98F /* LogoutModalViewController.swift in Sources */,
 				656175132D2FE86900562071 /* QuestTabViewController.swift in Sources */,
 				562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */,
 				569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */,
 				65118E322D3165780048A222 /* PushTokenManager.swift in Sources */,
+				5696B9E92D35420E0028F98F /* ProfileService.swift in Sources */,
 				568DF6E22D318541000E7CBE /* ExpAllViewController.swift in Sources */,
 				56C441572D2EC2BC00BAD635 /* NavigationViewController.swift in Sources */,
 				6504AFEC2D1BF7E700051B44 /* ScheduleViewController.swift in Sources */,
+				5696BA0F2D36334C0028F98F /* UIImage+Extension.swift in Sources */,
 				6504AFF12D1BF80D00051B44 /* BoardViewController.swift in Sources */,
+				5696BA112D3646AF0028F98F /* AvatarCell.swift in Sources */,
 				65B9DC8F2D1BFB4E00BB969D /* LoginViewController.swift in Sources */,
 				65020FAB2D2521CF00CC85FB /* APIResponse.swift in Sources */,
 				656175172D2FEFDE00562071 /* QuestMonthlyViewController.swift in Sources */,
 				654BD9902D340AA10048F5CA /* TestViewController.swift in Sources */,
+				5696B9EF2D35615B0028F98F /* AdminBoardService.swift in Sources */,
 				567443852D2CEBD700BBC8BD /* BoardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1025,6 +1105,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		561040132D343FBA0074D746 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.0;
+			};
+		};
 		65B9DC9B2D1BFE1E00BB969D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1052,6 +1140,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		561040142D343FBA0074D746 /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 561040132D343FBA0074D746 /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
+		};
 		65020F8D2D1FD3A400CC85FB /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 65B9DC9B2D1BFE1E00BB969D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

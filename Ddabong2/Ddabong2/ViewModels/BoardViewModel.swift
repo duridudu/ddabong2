@@ -8,31 +8,67 @@ import UIKit
 class BoardViewModel {
     private var boards: [Board] = [] // 게시글 데이터 저장
     var onBoardsUpdated: (() -> Void)? // 데이터 업데이트 콜백
+    var isSearchMode: Bool = false // 검색 모드 여부
 
-    func fetchBoards(size: Int) {
-        print("API 호출 시작")
-        let url = "https://myhands.store/board/overview"
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(UserSessionManager.shared.getAccessToken() ?? "토큰 없음")"
-        ]
-        print("ACCESS TOKEN",UserSessionManager.shared.getAccessToken())
-        let parameters: [String: Any] = ["size": size]
-        print("요청 URL: \(url)")
-        print("요청 헤더: \(headers)")
-        print("요청 파라미터: \(parameters)")
+    // 데이터 가져오기
+    func fetchBoards(size: Int, lastId: Int? = nil) {
+        guard !isSearchMode else { return } // 검색 중에는 일반 데이터 요청을 막음
 
-        // API 요청 및 응답 처리
-        AF.request(url, method: .get, parameters: parameters, headers: headers)
-            .responseDecodable(of: BoardResponse.self) { response in
-                switch response.result {
-                case .success(let boardResponse):
-                    self.boards = boardResponse.responseDto.sorted(by: { $0.timeAgo > $1.timeAgo }) // 최신순 정렬
-                    print("디코딩 성공: \(self.boards)")
-                    self.onBoardsUpdated?() // 데이터 변경 시 콜백 호출
-                case .failure(let error):
-                    print("디코딩 실패: \(error.localizedDescription)")
+        let url = "https://myhands.store/board/list"
+        var parameters: [String: Any] = ["size": size]
+        if let lastId = lastId {
+            parameters["lastId"] = lastId
+        }
+
+        AF.request(url, method: .get, parameters: parameters, headers: [
+            "Authorization": "Bearer \(UserSessionManager.shared.getAccessToken() ?? "")"
+        ])
+        .responseDecodable(of: BoardResponse.self) { response in
+            switch response.result {
+            case .success(let boardResponse):
+                if lastId == nil {
+                    self.boards = boardResponse.responseDto // 초기 데이터 요청
+                } else {
+                    self.boards += boardResponse.responseDto // 추가 데이터 요청
                 }
+                self.onBoardsUpdated?()
+            case .failure(let error):
+                print("Error fetching boards: \(error.localizedDescription)")
             }
+        }
+    }
+
+    // 검색
+    func searchBoards(word: String, size: Int, lastId: Int? = nil) {
+        isSearchMode = true // 검색 모드 활성화
+        let url = "https://myhands.store/board/search"
+        var parameters: [String: Any] = ["size": size, "word": word]
+        if let lastId = lastId {
+            parameters["lastId"] = lastId
+        }
+
+        AF.request(url, method: .get, parameters: parameters, headers: [
+            "Authorization": "Bearer \(UserSessionManager.shared.getAccessToken() ?? "")"
+        ])
+        .responseDecodable(of: BoardResponse.self) { response in
+            switch response.result {
+            case .success(let boardResponse):
+                if lastId == nil {
+                    self.boards = boardResponse.responseDto // 검색 결과로 초기화
+                } else {
+                    self.boards += boardResponse.responseDto // 검색 결과 추가
+                }
+                self.onBoardsUpdated?()
+            case .failure(let error):
+                print("Error searching boards: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    // 데이터 초기화
+    func resetSearch() {
+        isSearchMode = false
+        fetchBoards(size: 20) // 검색 종료 후 전체 데이터 다시 가져오기
     }
 
     func getBoards() -> [Board] {
