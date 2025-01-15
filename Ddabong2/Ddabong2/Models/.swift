@@ -1,9 +1,14 @@
-import UIKit
+//
+//  RankingViewController.swift
+//  Ddabong2
+//
+//  Created by 안지희 on 1/15/25.
+//
+
 
 import UIKit
-import Foundation
 
-class RankViewController: UIViewController {
+class RankingViewController: UIViewController {
     
     private let tableView = UITableView()
     private let viewModel = RankingViewModel()

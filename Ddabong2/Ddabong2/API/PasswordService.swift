@@ -1,12 +1,4 @@
-//
-//  PasswordService.swift
-//  Ddabong2
-//
-//  Created by 안지희 on 1/14/25.
-//
-
-
-import Foundation
+import Alamofire
 
 class PasswordService {
     static let shared = PasswordService()
@@ -14,37 +6,37 @@ class PasswordService {
     private init() {}
 
     func changePassword(newPassword: String, completion: @escaping (Bool, String?) -> Void) {
-        guard let url = URL(string: "https://myhands.store/user/password") else {
-            completion(false, "잘못된 URL입니다.")
+        // 액세스 토큰 확인
+        guard let token = UserSessionManager.shared.getAccessToken() else {
+            completion(false, "User is not authenticated.")
             return
         }
 
-        var request = URLRequest(url: url)
-        request.httpMethod = "PATCH"
-        request.setValue("Bearer <token>", forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        // API 요청 URL 및 헤더
+        let url = "https://myhands.store/user/password"
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Content-Type": "application/json"
+        ]
 
-        let body: [String: String] = ["password": newPassword]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
+        // 요청 Body 생성
+        let body = ChangePasswordRequest(password: newPassword)
 
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(false, "네트워크 오류: \(error.localizedDescription)")
-                return
-            }
-
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    completion(true, nil)
-                } else {
-                    let errorMessage = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
-                    completion(false, "서버 오류: \(errorMessage)")
+        // API 요청
+        AF.request(url, method: .patch, parameters: body, encoder: JSONParameterEncoder.default, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let statusCode = response.response?.statusCode, statusCode == 200 {
+                        completion(true, nil) // 성공 시
+                    } else {
+                        let errorMessage = "Password change failed with status code: \(response.response?.statusCode ?? -1)."
+                        completion(false, errorMessage) // 실패 메시지
+                    }
+                case .failure(let error):
+                    completion(false, error.localizedDescription)
                 }
-            } else {
-                completion(false, "알 수 없는 서버 응답입니다.")
             }
-        }
-
-        task.resume()
     }
 }
+

@@ -1,6 +1,3 @@
-//JH
-//어드민 사이드
-
 import UIKit
 
 class AdminMenuViewController: UIViewController {
@@ -146,10 +143,16 @@ extension AdminMenuViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             print("메인 화면으로 이동")
-            // AdminMainViewController로 이동
+            // AdminMainViewController로 이동 (push 방식)
             let adminMainVC = AdminMainViewController()
-            adminMainVC.modalPresentationStyle = .fullScreen
-            present(adminMainVC, animated: true, completion: nil)
+            if let navigationController = self.navigationController {
+                navigationController.pushViewController(adminMainVC, animated: true)
+            } else {
+                // NavigationController가 없으면 새로 생성
+                let navController = UINavigationController(rootViewController: adminMainVC)
+                navController.modalPresentationStyle = .fullScreen
+                present(navController, animated: true, completion: nil)
+            }
         case 1:
             print("로그아웃 선택됨")
             showLogoutModal()

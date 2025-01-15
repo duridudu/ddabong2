@@ -7,9 +7,9 @@ class MyPageViewController: UIViewController {
     private let userInfoViewModel = UserInfoViewModel()
     private let myPageViewModel = MyPageViewModel()
     
-    
-
     private var sideMenu: SideMenuNavigationController?
+    
+    
 
     // MARK: - UI Components
     private let pinkBackgroundView = UIView() // 핑크 배경
@@ -35,61 +35,77 @@ class MyPageViewController: UIViewController {
     private let lastYearProgressPercentageLabel = UILabel()
 
     override func viewDidLoad() {
+        view.backgroundColor = UIColor.white // 배경색을 흰색으로 설정
         super.viewDidLoad()
-        setupCustomTitle()
+        setupCustomHeader() // 헤더 설정
         setupUI()
         setupSideMenu()
         bindViewModels()
         fetchData()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        // Navigation Bar 설정
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.backgroundColor = .clear
-
-        // 사용자 정보 및 UI 업데이트
-        userInfoViewModel.fetchUserInfo()
-        userInfoViewModel.onUserInfoFetchSuccess = { [weak self] in
-            DispatchQueue.main.async {
-                self?.updateProfileImage()
-            }
-        }
-    }
-
-    // 프로필 업데이트
+    
     private func updateProfileImage() {
         if let avartaId = userInfoViewModel.userInfo?.avartaId,
            let profileImage = UIImage.profileImage(for: avartaId) {
             profileImageView.image = profileImage
         } else {
-            profileImageView.image = UIImage(named: "defaultAvatar") // 기본 이미지
+            print("Image not found or avartaId is nil")
+            profileImageView.image = UIImage(named: "avatar1") // 기본 이미지
         }
     }
 
     // MARK: - UI Setup
+       private func setupCustomHeader() {
+           let headerContainer = UIView()
+           headerContainer.backgroundColor = .white
+           view.addSubview(headerContainer)
+           headerContainer.translatesAutoresizingMaskIntoConstraints = false
+
+           let hamburgerMenu = UIButton()
+           hamburgerMenu.setImage(UIImage(named: "drawer"), for: .normal)
+           hamburgerMenu.tintColor = .black
+           hamburgerMenu.addTarget(self, action: #selector(openSideMenu), for: .touchUpInside)
+           headerContainer.addSubview(hamburgerMenu)
+           hamburgerMenu.translatesAutoresizingMaskIntoConstraints = false
+
+           let headerTitleLabel = UILabel()
+           headerTitleLabel.text = "마이페이지"
+           headerTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+           headerTitleLabel.textColor = .black
+           headerTitleLabel.textAlignment = .center
+           headerContainer.addSubview(headerTitleLabel)
+           headerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+           let alertIcon = UIButton()
+           alertIcon.setImage(UIImage(named: "alert"), for: .normal)
+           alertIcon.tintColor = .black
+           headerContainer.addSubview(alertIcon)
+           alertIcon.translatesAutoresizingMaskIntoConstraints = false
+
+           NSLayoutConstraint.activate([
+               headerContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 50), // Safe Area 무시하고 5 아래로 이동
+               headerContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+               headerContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+               headerContainer.heightAnchor.constraint(equalToConstant: 50),
+
+               hamburgerMenu.leadingAnchor.constraint(equalTo: headerContainer.leadingAnchor, constant: 16),
+               hamburgerMenu.centerYAnchor.constraint(equalTo: headerContainer.centerYAnchor),
+               hamburgerMenu.widthAnchor.constraint(equalToConstant: 24),
+               hamburgerMenu.heightAnchor.constraint(equalToConstant: 24),
+
+               headerTitleLabel.centerXAnchor.constraint(equalTo: headerContainer.centerXAnchor),
+               headerTitleLabel.centerYAnchor.constraint(equalTo: headerContainer.centerYAnchor),
+
+               alertIcon.trailingAnchor.constraint(equalTo: headerContainer.trailingAnchor, constant: -16),
+               alertIcon.centerYAnchor.constraint(equalTo: headerContainer.centerYAnchor),
+               alertIcon.widthAnchor.constraint(equalToConstant: 24),
+               alertIcon.heightAnchor.constraint(equalToConstant: 24)
+           ])
+       }
+    
+    // MARK: - UI Setup
     private func setupUI() {
-        navigationItem.title = "마이페이지"
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "drawer")?.withRenderingMode(.alwaysTemplate),
-            style: .plain,
-            target: self,
-            action: #selector(openSideMenu)
-        )
-        navigationItem.leftBarButtonItem?.tintColor = .black
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "alert")?.withRenderingMode(.alwaysTemplate),
-            style: .plain,
-            target: self,
-            action: nil
-        )
-        navigationItem.rightBarButtonItem?.tintColor = .black
 
         pinkBackgroundView.backgroundColor = UIColor(red: 1.0, green: 0.956, blue: 0.956, alpha: 1.0) // #FFF4F4
         pinkBackgroundView.layer.cornerRadius = 12
@@ -132,8 +148,6 @@ class MyPageViewController: UIViewController {
         progressBar.layer.cornerRadius = 5
         progressBar.clipsToBounds = true
 
-        
-        
         
         whiteContainerView.addSubview(progressBar)
         progressPercentageLabel.font = UIFont.boldSystemFont(ofSize: 14)
@@ -223,82 +237,83 @@ class MyPageViewController: UIViewController {
         lastYearExpLabel.translatesAutoresizingMaskIntoConstraints = false
         lastYearProgressBar.translatesAutoresizingMaskIntoConstraints = false
         
-
+        
+        
+        NSLayoutConstraint.deactivate(pinkBackgroundView.constraints)
+        NSLayoutConstraint.deactivate(whiteContainerView.constraints)
+        
         NSLayoutConstraint.activate([
-            pinkBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            pinkBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
             pinkBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pinkBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pinkBackgroundView.heightAnchor.constraint(equalToConstant: 250),
-
-            whiteContainerView.topAnchor.constraint(equalTo: pinkBackgroundView.topAnchor, constant: 24),
+            
+            whiteContainerView.topAnchor.constraint(equalTo: pinkBackgroundView.topAnchor, constant: 20), // 간격 조정
             whiteContainerView.leadingAnchor.constraint(equalTo: pinkBackgroundView.leadingAnchor, constant: 24),
             whiteContainerView.trailingAnchor.constraint(equalTo: pinkBackgroundView.trailingAnchor, constant: -24),
-            whiteContainerView.bottomAnchor.constraint(equalTo: pinkBackgroundView.bottomAnchor, constant: -24),
-
-
-            profileImageView.topAnchor.constraint(equalTo: whiteContainerView.topAnchor, constant: 16),
+            whiteContainerView.bottomAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 30), // 흰색 컨테이너를 확장
+            
+            profileImageView.topAnchor.constraint(equalTo: whiteContainerView.topAnchor, constant: 21),
             profileImageView.leadingAnchor.constraint(equalTo: whiteContainerView.leadingAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalToConstant: 80),
             profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor),
-
+            
             greetingLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor),
-            greetingLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            greetingLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 21),
             greetingLabel.trailingAnchor.constraint(equalTo: whiteContainerView.trailingAnchor, constant: -16),
-
-            fortuneLabel.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 8),
+            
+            fortuneLabel.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 13),
             fortuneLabel.leadingAnchor.constraint(equalTo: greetingLabel.leadingAnchor),
             fortuneLabel.trailingAnchor.constraint(equalTo: greetingLabel.trailingAnchor),
-
-            levelLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16),
+            
+            levelLabel.topAnchor.constraint(equalTo: fortuneLabel.bottomAnchor, constant: 21), // 프로필 아래로 이동
             levelLabel.leadingAnchor.constraint(equalTo: whiteContainerView.leadingAnchor, constant: 16),
-
+            
             nextLevelLabel.centerYAnchor.constraint(equalTo: levelLabel.centerYAnchor),
             nextLevelLabel.trailingAnchor.constraint(equalTo: whiteContainerView.trailingAnchor, constant: -16),
-
-            progressBar.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: 8),
+            
+            progressBar.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: 13),
             progressBar.leadingAnchor.constraint(equalTo: whiteContainerView.leadingAnchor, constant: 16),
             progressBar.trailingAnchor.constraint(equalTo: whiteContainerView.trailingAnchor, constant: -16),
             progressBar.heightAnchor.constraint(equalToConstant: 30),
-
+            
             progressPercentageLabel.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor),
             progressPercentageLabel.centerYAnchor.constraint(equalTo: progressBar.centerYAnchor),
-
-            experienceContainerView.topAnchor.constraint(equalTo: pinkBackgroundView.bottomAnchor, constant: 16),
+            
+            experienceContainerView.topAnchor.constraint(equalTo: pinkBackgroundView.bottomAnchor, constant: 21),
             experienceContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             experienceContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             
             experienceTitleLabel.topAnchor.constraint(equalTo: experienceContainerView.topAnchor),
             experienceTitleLabel.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
-
-            recentExpLabel.topAnchor.constraint(equalTo: experienceTitleLabel.bottomAnchor, constant: 16),
+            
+            recentExpLabel.topAnchor.constraint(equalTo: experienceTitleLabel.bottomAnchor, constant: 21),
             recentExpLabel.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
-
+            
             viewAllButton.centerYAnchor.constraint(equalTo: recentExpLabel.centerYAnchor),
             viewAllButton.trailingAnchor.constraint(equalTo: experienceContainerView.trailingAnchor),
-
+            
             thisYearExpLabel.topAnchor.constraint(equalTo: recentExpLabel.bottomAnchor, constant: 24),
             thisYearExpLabel.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
-
-            thisYearProgressBar.topAnchor.constraint(equalTo: thisYearExpLabel.bottomAnchor, constant: 8),
+            
+            thisYearProgressBar.topAnchor.constraint(equalTo: thisYearExpLabel.bottomAnchor, constant: 13),
             thisYearProgressBar.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
             thisYearProgressBar.trailingAnchor.constraint(equalTo: experienceContainerView.trailingAnchor),
             thisYearProgressBar.heightAnchor.constraint(equalToConstant: 20),
-
-            lastYearExpLabel.topAnchor.constraint(equalTo: thisYearProgressBar.bottomAnchor, constant: 16),
+            
+            lastYearExpLabel.topAnchor.constraint(equalTo: thisYearProgressBar.bottomAnchor, constant: 21),
             lastYearExpLabel.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
-
-            lastYearProgressBar.topAnchor.constraint(equalTo: lastYearExpLabel.bottomAnchor, constant: 8),
+            
+            lastYearProgressBar.topAnchor.constraint(equalTo: lastYearExpLabel.bottomAnchor, constant: 13),
             lastYearProgressBar.leadingAnchor.constraint(equalTo: experienceContainerView.leadingAnchor),
             lastYearProgressBar.trailingAnchor.constraint(equalTo: experienceContainerView.trailingAnchor),
             lastYearProgressBar.heightAnchor.constraint(equalToConstant: 20),
-            // 올해 퍼센트 라벨
+            
             thisYearProgressPercentageLabel.centerXAnchor.constraint(equalTo: thisYearProgressBar.centerXAnchor),
             thisYearProgressPercentageLabel.centerYAnchor.constraint(equalTo: thisYearProgressBar.centerYAnchor),
-
-            // 작년 퍼센트 라벨
+            
             lastYearProgressPercentageLabel.centerXAnchor.constraint(equalTo: lastYearProgressBar.centerXAnchor),
             lastYearProgressPercentageLabel.centerYAnchor.constraint(equalTo: lastYearProgressBar.centerYAnchor)
-            
         ])
     }
 
@@ -489,6 +504,21 @@ class MyPageViewController: UIViewController {
         return outputFormatter.string(from: date)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+
+        // 사용자 정보 및 UI 업데이트
+               userInfoViewModel.fetchUserInfo()
+               userInfoViewModel.onUserInfoFetchSuccess = { [weak self] in
+                   DispatchQueue.main.async {
+                       self?.updateProfileImage()
+                   }
+               }
+
+        
+           // 레이아웃 갱신 방지
+           navigationController?.navigationBar.isHidden = true
+       }
 
     @objc private func openSideMenu() {
         guard let sideMenu = sideMenu else { return }
