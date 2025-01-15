@@ -15,6 +15,14 @@ class AlarmViewController:UIViewController,UITableViewDataSource, UITableViewDel
     let viewModel = AlarmViewModel()
     var responseDTO: AlarmResponse?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    @IBAction func btnBack(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +40,7 @@ class AlarmViewController:UIViewController,UITableViewDataSource, UITableViewDel
             self.responseDTO = dto
             DispatchQueue.main.async {
                 self.updateUI() // UI 업데이트 함수 호출
+                self.updateOlds()
             }
         }
         fetchAllAlarms()
@@ -46,39 +55,46 @@ class AlarmViewController:UIViewController,UITableViewDataSource, UITableViewDel
         // responseDTO를 기반으로 UI 업데이트
         print("UI 업데이트: \(String(describing: responseDTO))")
         self.recentTableView.reloadData() // 테이블 뷰 갱신
-        self.oldTableView.reloadData()
+       
     }
     
-    
+    func updateOlds(){
+        print("UI 업데이트: old tables", String(describing: responseDTO?.oldAlarmList))
+        self.oldTableView.reloadData()
+    }
 }
 
 extension AlarmViewController{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == recentTableView {
+            print("RECENT",  responseDTO?.recentAlarmList.count ?? 0)
             return responseDTO?.recentAlarmList.count ?? 0
         } else if tableView == oldTableView {
+            print("OLD",  responseDTO?.oldAlarmList.count ?? 0)
             return responseDTO?.oldAlarmList.count ?? 0
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("현재 tableView: \(tableView)")
         if tableView == recentTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RecentAlarmCell", for: indexPath)
-            let alarm = responseDTO?.recentAlarmList[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RecentAlarmCell", for: indexPath) as! RecentAlarmCell
+            let alarm = responseDTO?.recentAlarmList[indexPath.row] ?? Alarm.defaultAlarm
+            print("RECENTVIEW")
             // 셀 구성 (예: 제목과 생성일 표시)
-            cell.textLabel?.text = alarm?.title
-            cell.detailTextLabel?.text = alarm?.createdAt
+            cell.configure(with: alarm)
             return cell
         } else if tableView == oldTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OldAlarmCell", for: indexPath)
-            let alarm = responseDTO?.oldAlarmList[indexPath.row]
+            print("OLDTABLEVIEW")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OldAlarmsCell", for: indexPath) as! OldAlarmsCell
+            let alarm = responseDTO?.oldAlarmList[indexPath.row] ?? Alarm.defaultAlarm
             // 셀 구성 (예: 제목과 생성일 표시)
-            cell.textLabel?.text = alarm?.title
-            cell.detailTextLabel?.text = alarm?.createdAt
+            cell.configure(with: alarm)
             return cell
         }
         
+        print("테이블이 매칭되지 않음")
         return UITableViewCell()
     }
 }
