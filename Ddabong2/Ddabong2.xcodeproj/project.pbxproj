@@ -15,6 +15,11 @@
 		56124D742D34E3EF0016DF5B /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56124D732D34E3EF0016DF5B /* MyPageViewModel.swift */; };
 		562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */; };
 		562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DDC2D2984D800B14088 /* UIColor+extension.swift */; };
+		565724372D378A1300923941 /* BoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565724362D378A1300923941 /* BoardService.swift */; };
+		565724392D378A4200923941 /* UserListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565724382D378A4200923941 /* UserListItem.swift */; };
+		5657243D2D378A7A00923941 /* UserCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657243C2D378A7A00923941 /* UserCreateRequest.swift */; };
+		5657243F2D378A8800923941 /* CreateBoardRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657243E2D378A8800923941 /* CreateBoardRequest.swift */; };
+		565724412D378AB500923941 /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565724402D378AB500923941 /* Department.swift */; };
 		567443812D2CE97000BBC8BD /* BoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */; };
 		567443832D2CEBD000BBC8BD /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567443822D2CEBD000BBC8BD /* Board.swift */; };
 		567443852D2CEBD700BBC8BD /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567443842D2CEBD700BBC8BD /* BoardViewModel.swift */; };
@@ -23,7 +28,6 @@
 		5696B9C72D3502500028F98F /* ChangeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9C62D3502500028F98F /* ChangeProfileViewController.swift */; };
 		5696B9C92D350C250028F98F /* AdminUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9C82D350C240028F98F /* AdminUserService.swift */; };
 		5696B9E92D35420E0028F98F /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9E82D35420E0028F98F /* ProfileService.swift */; };
-		5696B9EF2D35615B0028F98F /* AdminBoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9EE2D35615B0028F98F /* AdminBoardService.swift */; };
 		5696B9F12D35628F0028F98F /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F02D35628F0028F98F /* LogoutService.swift */; };
 		5696B9F32D3563860028F98F /* LogoutModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F22D3563860028F98F /* LogoutModalViewController.swift */; };
 		5696B9F52D356EE10028F98F /* AdminUserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */; };
@@ -109,6 +113,11 @@
 		56124D732D34E3EF0016DF5B /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		562E5DDC2D2984D800B14088 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		565724362D378A1300923941 /* BoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardService.swift; sourceTree = "<group>"; };
+		565724382D378A4200923941 /* UserListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListItem.swift; sourceTree = "<group>"; };
+		5657243C2D378A7A00923941 /* UserCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCreateRequest.swift; sourceTree = "<group>"; };
+		5657243E2D378A8800923941 /* CreateBoardRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardRequest.swift; sourceTree = "<group>"; };
+		565724402D378AB500923941 /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailViewController.swift; sourceTree = "<group>"; };
 		567443822D2CEBD000BBC8BD /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		567443842D2CEBD700BBC8BD /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
@@ -117,7 +126,6 @@
 		5696B9C62D3502500028F98F /* ChangeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileViewController.swift; sourceTree = "<group>"; };
 		5696B9C82D350C240028F98F /* AdminUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserService.swift; sourceTree = "<group>"; };
 		5696B9E82D35420E0028F98F /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
-		5696B9EE2D35615B0028F98F /* AdminBoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminBoardService.swift; sourceTree = "<group>"; };
 		5696B9F02D35628F0028F98F /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
 		5696B9F22D3563860028F98F /* LogoutModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModalViewController.swift; sourceTree = "<group>"; };
 		5696B9F42D356EE10028F98F /* AdminUserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserListViewModel.swift; sourceTree = "<group>"; };
@@ -253,12 +261,12 @@
 				5696BA142D3653250028F98F /* PasswordService.swift */,
 				5696B9F82D357D6D0028F98F /* CreateUserService.swift */,
 				5696B9F02D35628F0028F98F /* LogoutService.swift */,
-				5696B9EE2D35615B0028F98F /* AdminBoardService.swift */,
 				5696B9E82D35420E0028F98F /* ProfileService.swift */,
 				65020FA42D251CD500CC85FB /* AlamofireManager.swift */,
 				65020FA62D251D5F00CC85FB /* EndPoints.swift */,
 				65020FAA2D2521CF00CC85FB /* APIResponse.swift */,
 				5696B9C82D350C240028F98F /* AdminUserService.swift */,
+				565724362D378A1300923941 /* BoardService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -294,6 +302,7 @@
 		6504AFF42D1BF93C00051B44 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				565724402D378AB500923941 /* Department.swift */,
 				654BD9912D340ABF0048F5CA /* Quest.swift */,
 				56CFC9982D317E0F00C77CCE /* UserSessionManager.swift */,
 				567443822D2CEBD000BBC8BD /* Board.swift */,
@@ -303,6 +312,9 @@
 				6504AFF92D1BF96400051B44 /* DayoffModel.swift */,
 				65118E312D3165780048A222 /* PushTokenManager.swift */,
 				56124D712D34E3A10016DF5B /* MyPageResponse.swift */,
+				565724382D378A4200923941 /* UserListItem.swift */,
+				5657243C2D378A7A00923941 /* UserCreateRequest.swift */,
+				5657243E2D378A8800923941 /* CreateBoardRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -654,6 +666,7 @@
 				567443832D2CEBD000BBC8BD /* Board.swift in Sources */,
 				656175152D2FE8B600562071 /* QuestTabCell.swift in Sources */,
 				654BD98D2D340A850048F5CA /* Container2ViewController.swift in Sources */,
+				565724372D378A1300923941 /* BoardService.swift in Sources */,
 				65020FA52D251CD500CC85FB /* AlamofireManager.swift in Sources */,
 				561040172D3440200074D746 /* MenuViewController.swift in Sources */,
 				569D8AA42D293F5D00949DB4 /* LoginResponse.swift in Sources */,
@@ -684,7 +697,9 @@
 				5696B9F32D3563860028F98F /* LogoutModalViewController.swift in Sources */,
 				656175132D2FE86900562071 /* QuestTabViewController.swift in Sources */,
 				562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */,
+				5657243D2D378A7A00923941 /* UserCreateRequest.swift in Sources */,
 				569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */,
+				565724412D378AB500923941 /* Department.swift in Sources */,
 				65118E322D3165780048A222 /* PushTokenManager.swift in Sources */,
 				5696B9E92D35420E0028F98F /* ProfileService.swift in Sources */,
 				568DF6E22D318541000E7CBE /* ExpAllViewController.swift in Sources */,
@@ -692,13 +707,14 @@
 				6504AFEC2D1BF7E700051B44 /* ScheduleViewController.swift in Sources */,
 				5696BA0F2D36334C0028F98F /* UIImage+Extension.swift in Sources */,
 				6504AFF12D1BF80D00051B44 /* BoardViewController.swift in Sources */,
+				5657243F2D378A8800923941 /* CreateBoardRequest.swift in Sources */,
 				5696BA112D3646AF0028F98F /* AvatarCell.swift in Sources */,
 				65B9DC8F2D1BFB4E00BB969D /* LoginViewController.swift in Sources */,
 				65020FAB2D2521CF00CC85FB /* APIResponse.swift in Sources */,
 				656175172D2FEFDE00562071 /* QuestMonthlyViewController.swift in Sources */,
 				654BD9902D340AA10048F5CA /* TestViewController.swift in Sources */,
-				5696B9EF2D35615B0028F98F /* AdminBoardService.swift in Sources */,
 				567443852D2CEBD700BBC8BD /* BoardViewModel.swift in Sources */,
+				565724392D378A4200923941 /* UserListItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

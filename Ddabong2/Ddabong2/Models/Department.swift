@@ -7,7 +7,9 @@
 
 // 유저 생성할때... 써야하는 파일
 
+
 import Foundation
+import UIKit
 
 enum Department: Int, CaseIterable {
     case 음성1센터 = 1

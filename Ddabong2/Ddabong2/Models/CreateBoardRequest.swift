@@ -6,6 +6,8 @@
 //
 
 
+import Foundation
+
 struct CreateBoardRequest: Encodable {
     let title: String
     let content: String

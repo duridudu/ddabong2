@@ -5,6 +5,7 @@
 //  Created by 안지희 on 1/15/25.
 //
 
+import Foundation
 
 struct AdminUserListResponse: Decodable {
     let status: String
