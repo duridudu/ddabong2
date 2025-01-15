@@ -106,67 +106,17 @@ class Container2ViewController:UIViewController{
     
     func loadData(){
         // 예제 JSON 데이터 로드
-        let jsonString = """
-           {
-               "weekCount": 4,
-               "questList": [
-                   [
-                       {
-                           "questId": 1,
-                           "questType": "company",
-                           "name": "AAA 프로젝트 참여",
-                           "grade": "",
-                           "expAmount": 800,
-                           "isCompleted": true,
-                           "completedAt": "2024-01-22T10:30:00.123",
-                           "imageUrl": "https://example.com/image1.png"
-                       },
-                       {
-                           "questId": 2,
-                           "questType": "leader",
-                           "name": "월특근",
-                           "grade": "MAX",
-                           "expAmount": 80,
-                           "isCompleted": true,
-                           "completedAt": "2024-01-25T10:30:00.123",
-                           "imageUrl": "https://example.com/image2.png"
-                       }
-                   ],
-                   [
-                       {
-                           "questId": 4,
-                           "questType": "hr",
-                           "name": "인사평가 S 등급 달성",
-                           "grade": "S",
-                           "expAmount": 6500,
-                           "isCompleted": true,
-                           "completedAt": "2025-3-27T10:30:00.123",
-                           "imageUrl": "https://example.com/image3.png"
-                       },
-                       {
-                           "questId": 3,
-                           "questType": "job",
-                           "name": "생산성 MAX 달성",
-                           "grade": "MAX",
-                           "expAmount": 40,
-                           "isCompleted": true,
-                           "completedAt": "2025-02-26T10:30:00.123",
-                           "imageUrl": "https://example.com/image4.png"
-                       }
-                   ],
-                   []
-               ]
-           }
-           """
-        
-        let jsonData = Data(jsonString.utf8)
-        do {
-            let decodedData = try JSONDecoder().decode(QuestResponseDTO.self, from: jsonData)
-            responseDTO = viewModel.responseDto2
-            setupViewsForWeeks()
-        } catch {
-            print("Failed to decode JSON: \(error)")
-        }
+//        let jsonString = """
+//           """
+        responseDTO = viewModel.responseDto2
+        setupViewsForWeeks()
+//        let jsonData = Data(jsonString.utf8)
+//        do {
+//           // let decodedData = try JSONDecoder().decode(QuestResponseDTO.self, from: jsonData)
+//            
+//        } catch {
+//            print("Failed to decode JSON: \(error)")
+//        }
     }
     
     

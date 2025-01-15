@@ -17,7 +17,7 @@ class Container1ViewController:UIViewController{
     @IBOutlet weak var lblLongestWeek: UILabel!
     @IBOutlet weak var lblPercent: UILabel!
     @IBOutlet weak var lblWeeksCnt: UILabel!
-    
+    @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var uiView3: UIView!
     
     @IBOutlet weak var lblTitle3: UILabel!
@@ -25,7 +25,8 @@ class Container1ViewController:UIViewController{
     var resultList: [String] = []
     var historySize:Int = 0
     
-    
+    // MARK: - ViewModel
+    private let userInfoViewModel = UserInfoViewModel()
     private let viewModel = QuestViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,15 +36,17 @@ class Container1ViewController:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // user 이름 설정
+        fetchUserInfo()
         
         // 데이터 바인딩 설정
         setupBindings()
         
         // 정렬된 키와 값
-//        let sortedKeys = self.expHistory.keys.sorted(by: <) // ["2023", "2022", "2021", "2020"]
-//        let sortedValues = sortedKeys.map { expHistory[$0]! } // [12000, 10000, 7000, 7000]
-        let sortedKeys = ["2023", "2022", "2021", "2020"]
-        let sortedValues = [12000, 10000, 7000, 7000]
+        let sortedKeys = self.expHistory.keys.sorted(by: <)
+        let sortedValues = sortedKeys.map { expHistory[$0]! }
+//        let sortedKeys = ["2023", "2022", "2021", "2020"]
+//        let sortedValues = [12000, 10000, 7000, 7000]
         
         view.backgroundColor = UIColor(hex: "fff8f8")
         // 테두리 및 corner radius 설정
@@ -87,22 +90,46 @@ class Container1ViewController:UIViewController{
         
     }
     
+    // MARK: - Fetch User Info
+    private func fetchUserInfo() {
+        userInfoViewModel.fetchUserInfo()
+        userInfoViewModel.onUserInfoFetchSuccess = { [weak self] in
+            DispatchQueue.main.async {
+                guard let user = self?.userInfoViewModel.userInfo else { return }
+                self?.updateUI(with: user)
+            }
+        }
+        userInfoViewModel.onUserInfoFetchFailure = { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "에러", message: errorMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self?.present(alert, animated: true)
+            }
+        }
+    }
+    
+    // 이름 설정
+    private func updateUI(with user: User) {
+        print("이름 설정 - ", user.name)
+        lblName.text = "현재 \(user.name)님은"
+    }
+    
+    
     private func setupBindings() {
+        viewModel.fetchQuestStats()
         // 성공 시 데이터 처리
         viewModel.responseDto = { [weak self] dto in
             guard let self = self, let dto = dto else { return }
             DispatchQueue.main.async {
                 self.lblWeeksCnt.text = "\(dto.challengeCount)주"
-                self.lblPercent.text = "Challenge Count: \(dto.questRate)"
-                self.lblLongestWeek.text = "Quest Rate: \(dto.maxCount)%"
+                self.lblPercent.text = "\(dto.maxCount)%"
+                self.lblLongestWeek.text = "\(dto.maxCount)주🔥"
                 self.expHistory = dto.expHistory
                 self.resultList = dto.resultList
                 self.historySize = dto.historySize
             }
         }
-        
     }
-    
     
 }
 

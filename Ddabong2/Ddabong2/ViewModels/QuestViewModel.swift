@@ -26,7 +26,7 @@ class QuestViewModel{
         print("요청 헤더: \(headers)")
 //        print("요청 파라미터: \(parameters)")
 
-        AF.request(url, method: .get).responseDecodable(of: APIResponse<QuestStatsResponseDto>.self) { response in
+        AF.request(url, method: .get, headers: headers).responseDecodable(of: APIResponse<QuestStatsResponseDto>.self) { response in
             switch response.result {
             case .success(let data):
                 // 성공적으로 디코딩한 데이터 사용
@@ -55,8 +55,6 @@ class QuestViewModel{
                 "month": month
             ]
         
-       // print("ACCESS TOKEN",UserSessionManager.shared.getAccessToken())
-//        let parameters: [String: Any] = ["size": size]
         print("요청 URL: \(url)")
         print("요청 헤더: \(headers)")
         print("요청 파라미터: \(parameters)")

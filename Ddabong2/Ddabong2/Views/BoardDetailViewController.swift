@@ -2,92 +2,117 @@
 import UIKit
 
 class BoardDetailViewController: UIViewController {
-    
-    var board: Board? // BoardViewModel에서 전달받은 게시글 데이터
+    var board: Board? // 선택된 게시글 데이터
 
-    /*
-    private let backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "arrow.backward"), for: .normal) // 뒤로가기 화살표 아이콘
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside) // 클릭 이벤트 연결
-        return button
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.textColor = .black
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
-        label.textAlignment = .center
-        return label
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        configureUI()
-    }
+      // 뒤로가기 버튼
+      private let backButton: UIButton = {
+          let button = UIButton(type: .system)
+          button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+          button.tintColor = .black
+          button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+          button.translatesAutoresizingMaskIntoConstraints = false
+          return button
+      }()
 
-    /// UI 설정
-    private func setupUI() {
-        view.backgroundColor = .white
-        
-        // 서브뷰 추가
-        view.addSubview(backButton)
-        view.addSubview(titleLabel)
-        view.addSubview(dateLabel)
-        
-        // 오토레이아웃 설정
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            // 뒤로가기 버튼
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            backButton.widthAnchor.constraint(equalToConstant: 30),
-            backButton.heightAnchor.constraint(equalToConstant: 30),
-            
-            // 제목 레이블
-            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            // 날짜 레이블
-            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
-    }
-    
-    /// 데이터 구성
-    private func configureUI() {
-        guard let board = board else { return }
-        titleLabel.text = board.title
-        dateLabel.text = board.createdAt
-    }
-    
-    /// 뒤로가기 버튼 액션
-    @objc private func didTapBackButton() {
-        navigationController?.popViewController(animated: true)
-    }
-
-    // 여백 삭제
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-     */
+      // 제목 레이블
+      private let titleLabel: UILabel = {
+          let label = UILabel()
+          label.font = UIFont.boldSystemFont(ofSize: 20)
+          label.textColor = .black
+          label.numberOfLines = 0
+          label.translatesAutoresizingMaskIntoConstraints = false
+          return label
+      }()
+      
+      // 작성 시간 레이블
+      private let timeAgoLabel: UILabel = {
+          let label = UILabel()
+          label.font = UIFont.systemFont(ofSize: 14)
+          label.textColor = .gray
+          label.translatesAutoresizingMaskIntoConstraints = false
+          return label
+      }()
+      
+      // 구분선
+      private let separatorView: UIView = {
+          let view = UIView()
+          view.backgroundColor = .lightGray
+          view.translatesAutoresizingMaskIntoConstraints = false
+          return view
+      }()
+      
+      // 내용 레이블
+      private let contentLabel: UILabel = {
+          let label = UILabel()
+          label.font = UIFont.systemFont(ofSize: 16)
+          label.textColor = .darkGray
+          label.numberOfLines = 0
+          label.translatesAutoresizingMaskIntoConstraints = false
+          return label
+      }()
+      
+      override func viewDidLoad() {
+          super.viewDidLoad()
+          setupUI()
+          updateUI()
+      }
+      
+      private func setupUI() {
+          view.backgroundColor = .white
+          view.addSubview(backButton)
+          view.addSubview(titleLabel)
+          view.addSubview(timeAgoLabel)
+          view.addSubview(separatorView)
+          view.addSubview(contentLabel)
+          
+          let horizontalMargin: CGFloat = 20 // 좌우 여백 설정
+          
+          NSLayoutConstraint.activate([
+              // 뒤로가기 버튼
+              backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalMargin),
+              backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+              backButton.widthAnchor.constraint(equalToConstant: 24),
+              backButton.heightAnchor.constraint(equalToConstant: 24),
+              
+              // 제목 레이블
+              titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 16),
+              titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalMargin),
+              titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalMargin),
+              
+              // 작성 시간 레이블
+              timeAgoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+              timeAgoLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+              timeAgoLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+              
+              // 구분선
+              separatorView.topAnchor.constraint(equalTo: timeAgoLabel.bottomAnchor, constant: 8),
+              separatorView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+              separatorView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+              separatorView.heightAnchor.constraint(equalToConstant: 1),
+              
+              // 내용 레이블
+              contentLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 16),
+              contentLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+              contentLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+              contentLabel.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -horizontalMargin)
+          ])
+      }
+      
+      private func updateUI() {
+          guard let board = board else { return }
+          titleLabel.text = board.title
+          contentLabel.text = board.content
+          timeAgoLabel.text = board.timeAgo // timeAgo를 표시
+      }
+      
+      // 뒤로가기 버튼 액션
+      @objc private func didTapBackButton() {
+          navigationController?.popViewController(animated: true)
+      }
+      
+      override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(animated)
+          self.navigationController?.setNavigationBarHidden(true, animated: false)
+      }
 }
-
 
