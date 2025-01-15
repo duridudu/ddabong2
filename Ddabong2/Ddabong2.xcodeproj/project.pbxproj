@@ -15,6 +15,14 @@
 		56124D742D34E3EF0016DF5B /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56124D732D34E3EF0016DF5B /* MyPageViewModel.swift */; };
 		562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */; };
 		562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DDC2D2984D800B14088 /* UIColor+extension.swift */; };
+		563509D12D37CAE900C109AA /* DuplicateCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D02D37CAE900C109AA /* DuplicateCheckService.swift */; };
+		563509D32D37CB6C00C109AA /* CustomDropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D22D37CB6C00C109AA /* CustomDropDownView.swift */; };
+		563509D52D37F45900C109AA /* RankingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D42D37F45900C109AA /* RankingResponse.swift */; };
+		563509D72D37F46200C109AA /* RankingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D62D37F46200C109AA /* RankingService.swift */; };
+		563509D92D37F47000C109AA /* RankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D82D37F47000C109AA /* RankingViewModel.swift */; };
+		563509DD2D37F48500C109AA /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509DC2D37F48500C109AA /* RankingViewController.swift */; };
+		563509DF2D37F8CB00C109AA /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509DE2D37F8CB00C109AA /* RankingTableViewCell.swift */; };
+		56377AED2D37B2DF007B0E7F /* ChangePasswordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56377AEC2D37B2DF007B0E7F /* ChangePasswordRequest.swift */; };
 		565724372D378A1300923941 /* BoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565724362D378A1300923941 /* BoardService.swift */; };
 		565724392D378A4200923941 /* UserListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565724382D378A4200923941 /* UserListItem.swift */; };
 		5657243D2D378A7A00923941 /* UserCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657243C2D378A7A00923941 /* UserCreateRequest.swift */; };
@@ -42,7 +50,6 @@
 		569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */; };
 		56B2B0A92D2D3D1E007EF5B6 /* BoardAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B2B0A82D2D3D1E007EF5B6 /* BoardAllViewController.swift */; };
 		56C441572D2EC2BC00BAD635 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C441562D2EC2BC00BAD635 /* NavigationViewController.swift */; };
-		56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C441582D2EC52300BAD635 /* RaceViewController.swift */; };
 		56C4415B2D2EC54400BAD635 /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4415A2D2EC54400BAD635 /* QuestViewController.swift */; };
 		56CFC9992D317E0F00C77CCE /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFC9982D317E0F00C77CCE /* UserSessionManager.swift */; };
 		65020F8E2D1FD3A400CC85FB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 65020F8D2D1FD3A400CC85FB /* FirebaseFirestore */; };
@@ -136,6 +143,14 @@
 		56124D732D34E3EF0016DF5B /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		562E5DD82D2983FA00B14088 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		562E5DDC2D2984D800B14088 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		563509D02D37CAE900C109AA /* DuplicateCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateCheckService.swift; sourceTree = "<group>"; };
+		563509D22D37CB6C00C109AA /* CustomDropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropDownView.swift; sourceTree = "<group>"; };
+		563509D42D37F45900C109AA /* RankingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingResponse.swift; sourceTree = "<group>"; };
+		563509D62D37F46200C109AA /* RankingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingService.swift; sourceTree = "<group>"; };
+		563509D82D37F47000C109AA /* RankingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewModel.swift; sourceTree = "<group>"; };
+		563509DC2D37F48500C109AA /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
+		563509DE2D37F8CB00C109AA /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
+		56377AEC2D37B2DF007B0E7F /* ChangePasswordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordRequest.swift; sourceTree = "<group>"; };
 		565724362D378A1300923941 /* BoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardService.swift; sourceTree = "<group>"; };
 		565724382D378A4200923941 /* UserListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListItem.swift; sourceTree = "<group>"; };
 		5657243C2D378A7A00923941 /* UserCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCreateRequest.swift; sourceTree = "<group>"; };
@@ -163,7 +178,6 @@
 		569D8AA72D2954C600949DB4 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		56B2B0A82D2D3D1E007EF5B6 /* BoardAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAllViewController.swift; sourceTree = "<group>"; };
 		56C441562D2EC2BC00BAD635 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		56C441582D2EC52300BAD635 /* RaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
 		56C4415A2D2EC54400BAD635 /* QuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
 		56CFC9982D317E0F00C77CCE /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
 		65020F9D2D21226F00CC85FB /* ParticiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticiCell.swift; sourceTree = "<group>"; };
@@ -291,8 +305,6 @@
 		65020F862D1FCCB700CC85FB /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				65E0944F2D37E9B800A64414 /* OldAlarmsCell.swift */,
-				65E0944B2D37E5B500A64414 /* RecentAlarmCell.swift */,
 				65E094372D37992D00A64414 /* CustomTableViewCell.swift */,
 				65E094382D37992D00A64414 /* QuestMonthlyView.swift */,
 				65E094332D37992500A64414 /* CustomTableViewCell.xib */,
@@ -313,6 +325,8 @@
 		65020FA32D251CC200CC85FB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				563509D62D37F46200C109AA /* RankingService.swift */,
+				563509D02D37CAE900C109AA /* DuplicateCheckService.swift */,
 				5696BA142D3653250028F98F /* PasswordService.swift */,
 				5696B9F82D357D6D0028F98F /* CreateUserService.swift */,
 				5696B9F02D35628F0028F98F /* LogoutService.swift */,
@@ -329,6 +343,8 @@
 		6504AFED2D1BF7ED00051B44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				563509DC2D37F48500C109AA /* RankingViewController.swift */,
+				563509D22D37CB6C00C109AA /* CustomDropDownView.swift */,
 				657A0E582D37752D00038AC2 /* AlarmViewController.swift */,
 				56124D752D34F4A40016DF5B /* AdminViews */,
 				56C441562D2EC2BC00BAD635 /* NavigationViewController.swift */,
@@ -348,7 +364,6 @@
 				6504AFF02D1BF80D00051B44 /* BoardViewController.swift */,
 				56B2B0A82D2D3D1E007EF5B6 /* BoardAllViewController.swift */,
 				567443802D2CE97000BBC8BD /* BoardDetailViewController.swift */,
-				56C441582D2EC52300BAD635 /* RaceViewController.swift */,
 				656175162D2FEFDE00562071 /* QuestMonthlyViewController.swift */,
 				568DF6E12D318541000E7CBE /* ExpAllViewController.swift */,
 			);
@@ -358,6 +373,8 @@
 		6504AFF42D1BF93C00051B44 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				563509D42D37F45900C109AA /* RankingResponse.swift */,
+				56377AEC2D37B2DF007B0E7F /* ChangePasswordRequest.swift */,
 				657A0E5C2D377F5000038AC2 /* Alarm.swift */,
 				565724402D378AB500923941 /* Department.swift */,
 				654BD9912D340ABF0048F5CA /* Quest.swift */,
@@ -440,6 +457,7 @@
 		65B9DC902D1BFB9D00BB969D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				563509D82D37F47000C109AA /* RankingViewModel.swift */,
 				65E094272D3791B500A64414 /* QuestViewModel.swift */,
 				657A0E5E2D377FFF00038AC2 /* AlarmViewModel.swift */,
 				657A0E542D376A6400038AC2 /* ExpViewModel.swift */,
@@ -760,13 +778,14 @@
 				5696B9F92D357D6D0028F98F /* CreateUserService.swift in Sources */,
 				657A0E532D3769F900038AC2 /* Exp.swift in Sources */,
 				65020FA92D251DE900CC85FB /* UserInfoViewModel.swift in Sources */,
+				563509DF2D37F8CB00C109AA /* RankingTableViewCell.swift in Sources */,
 				654BD9922D340ABF0048F5CA /* Quest.swift in Sources */,
 				6504AFF32D1BF81A00051B44 /* MyPageViewController.swift in Sources */,
+				563509D32D37CB6C00C109AA /* CustomDropDownView.swift in Sources */,
 				6504AFF82D1BF95000051B44 /* ScheduleModel.swift in Sources */,
 				5696BA152D3653250028F98F /* PasswordService.swift in Sources */,
 				655DCB2C2D144C3300E8A8F2 /* AppDelegate.swift in Sources */,
 				562E5DD92D2983FA00B14088 /* ChangePasswordViewController.swift in Sources */,
-				56C441592D2EC52300BAD635 /* RaceViewController.swift in Sources */,
 				561040122D340FCB0074D746 /* BoardAllViewModel.swift in Sources */,
 				5696B9F12D35628F0028F98F /* LogoutService.swift in Sources */,
 				6504AFF62D1BF94700051B44 /* UserInfo.swift in Sources */,
@@ -775,6 +794,7 @@
 				569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */,
 				5696B9F52D356EE10028F98F /* AdminUserListViewModel.swift in Sources */,
 				5696B9F72D356F0D0028F98F /* UserTableViewCell.swift in Sources */,
+				563509DD2D37F48500C109AA /* RankingViewController.swift in Sources */,
 				56124D742D34E3EF0016DF5B /* MyPageViewModel.swift in Sources */,
 				655DCB2E2D144C3300E8A8F2 /* SceneDelegate.swift in Sources */,
 				657A0E572D3770D500038AC2 /* ExpCell.swift in Sources */,
@@ -783,6 +803,7 @@
 				56CFC9992D317E0F00C77CCE /* UserSessionManager.swift in Sources */,
 				567443872D2CEC0200BBC8BD /* BoardTableViewCell.swift in Sources */,
 				56C4415B2D2EC54400BAD635 /* QuestViewController.swift in Sources */,
+				563509D12D37CAE900C109AA /* DuplicateCheckService.swift in Sources */,
 				657A0E592D37753800038AC2 /* AlarmViewController.swift in Sources */,
 				56124D722D34E3A10016DF5B /* MyPageResponse.swift in Sources */,
 				65020FA72D251D5F00CC85FB /* EndPoints.swift in Sources */,
@@ -793,24 +814,26 @@
 				5657243D2D378A7A00923941 /* UserCreateRequest.swift in Sources */,
 				569D8AA62D29404D00949DB4 /* LoginViewModel.swift in Sources */,
 				565724412D378AB500923941 /* Department.swift in Sources */,
+				56377AED2D37B2DF007B0E7F /* ChangePasswordRequest.swift in Sources */,
 				65118E322D3165780048A222 /* PushTokenManager.swift in Sources */,
 				5696B9E92D35420E0028F98F /* ProfileService.swift in Sources */,
 				568DF6E22D318541000E7CBE /* ExpAllViewController.swift in Sources */,
 				56C441572D2EC2BC00BAD635 /* NavigationViewController.swift in Sources */,
 				6504AFEC2D1BF7E700051B44 /* ScheduleViewController.swift in Sources */,
 				5696BA0F2D36334C0028F98F /* UIImage+Extension.swift in Sources */,
+				563509D72D37F46200C109AA /* RankingService.swift in Sources */,
 				6504AFF12D1BF80D00051B44 /* BoardViewController.swift in Sources */,
 				65E0944C2D37E5BA00A64414 /* RecentAlarmCell.swift in Sources */,
 				657A0E5D2D377F5300038AC2 /* Alarm.swift in Sources */,
 				5657243F2D378A8800923941 /* CreateBoardRequest.swift in Sources */,
 				5696BA112D3646AF0028F98F /* AvatarCell.swift in Sources */,
-				65E094502D37E9EF00A64414 /* OldAlarmsCell.swift in Sources */,
 				65B9DC8F2D1BFB4E00BB969D /* LoginViewController.swift in Sources */,
 				65020FAB2D2521CF00CC85FB /* APIResponse.swift in Sources */,
 				656175172D2FEFDE00562071 /* QuestMonthlyViewController.swift in Sources */,
 				654BD9902D340AA10048F5CA /* TestViewController.swift in Sources */,
 				567443852D2CEBD700BBC8BD /* BoardViewModel.swift in Sources */,
 				565724392D378A4200923941 /* UserListItem.swift in Sources */,
+				563509D92D37F47000C109AA /* RankingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

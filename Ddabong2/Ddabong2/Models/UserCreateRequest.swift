@@ -9,14 +9,14 @@
 // UserCreateRequest.swift
 import Foundation
 
-struct UserCreateRequest: Encodable {
-    let name: String
-    let id: String
-    let password: String
-    let joinedAt: String
-    let departmentId: Int
-    let jobGroup: Int
-    let group: String
+struct UserCreateRequest: Codable {
+    var name: String
+    var id: String
+    var password: String
+    var joinedAt: String
+    var departmentId: Int
+    var jobGroup: Int
+    var group: String
 }
 
 // UserCreateResponse.swift
