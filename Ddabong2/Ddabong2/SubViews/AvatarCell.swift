@@ -33,8 +33,8 @@ class AvatarCell: UICollectionViewCell {
         ])
         
         contentView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor // 연한 테두리 색상
-        contentView.layer.borderWidth = 1
-        contentView.layer.cornerRadius = 8
+        contentView.layer.borderWidth = 1 // 테두리 두께 조정
+        contentView.layer.cornerRadius = (frame.width - 8) / 2 // 이미지 크기에 맞춰 반지름 크기 설정
         contentView.clipsToBounds = true
         
         overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
