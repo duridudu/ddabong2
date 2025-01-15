@@ -7,17 +7,28 @@
 
 import Foundation
 import UIKit
+import SideMenu
 
 class TestViewController:UIViewController{
+    private var sideMenu: SideMenuNavigationController?
+    
     private var currentChildViewController: UIViewController? // 현재 표시 중인 뷰 컨트롤러
     @IBOutlet weak var containerView: UIView!
     
+    @IBOutlet weak var lblLeft: UILabel!
+    @IBOutlet weak var lblRight: UILabel!
+    @IBOutlet weak var btn2: UIButton!
+    @IBOutlet weak var btn1: UIButton!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     
+    @IBAction func btnMenu(_ sender: UIButton) {
+        guard let sideMenu = sideMenu else { return }
+        present(sideMenu, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +36,29 @@ class TestViewController:UIViewController{
         
     }
     
+    private func setupSideMenu() {
+        let menuViewController = MenuViewController()
+        sideMenu = SideMenuNavigationController(rootViewController: menuViewController)
+        sideMenu?.leftSide = true
+        sideMenu?.menuWidth = 300
+        sideMenu?.presentationStyle = .menuSlideIn
+    }
+    
     @IBAction func btn1Clicked(_ sender: Any) {
-        print("!!")
+        btn1.titleLabel?.textColor = .red
+        btn2.titleLabel?.textColor = .black
+        lblLeft.isHidden = true
+        lblRight.isHidden = false
         switchToViewController(identifier: "CV1")
     }
     
     @IBAction func btn2Clicked(_ sender: Any) {
-        print("@@")
+        btn1.titleLabel?.textColor = .black
+        btn2.titleLabel?.textColor = .red
+       
+        
+        lblLeft.isHidden = false
+        lblRight.isHidden = true
         switchToViewController(identifier: "CV2")
     }
     
