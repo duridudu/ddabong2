@@ -82,7 +82,6 @@ class BoardTableViewCell: UITableViewCell {
         } else {
             newIconImageView.isHidden = true
         }
-    
     }
 
     private func formatRelativeTime(_ timeAgo: String) -> String {

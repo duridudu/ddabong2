@@ -7,6 +7,19 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
+            uuid = "6C44D99D-4093-46EE-85BD-E6CB04701E0D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ddabong2/Views/BoardAllViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "unknown"
+            landmarkType = "0">
+=======
             uuid = "185843F4-7B7B-4F7F-B49E-37EDBE4D2CCF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -18,6 +31,7 @@
             endingLineNumber = "18"
             landmarkName = "BoardResponse"
             landmarkType = "14">
+>>>>>>> bc10c6b90643b6189694713e1d5d066ab4b40426
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
