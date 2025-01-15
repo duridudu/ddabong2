@@ -1,42 +1,26 @@
 import Alamofire
+import Foundation
 
 class AdminUserListViewModel {
-    
-    /*
-    private var users: [User] = [] // 여러 사용자 데이터를 저장
-    var onUserListUpdated: (() -> Void)? // 데이터 업데이트 성공 콜백
-    var onFetchFailure: ((String) -> Void)? // 실패 시 메시지 전달 콜백
+    static let shared = AdminUserListViewModel()
 
-    func fetchUserList() {
-        guard let accessToken = UserSessionManager.shared.getAccessToken() else {
-            onFetchFailure?("로그인 토큰이 없습니다.")
-            return
-        }
+    private init() {}
 
-        let url = "https://myhands.store/user/list" // 다수 사용자 데이터를 가져오는 API
+    func fetchUserList(completion: @escaping (Result<[UserListItem], Error>) -> Void) {
+        let url = "https://myhands.store/user/list"
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)"
+            "Authorization": "Bearer \(UserSessionManager.shared.getAccessToken() ?? "")"
         ]
 
-        // 다수 사용자 데이터를 처리하는 UserListResponse 사용
         AF.request(url, method: .get, headers: headers)
-            .responseDecodable(of: UserListResponse.self) { response in
+            .responseDecodable(of: AdminUserListResponse.self) { response in
                 switch response.result {
-                case .success(let userListResponse):
-                    if userListResponse.status == "OK" {
-                        self.users = userListResponse.responseDto // 여러 사용자 정보 저장
-                        self.onUserListUpdated?() // 성공 콜백 호출
-                    } else {
-                        self.onFetchFailure?(userListResponse.message)
-                    }
+                case .success(let adminUserListResponse):
+                    completion(.success(adminUserListResponse.responseDto))
                 case .failure(let error):
-                    self.onFetchFailure?("유저 목록을 가져오는 데 실패했습니다: \(error.localizedDescription)")
+                    completion(.failure(error))
                 }
             }
     }
-
-    func getUsers() -> [User] {
-        return users
-    }
-     */
 }
+

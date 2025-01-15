@@ -7,13 +7,10 @@
 
 import Foundation
 import UIKit
-import Alamofire
-
 class Container1ViewController:UIViewController{
     @IBOutlet weak var bg1: UILabel!
     @IBOutlet weak var bg2: UILabel!
     @IBOutlet weak var bg0: UILabel!
-    
     @IBOutlet weak var lblLongestWeek: UILabel!
     @IBOutlet weak var lblPercent: UILabel!
     @IBOutlet weak var lblWeeksCnt: UILabel!
@@ -38,10 +35,6 @@ class Container1ViewController:UIViewController{
         super.viewDidLoad()
         // user 이름 설정
         fetchUserInfo()
-        
-        // 데이터 바인딩 설정
-        setupBindings()
-        
         // 정렬된 키와 값
         let sortedKeys = self.expHistory.keys.sorted(by: <)
         let sortedValues = sortedKeys.map { expHistory[$0]! }
@@ -69,6 +62,7 @@ class Container1ViewController:UIViewController{
         bg0.layer.borderColor = UIColor(hex: "eaeaea").cgColor // 테두리 색상
         bg0.layer.cornerRadius = 40.0 // 테두리의 둥글기
         bg0.layer.masksToBounds = true // corner radius가 적용되도록 설정
+
         
         let graphView = BarGraphView()
         graphView.data = sortedValues // sortedValues
@@ -132,39 +126,3 @@ class Container1ViewController:UIViewController{
     }
     
 }
-
-class BarGraphView: UIView {
-    var data: [Int] = []
-    var labels: [String] = []
-    
-    override func draw(_ rect: CGRect) {
-        guard data.count > 0 else { return }
-        
-        let maxData = data.max() ?? 1
-        let barWidth = rect.width / CGFloat(data.count) - 40
-        
-        for (index, value) in data.enumerated() {
-            let barHeight = (CGFloat(value) / CGFloat(maxData)) * rect.height
-            let x = CGFloat(index) * (barWidth + 16)
-            let y = rect.height - barHeight
-            
-            // 막대 그리기
-            let bar = UIBezierPath(rect: CGRect(x: x, y: y, width: barWidth, height: barHeight))
-            UIColor(hex:"ff8b71").setFill()
-            bar.fill()
-            
-            // 레이블 추가
-            let label = UILabel(frame: CGRect(x: x, y: rect.height + 4, width: barWidth, height: 20))
-            label.text = String(data[index])
-            label.font = .systemFont(ofSize: 12)
-            label.textAlignment = .center
-            addSubview(label)
-            
-            // 레이블 추가
-            let label2 = UILabel(frame: CGRect(x: x, y: rect.height + 4, width: barWidth, height: 20))
-            label2.text = "\(labels[index])년"
-            label2.font = .systemFont(ofSize: 12)
-            label2.textAlignment = .center
-            addSubview(label2)
-        }
-    }}

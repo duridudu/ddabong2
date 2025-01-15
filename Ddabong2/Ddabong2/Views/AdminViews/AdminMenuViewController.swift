@@ -26,7 +26,7 @@ class AdminMenuViewController: UIViewController {
     private func setupAdminInfo() {
         // 어드민 이름과 ID 표시
         nameLabel.text = "관리자"
-        idLabel.text = "adminid"
+        idLabel.text = "admin"
     }
 
     // MARK: - UI Setup
