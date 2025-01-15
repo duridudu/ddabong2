@@ -17,11 +17,11 @@
 		562E5DDD2D2984D800B14088 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E5DDC2D2984D800B14088 /* UIColor+extension.swift */; };
 		563509D12D37CAE900C109AA /* DuplicateCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D02D37CAE900C109AA /* DuplicateCheckService.swift */; };
 		563509D32D37CB6C00C109AA /* CustomDropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D22D37CB6C00C109AA /* CustomDropDownView.swift */; };
-		563509D52D37F45900C109AA /* RankingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D42D37F45900C109AA /* RankingResponse.swift */; };
 		563509D72D37F46200C109AA /* RankingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D62D37F46200C109AA /* RankingService.swift */; };
 		563509D92D37F47000C109AA /* RankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509D82D37F47000C109AA /* RankingViewModel.swift */; };
 		563509DD2D37F48500C109AA /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509DC2D37F48500C109AA /* RankingViewController.swift */; };
 		563509DF2D37F8CB00C109AA /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509DE2D37F8CB00C109AA /* RankingTableViewCell.swift */; };
+		563509F82D38562400C109AA /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563509F72D38562400C109AA /* RankingTableViewCell.swift */; };
 		56377AED2D37B2DF007B0E7F /* ChangePasswordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56377AEC2D37B2DF007B0E7F /* ChangePasswordRequest.swift */; };
 		565724372D378A1300923941 /* BoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565724362D378A1300923941 /* BoardService.swift */; };
 		565724392D378A4200923941 /* UserListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565724382D378A4200923941 /* UserListItem.swift */; };
@@ -107,7 +107,6 @@
 		65E0943F2D3799BE00A64414 /* imgFullRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E0943C2D3799BE00A64414 /* imgFullRed.png */; };
 		65E094402D3799BE00A64414 /* imgFullBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E0943B2D3799BE00A64414 /* imgFullBlue.png */; };
 		65E0944C2D37E5BA00A64414 /* RecentAlarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0944B2D37E5B500A64414 /* RecentAlarmCell.swift */; };
-		65E094502D37E9EF00A64414 /* OldAlarmsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0944F2D37E9B800A64414 /* OldAlarmsCell.swift */; };
 		65E094562D37FB6500A64414 /* imgGrayCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E094532D37FB6500A64414 /* imgGrayCircle.png */; };
 		65E094572D37FB6500A64414 /* imgGrayEmptyCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E094542D37FB6500A64414 /* imgGrayEmptyCircle.png */; };
 		65E094582D37FB6500A64414 /* imgChecked 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E094512D37FB6500A64414 /* imgChecked 2.png */; };
@@ -150,6 +149,7 @@
 		563509D82D37F47000C109AA /* RankingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewModel.swift; sourceTree = "<group>"; };
 		563509DC2D37F48500C109AA /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		563509DE2D37F8CB00C109AA /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
+		563509F72D38562400C109AA /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
 		56377AEC2D37B2DF007B0E7F /* ChangePasswordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordRequest.swift; sourceTree = "<group>"; };
 		565724362D378A1300923941 /* BoardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardService.swift; sourceTree = "<group>"; };
 		565724382D378A4200923941 /* UserListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListItem.swift; sourceTree = "<group>"; };
@@ -236,7 +236,6 @@
 		65E0943C2D3799BE00A64414 /* imgFullRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgFullRed.png; sourceTree = "<group>"; };
 		65E0943D2D3799BE00A64414 /* imgFullYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgFullYellow.png; sourceTree = "<group>"; };
 		65E0944B2D37E5B500A64414 /* RecentAlarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentAlarmCell.swift; sourceTree = "<group>"; };
-		65E0944F2D37E9B800A64414 /* OldAlarmsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldAlarmsCell.swift; sourceTree = "<group>"; };
 		65E094512D37FB6500A64414 /* imgChecked 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgChecked 2.png"; sourceTree = "<group>"; };
 		65E094522D37FB6500A64414 /* imgEmptyCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgEmptyCircle.png; sourceTree = "<group>"; };
 		65E094532D37FB6500A64414 /* imgGrayCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgGrayCircle.png; sourceTree = "<group>"; };
@@ -302,6 +301,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		563509EC2D38550A00C109AA /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				563509DE2D37F8CB00C109AA /* RankingTableViewCell.swift */,
+				65E0944B2D37E5B500A64414 /* RecentAlarmCell.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		65020F862D1FCCB700CC85FB /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +326,7 @@
 				656175142D2FE8B600562071 /* QuestTabCell.swift */,
 				656175122D2FE86900562071 /* QuestTabViewController.swift */,
 				5696BA0E2D36334C0028F98F /* UIImage+Extension.swift */,
+				563509F72D38562400C109AA /* RankingTableViewCell.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -403,6 +412,7 @@
 				655DCB292D144C3300E8A8F2 /* Products */,
 				DA4BF6C1CCAE05C71F937EF3 /* Pods */,
 				2BBD70541E7E71B1B6D44EBA /* Frameworks */,
+				563509EC2D38550A00C109AA /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -794,6 +804,7 @@
 				569D8AA82D2954C600949DB4 /* FindPasswordViewController.swift in Sources */,
 				5696B9F52D356EE10028F98F /* AdminUserListViewModel.swift in Sources */,
 				5696B9F72D356F0D0028F98F /* UserTableViewCell.swift in Sources */,
+				563509F82D38562400C109AA /* RankingTableViewCell.swift in Sources */,
 				563509DD2D37F48500C109AA /* RankingViewController.swift in Sources */,
 				56124D742D34E3EF0016DF5B /* MyPageViewModel.swift in Sources */,
 				655DCB2E2D144C3300E8A8F2 /* SceneDelegate.swift in Sources */,

@@ -101,4 +101,3 @@ class RankingTableViewCell: UITableViewCell {
         progressBar.progress = Float(score) / 200.0 // 최대 점수를 200으로 설정
     }
 }
-
