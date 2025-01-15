@@ -13,12 +13,14 @@ class ExpCell:UITableViewCell{
     @IBOutlet weak var lblContent: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
     
+    @IBOutlet weak var lblBg: UILabel!
     
     func configure(with quest: Exp) {
         print("난 셀이야", quest)
+        lblBg.layer.cornerRadius = 8
         lblExp.text = "\(quest.expAmount)D"
-        lblTime.text = "\(quest.completedAt) 전"
-//        lblContent.text = "\(exp.)"
+        lblTime.text = "\(quest.completedAt)"
+//        lblContent.text = "\(quest.)"
         lblTitle.text = quest.name
     }
 }

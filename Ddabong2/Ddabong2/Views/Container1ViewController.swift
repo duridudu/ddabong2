@@ -43,10 +43,11 @@ class Container1ViewController:UIViewController{
         setupBindings()
         
         // 정렬된 키와 값
-        let sortedKeys = self.expHistory.keys.sorted(by: <)
-        let sortedValues = sortedKeys.map { expHistory[$0]! }
-//        let sortedKeys = ["2023", "2022", "2021", "2020"]
-//        let sortedValues = [12000, 10000, 7000, 7000]
+//        let sortedKeys = self.expHistory.keys.sorted(by: <)
+//        let sortedValues = sortedKeys.map { expHistory[$0]! }
+        
+        let sortedKeys = ["2023", "2022", "2021", "2020"]
+        let sortedValues = [12000, 10000, 7000, 7000]
         
         view.backgroundColor = UIColor(hex: "fff8f8")
         // 테두리 및 corner radius 설정
@@ -73,20 +74,20 @@ class Container1ViewController:UIViewController{
         let graphView = BarGraphView()
         graphView.data = sortedValues // sortedValues
         graphView.labels = sortedKeys// sortedKeys
-        graphView.backgroundColor = .white
-        graphView.frame = CGRect(x: 16, y: 100, width: uiView3.frame.width, height: 300)
+        graphView.backgroundColor = .clear
+        graphView.frame = CGRect(x:40, y: 100, width: uiView3.frame.width-100, height: 230)
         graphView.translatesAutoresizingMaskIntoConstraints = false // 오토레이아웃 설정을 활성화
         
         uiView3.addSubview(graphView)
         
-        // 오토레이아웃 제약조건 설정
-           NSLayoutConstraint.activate([
-            graphView.centerXAnchor.constraint(equalTo: uiView3.centerXAnchor), // uiView3의 가로 중앙에 맞춤
-               graphView.widthAnchor.constraint(equalTo: uiView3.widthAnchor, multiplier: 0.8), // uiView3의 너비의 80%로 설정
-               graphView.topAnchor.constraint(equalTo: lblTitle3.bottomAnchor, constant: 20), // 적절한 상단 여백
-               graphView.bottomAnchor.constraint(equalTo: uiView3.bottomAnchor, constant: -16) // 적절한 하단 여백
+//        // 오토레이아웃 제약조건 설정
+        NSLayoutConstraint.activate([
+//            graphView.centerXAnchor.constraint(equalTo: uiView3.centerXAnchor), // uiView3의 가로 중앙에 맞춤
+               graphView.widthAnchor.constraint(equalTo: uiView3.widthAnchor, multiplier: 0.83), // uiView3의 너비의 80%로 설정
+               graphView.topAnchor.constraint(equalTo: lblTitle3.bottomAnchor, constant: 10), // 적절한 상단 여백
+            graphView.heightAnchor.constraint(equalToConstant: 200), // 높이 설정
+               graphView.leadingAnchor.constraint(equalTo: uiView3.leadingAnchor, constant: 80) // 좌측 여백
            ])
-        
         
     }
     
@@ -154,14 +155,14 @@ class BarGraphView: UIView {
             bar.fill()
             
             // 레이블 추가
-            let label = UILabel(frame: CGRect(x: x, y: rect.height + 4, width: barWidth, height: 20))
+            let label = UILabel(frame: CGRect(x: x, y: rect.height + 4, width: barWidth, height: 15))
             label.text = String(data[index])
             label.font = .systemFont(ofSize: 12)
             label.textAlignment = .center
             addSubview(label)
             
             // 레이블 추가
-            let label2 = UILabel(frame: CGRect(x: x, y: rect.height + 4, width: barWidth, height: 20))
+            let label2 = UILabel(frame: CGRect(x: x, y: rect.height + 20, width: barWidth+6, height: 15))
             label2.text = "\(labels[index])년"
             label2.font = .systemFont(ofSize: 12)
             label2.textAlignment = .center

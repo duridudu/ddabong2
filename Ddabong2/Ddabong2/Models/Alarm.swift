@@ -15,6 +15,14 @@ struct Alarm: Decodable {
     var title: String
     var boardId: Int?
     var exp: Int
+    
+    static let defaultAlarm = Alarm(
+        category: false,
+        createdAt: "0분 전",
+        title: "공지사항",
+        boardId: 0,
+        exp: 0
+    )
 }
 
 // 전체 응답 구조체
