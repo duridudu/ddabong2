@@ -366,6 +366,12 @@
                         <outlet property="bg0" destination="37j-t3-ixw" id="Y3C-rn-ClJ"/>
                         <outlet property="bg1" destination="tBf-2n-Nz7" id="Vam-yF-rfV"/>
                         <outlet property="bg2" destination="DZm-A4-9R6" id="xJp-Lk-RYs"/>
+                        <outlet property="lblLongestWeek" destination="4hv-eE-nQ6" id="B31-e7-twp"/>
+                        <outlet property="lblName" destination="X2e-3L-e10" id="hnk-nf-uae"/>
+                        <outlet property="lblPercent" destination="Gsn-ZN-lKg" id="TZm-UK-vS5"/>
+                        <outlet property="lblTitle3" destination="wxz-LB-7XJ" id="Nrq-aN-cYR"/>
+                        <outlet property="lblWeeksCnt" destination="h5K-e1-nvR" id="kRA-rf-YFF"/>
+                        <outlet property="uiView3" destination="guk-7K-jTP" id="gww-i8-LPj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F9r-Eb-AWU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1081,9 +1087,9 @@
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="filemenu.and.cursorarrow" catalog="system" width="128" height="108"/>
         <image name="imgChecked.png" width="29" height="25"/>
-        <image name="imgFullBlue.png" width="128" height="128"/>
-        <image name="imgFullRed.png" width="128" height="128"/>
-        <image name="imgFullYellow.png" width="128" height="128"/>
+        <image name="imgFullBlue.png" width="8" height="8"/>
+        <image name="imgFullRed.png" width="8" height="8"/>
+        <image name="imgFullYellow.png" width="8" height="8"/>
         <image name="light.beacon.max.fill" catalog="system" width="128" height="102"/>
         <image name="rectangle.and.pencil.and.ellipsis" catalog="system" width="128" height="85"/>
         <namedColor name="AccentColor">
